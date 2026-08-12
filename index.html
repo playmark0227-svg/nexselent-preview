@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Yuji+Syuku&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=12">
+<link rel="stylesheet" href="css/style.css?v=14">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -103,12 +103,12 @@
       </div>
       <div class="hero__visual" data-hero-fade>
         <div class="hero__slides" id="heroSlides" role="group" aria-roledescription="スライドショー" aria-label="メインビジュアル(写真は撮影後に掲載します)">
-          <div class="hero__slide hero__slide--a is-active" role="img" aria-label="オフィスでの相談の様子(写真は撮影後に掲載します)"><span class="ph-note">メイン写真①<br>撮影後に掲載します</span></div>
-          <div class="hero__slide hero__slide--b" role="img" aria-label="セミナーの様子(写真は撮影後に掲載します)"><span class="ph-note">メイン写真②<br>セミナーの様子など</span></div>
-          <div class="hero__slide hero__slide--c" role="img" aria-label="スタッフの様子(写真は撮影後に掲載します)"><span class="ph-note">メイン写真③<br>スタッフの様子など</span></div>
+          <div class="hero__slide hero__slide--a is-active" role="img" aria-label="オフィスでの相談の様子(写真は撮影後に掲載します)"><span class="ph-note">撮影予定<br>ご相談の様子</span></div>
+          <div class="hero__slide hero__slide--b" role="img" aria-label="セミナーの様子(写真は撮影後に掲載します)"><span class="ph-note">撮影予定<br>セミナー会場</span></div>
+          <div class="hero__slide hero__slide--c" role="img" aria-label="スタッフの様子(写真は撮影後に掲載します)"><span class="ph-note">撮影予定<br>スタッフ集合</span></div>
           <div class="hero__dots" id="heroDots" role="group" aria-label="スライドを選択"></div>
         </div>
-        <div class="hero__badge" aria-hidden="true"><span class="hero__badge-num">2021</span><span class="hero__badge-txt">札幌から、<br>暮らしに寄り添う</span></div>
+        <div class="hero__badge" aria-hidden="true"><span class="hero__badge-num">2021</span><span class="hero__badge-txt">設立<br>札幌市中央区</span></div>
       </div>
     </div>
   </section>
@@ -116,22 +116,22 @@
   <!-- Navy value strip -->
   <section class="values">
     <div class="container">
-      <p class="values__catch" data-split><span class="ph-line">暮らしとお金の、あらゆる選択のそばに。</span></p>
+      <p class="values__catch" data-split><span class="ph-line">保険も、住まいも、電気代も。ばらばらに相談していませんか。</span></p>
       <ul class="values__list">
         <li data-reveal style="--i:0">
           <span class="values__icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 4l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
           <span class="values__ttl">伴走</span>
-          <span class="values__txt">ご契約はゴールではなく始まり。人生の節目ごとに、何度でも。</span>
+          <span class="values__txt">契約したら終わり、にはしません。進学や住み替えなど節目のたびに、何度でも見直します。</span>
         </li>
         <li data-reveal style="--i:1">
           <span class="values__icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="10" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="22" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="22" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M13 15l2 4m4-4l-2 4M14 12h4" stroke="currentColor" stroke-width="1.5"/></svg></span>
           <span class="values__ttl">横断提案</span>
-          <span class="values__txt">住まい・お金・固定費・発信。4つの事業をひとつの窓口で。</span>
+          <span class="values__txt">住まいもお金も固定費も、窓口はひとつ。会社ごとに説明し直す手間がかかりません。</span>
         </li>
         <li data-reveal style="--i:2">
           <span class="values__icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 26L13 17l5 4 9-11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 9h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <span class="values__ttl">長期視点</span>
-          <span class="values__txt">目先の損得ではなく、10年後の暮らしから逆算してご提案。</span>
+          <span class="values__txt">10年後の家計から逆算して考えます。いま得に見えるだけの選択はお勧めしません。</span>
         </li>
       </ul>
     </div>
@@ -140,18 +140,20 @@
   <!-- Service digest -->
   <section class="section" id="service">
     <div class="container">
-      <header class="sec-head" data-reveal>
-        <p class="sec-head__en" lang="en">Service</p>
-        <h2 class="sec-head__jp">事業内容</h2>
-        <p class="sec-head__lead">暮らしにまつわる4つの事業を、ひとつの窓口で。</p>
+      <header class="sec-head sec-head--split" data-reveal>
+        <div>
+          <p class="sec-head__en" lang="en">Service</p>
+          <h2 class="sec-head__jp">事業内容</h2>
+        </div>
+        <p class="sec-head__lead">暮らしとお金にまつわることを、まとめてご相談いただけます。</p>
       </header>
       <div class="svc-grid">
-        <a class="svc-card" href="service-house.html" data-reveal style="--i:0">
+        <a class="svc-card svc-card--feature" href="service-house.html" data-reveal style="--i:0">
           <span class="svc-card__icon" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M6 20L20 8l14 12M10 18v14h20V18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 32v-8h6v8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
           <p class="svc-card__en" lang="en">Real Estate &amp; House</p>
           <h3 class="svc-card__ttl">不動産・建築</h3>
           <p class="svc-card__txt">「伝統にとらわれない」住まいづくり。CGアプローチ・建築設計から賃貸・売買・テナント仲介まで。</p>
-          <ul class="svc-card__tags"><li>CGアプローチ</li><li>建築設計</li><li>賃貸・売買</li></ul>
+          <ul class="svc-card__tags"><li>CGアプローチ</li><li>建築設計</li><li>賃貸・売買</li><li>テナント仲介</li></ul>
         </a>
         <a class="svc-card" href="service-lifeplan.html" data-reveal style="--i:1">
           <span class="svc-card__icon" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 34s-12-7.2-12-15a7 7 0 0112-5 7 7 0 0112 5c0 7.8-12 15-12 15z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M13 19h4l2-4 3 7 2-3h3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -165,7 +167,7 @@
           <p class="svc-card__en" lang="en">Branding</p>
           <h3 class="svc-card__ttl">ブランディング</h3>
           <p class="svc-card__txt">届ける・盛り上げる・向上させる。SNS・WEBの発信とサイト制作で、売上向上を支援します。</p>
-          <ul class="svc-card__tags"><li>SNS・WEB発信</li><li>WEB制作</li><li>地域密着</li></ul>
+          <ul class="svc-card__tags"><li>SNS・WEB発信</li><li>WEB・LP制作</li></ul>
         </a>
         <a class="svc-card" href="service-lifeline.html" data-reveal style="--i:3">
           <span class="svc-card__icon" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M22 4L10 22h8l-2 14 14-20h-9l1-12z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
@@ -220,8 +222,8 @@
       <div class="seminar-card" data-reveal>
         <div class="seminar-card__body">
           <p class="sec-head__en" lang="en" style="margin-bottom:6px">Seminar</p>
-          <h2 class="seminar-card__ttl">相談の前に、<br class="pc">まず知ることから。</h2>
-          <p class="seminar-card__txt">ネクセレントは、自社でマネーセミナーを開催しています。企画から当日の講師まで自社で担当。売り込みのない、お金の基礎から学べる場です。<br>「いきなり相談はハードルが高い」という方こそ、まずはこちらから。</p>
+          <h2 class="seminar-card__ttl">いきなり相談するのは、<br class="pc">正直ハードルが高い。</h2>
+          <p class="seminar-card__txt">そう感じる方のために、お金の基礎から学べるセミナーを自社で開いています。企画も当日の講師も自分たちで担当。その場で契約をお願いすることはありません。</p>
           <ul class="checks seminar-card__checks">
             <li>参加費は無料</li>
             <li>お金の知識がなくてもOK</li>
@@ -230,7 +232,7 @@
           </ul>
           <p class="more-link" style="text-align:left"><a href="seminar.html" class="btn btn--navy">セミナーについて見る<span class="btn__arrow" aria-hidden="true">→</span></a></p>
         </div>
-        <div class="seminar-card__visual" role="img" aria-label="セミナーの様子(写真は撮影後に掲載します)"><span class="ph-note">セミナーの様子は<br>撮影後に掲載します</span></div>
+        <div class="seminar-card__visual" role="img" aria-label="セミナーの様子(写真は撮影後に掲載します)"><span class="ph-note">撮影予定<br>セミナー風景</span></div>
       </div>
     </div>
   </section>
@@ -277,10 +279,10 @@
     <div class="container">
       <div class="msg" data-reveal>
         <figure class="msg__photo">
-          <div class="msg__ph" role="img" aria-label="代表写真(撮影後に掲載します)"><span class="ph-note">代表写真は<br>撮影後に掲載します</span></div>
+          <div class="msg__ph" role="img" aria-label="代表写真(撮影後に掲載します)"><span class="ph-note">撮影予定<br>代表ポートレート</span></div>
         </figure>
         <div class="msg__body">
-          <p class="msg__catch" data-split><span class="ph-line">損をしてほしくない。</span><span class="ph-line">だから、隣にいる。</span></p>
+          <p class="msg__catch" data-split><span class="ph-line">知らなかった、で</span><span class="ph-line">損をする人を減らしたい。</span></p>
           <p class="msg__txt">住まい、お金、日々の暮らし。人は人生の選択の場面でつまずき、知らないうちに損をしてしまうことが少なくありません。その選択を支える会社をつくりたい——それがネクセレントの出発点です。</p>
           <p class="signature"><span class="signature__label">代表取締役</span><span class="signature__name">山田 洋也</span></p>
           <p class="more-link" style="text-align:left"><a href="about.html" class="btn btn--ghost">代表挨拶・会社情報を見る<span class="btn__arrow" aria-hidden="true">→</span></a></p>
@@ -295,19 +297,19 @@
       <header class="sec-head" data-reveal>
         <p class="sec-head__en" lang="en">Activity</p>
         <h2 class="sec-head__jp">活動の様子</h2>
-        <p class="sec-head__lead">セミナーやご相談の様子など、実際の活動風景をご紹介します。</p>
+        <p class="sec-head__lead">ふだんどんな顔で仕事をしているのか、見ていただければと思います。</p>
       </header>
       <div class="activity-grid">
         <figure class="activity" data-reveal style="--i:0">
-          <div class="activity__ph" role="img" aria-label="セミナーの様子(写真は撮影後に掲載します)"><span class="ph-note">セミナーの様子<br>撮影後に掲載します</span></div>
+          <div class="activity__ph" role="img" aria-label="セミナーの様子(写真は撮影後に掲載します)"><span class="ph-note">撮影予定<br>セミナー風景</span></div>
           <figcaption class="activity__cap">マネーセミナーの開催風景</figcaption>
         </figure>
         <figure class="activity" data-reveal style="--i:1">
-          <div class="activity__ph" role="img" aria-label="個別相談の様子(写真は撮影後に掲載します)"><span class="ph-note">個別相談の様子<br>撮影後に掲載します</span></div>
+          <div class="activity__ph" role="img" aria-label="個別相談の様子(写真は撮影後に掲載します)"><span class="ph-note">撮影予定<br>個別相談</span></div>
           <figcaption class="activity__cap">お客様との個別相談</figcaption>
         </figure>
         <figure class="activity" data-reveal style="--i:2">
-          <div class="activity__ph" role="img" aria-label="オフィスの様子(写真は撮影後に掲載します)"><span class="ph-note">オフィス・チーム<br>撮影後に掲載します</span></div>
+          <div class="activity__ph" role="img" aria-label="オフィスの様子(写真は撮影後に掲載します)"><span class="ph-note">撮影予定<br>オフィス</span></div>
           <figcaption class="activity__cap">オフィス・チームの様子</figcaption>
         </figure>
       </div>
@@ -321,7 +323,7 @@
       <header class="sec-head" data-reveal>
         <p class="sec-head__en" lang="en">News</p>
         <h2 class="sec-head__jp">お知らせ</h2>
-        <p class="sec-head__lead">セミナー情報・採用・ブログなど、最新の情報をお届けします。</p>
+        <p class="sec-head__lead">セミナーの開催予定や、日々考えていることを載せていきます。</p>
       </header>
       <div class="news-list" data-reveal>
         <a class="news-card" href="news.html">
@@ -347,7 +349,7 @@
   <!-- CTA band -->
   <section class="cta-band">
     <div class="container cta-band__inner" data-reveal>
-      <p class="cta-band__catch">将来の不安を、今日の一歩で安心に。</p>
+      <p class="cta-band__catch">まずは、聞くだけでも。</p>
       <p class="cta-band__sub">ご相談は無料です。お気軽にご連絡ください。</p>
       <div class="cta-band__btns">
         <a href="contact.html" class="btn btn--line btn--lg">
@@ -395,6 +397,6 @@
   <span class="fab__txt">LINEで<br>相談</span>
 </a>
 
-<script src="js/main.js?v=12"></script>
+<script src="js/main.js?v=14"></script>
 </body>
 </html>

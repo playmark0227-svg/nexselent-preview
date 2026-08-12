@@ -276,8 +276,25 @@ body.is-locked .header .header__logo{visibility:hidden}
 .hero__photo::after{
   content:"";position:absolute;inset:14px;border:1px solid rgba(28,43,87,.14);border-radius:10px;
 }
+/* Placeholders read as a planned shot list, not as a missing image.
+   A washed-out grey box is the single biggest "unfinished / AI" tell. */
 .ph-note{
-  font-size:11px;letter-spacing:.18em;color:#8a90a0;text-align:center;line-height:2;
+  position:relative;z-index:1;
+  display:inline-flex;flex-direction:column;align-items:center;gap:2px;
+  font-size:11px;letter-spacing:.16em;line-height:1.9;text-align:center;
+  color:var(--navy);
+  background:rgba(255,255,255,.82);
+  border:1px solid rgba(21,42,85,.12);border-radius:10px;
+  padding:12px 18px;
+  backdrop-filter:blur(2px);
+}
+.ph-note::before{
+  content:"";width:22px;height:22px;margin-bottom:4px;
+  background:currentColor;opacity:.55;
+  -webkit-mask:var(--cam) center/contain no-repeat;mask:var(--cam) center/contain no-repeat;
+}
+:root{
+  --cam:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 7h3l2-2h6l2 2h3v12H4z'/%3E%3Ccircle cx='12' cy='13' r='3.5'/%3E%3C/svg%3E");
 }
 .hero__badge{
   position:absolute;left:-20px;bottom:-20px;
@@ -354,6 +371,31 @@ body.is-locked .header .header__logo{visibility:hidden}
   background:linear-gradient(90deg,transparent,var(--gold),transparent);
 }
 .sec-head__lead{margin-top:18px;font-size:14px;color:var(--gray)}
+
+/* editorial variant — breaks the "centred heading over an even grid" rhythm
+   that repeats on every section and makes a page read as templated */
+.sec-head--split{
+  display:grid;grid-template-columns:auto 1fr;
+  align-items:end;gap:clamp(20px,4vw,64px);
+  text-align:left;
+}
+.sec-head--split .sec-head__jp{padding-bottom:0}
+.sec-head--split .sec-head__jp::after{left:0;transform:scaleX(0);transform-origin:0 50%;bottom:-12px;width:56px}
+.sec-head--split.is-shown .sec-head__jp::after{transform:scaleX(1)}
+.sec-head--split .sec-head__lead{margin-top:0;padding-bottom:4px;border-bottom:1px solid var(--border)}
+@media(max-width:760px){
+  .sec-head--split{grid-template-columns:1fr;align-items:start;gap:16px}
+  .sec-head--split .sec-head__lead{border-bottom:none}
+}
+
+/* one card carries more weight than the rest, instead of four identical tiles */
+.svc-card--feature{grid-column:span 2}
+.svc-card--feature .svc-card__ttl{font-size:clamp(20px,2.2vw,25px)}
+.svc-card--feature .svc-card__txt{font-size:13.5px;max-width:42em}
+.svc-card--feature .svc-card__icon{width:62px;height:62px}
+.svc-card--feature .svc-card__icon svg{width:34px;height:34px}
+@media(max-width:900px){.svc-card--feature{grid-column:span 2}}
+@media(max-width:600px){.svc-card--feature{grid-column:auto}}
 
 /* ============ reveal ============ */
 [data-reveal]{
@@ -936,9 +978,19 @@ body.is-locked .header .header__logo{visibility:hidden}
 .hero__slide::after{
   content:"";position:absolute;inset:14px;border:1px solid rgba(28,43,87,.14);border-radius:10px;
 }
-.hero__slide--a{background:radial-gradient(110% 95% at 22% 4%,#dce8f7 0%,transparent 58%),linear-gradient(152deg,#cfdef0 0%,#e9eef2 58%,#e6ddc9 100%)}
-.hero__slide--b{background:radial-gradient(105% 95% at 82% 8%,#e6dcc3 0%,transparent 52%),linear-gradient(158deg,#dde7f3 0%,#e9e2d3 100%)}
-.hero__slide--c{background:radial-gradient(115% 115% at 50% 100%,#d4e2f4 0%,transparent 56%),linear-gradient(142deg,#e9e6db 0%,#d8e3f1 100%)}
+/* blueprint-ish line motif so an empty frame still looks art-directed */
+.hero__slide::before,.activity__ph::before,.msg__ph::before,.seminar-card__visual::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:
+    repeating-linear-gradient(90deg,rgba(21,42,85,.07) 0 1px,transparent 1px 44px),
+    repeating-linear-gradient(0deg,rgba(21,42,85,.07) 0 1px,transparent 1px 44px);
+  -webkit-mask-image:radial-gradient(90% 80% at 30% 20%,#000 0%,transparent 78%);
+  mask-image:radial-gradient(90% 80% at 30% 20%,#000 0%,transparent 78%);
+}
+.activity__ph,.msg__ph,.seminar-card__visual{position:relative;overflow:hidden}
+.hero__slide--a{background:radial-gradient(110% 95% at 22% 4%,#d3e3f6 0%,transparent 58%),linear-gradient(152deg,#c3d6ec 0%,#e4ebf1 58%,#e0d5bd 100%)}
+.hero__slide--b{background:radial-gradient(105% 95% at 82% 8%,#e0d3b5 0%,transparent 52%),linear-gradient(158deg,#d3e0f0 0%,#e5dbc7 100%)}
+.hero__slide--c{background:radial-gradient(115% 115% at 50% 100%,#c9dcf2 0%,transparent 56%),linear-gradient(142deg,#e5e0d1 0%,#cddced 100%)}
 /* bottom-right inside the frame, clear of the year badge */
 .hero__dots{
   position:absolute;right:12px;bottom:12px;
