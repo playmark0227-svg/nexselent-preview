@@ -96,11 +96,16 @@
   /* ---------- header shadow / floating LINE ---------- */
   const header = $("#header");
   const fab = $("#fab");
+  const bar = $("#progressBar");
   let ticking = false;
   const onScroll = () => {
     const y = window.scrollY;
     header && header.classList.toggle("is-scrolled", y > 10);
     fab && fab.classList.toggle("is-shown", y > 500);
+    if (bar) {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      bar.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
+    }
     ticking = false;
   };
   const requestScrollUpdate = () => {
@@ -110,16 +115,44 @@
   addEventListener("resize", requestScrollUpdate, { passive: true });
   onScroll();
 
+  /* ---------- section headings: wrap label + split JP title ---------- */
+  $$(".sec-head__en").forEach(el => {
+    if (!el.querySelector("span")) el.innerHTML = `<span>${el.textContent}</span>`;
+  });
+  $$(".sec-head__jp").forEach(el => {
+    if (el.querySelector(".ch")) return;
+    el.innerHTML = [...el.textContent]
+      .map((c, i) => c === " " ? c : `<span class="ch" style="--n:${i}">${c}</span>`)
+      .join("");
+  });
+
+  /* ---------- count up numbers ---------- */
+  const runCount = el => {
+    const target = parseFloat(el.dataset.count);
+    if (!isFinite(target)) return;
+    if (reduceNow()) { el.textContent = el.dataset.suffix ? target + el.dataset.suffix : target; return; }
+    const dur = 1100, t0 = performance.now(), suf = el.dataset.suffix || "";
+    const step = now => {
+      const p = Math.min(1, (now - t0) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased) + suf;
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+
   /* ---------- reveal on scroll ---------- */
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add("is-shown");
+        $$("[data-count]", e.target).forEach(runCount);
+        if (e.target.hasAttribute("data-count")) runCount(e.target);
         io.unobserve(e.target);
       }
     });
   }, { threshold: 0.16, rootMargin: "0px 0px -30px 0px" });
-  $$("[data-reveal], [data-split]").forEach(el => io.observe(el));
+  $$("[data-reveal], [data-split], .sec-head, .values__list li, [data-count]").forEach(el => io.observe(el));
 
   /* ---------- mobile drawer ---------- */
   const menuBtn = $("#menuBtn");

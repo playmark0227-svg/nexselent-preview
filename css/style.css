@@ -1045,6 +1045,138 @@ body.is-locked .header .header__logo{visibility:hidden}
 .cms-note strong{color:var(--navy)}
 
 /* =========================================================
+   Disclosure documents (industry-mandated PDFs)
+========================================================= */
+.doc-list{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.doc-item{
+  display:flex;align-items:center;gap:16px;
+  background:#fff;border:1px solid var(--border);border-radius:12px;
+  padding:16px 20px;box-shadow:var(--shadow-sm);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .3s;
+}
+.doc-item:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:var(--border-strong)}
+.doc-item__icon{
+  flex:none;width:38px;height:38px;display:grid;place-items:center;
+  border-radius:9px;background:var(--bg-2);color:var(--navy);
+}
+.doc-item__icon svg{width:22px;height:22px}
+.doc-item__body{display:flex;flex-direction:column;min-width:0}
+.doc-item__ttl{font-weight:700;font-size:14px;color:var(--ink);letter-spacing:.04em}
+.doc-item__note{font-size:12px;color:var(--gray);margin-top:2px}
+.doc-item__state{
+  margin-left:auto;flex:none;
+  font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--gold-text);
+  background:var(--bg-warm);border:1px solid #ece3d2;border-radius:100px;padding:4px 12px;
+}
+@media(max-width:600px){
+  .doc-item{flex-wrap:wrap;gap:12px}
+  .doc-item__state{margin-left:0}
+}
+
+/* =========================================================
+   Motion layer — richer effects (client asked for more)
+   Every rule stays on transform/opacity so it composites cheaply.
+========================================================= */
+
+/* --- scroll progress bar --- */
+.progress{
+  position:fixed;top:0;left:0;right:0;height:2px;z-index:60;pointer-events:none;
+  background:transparent;
+}
+.progress__bar{
+  height:100%;width:100%;transform:scaleX(0);transform-origin:0 50%;
+  background:linear-gradient(90deg,var(--navy),var(--gold-2));
+}
+
+/* --- section label wipes in, heading letters rise --- */
+.sec-head__en{
+  overflow:hidden;
+}
+.sec-head__en>span{
+  display:inline-block;transform:translateY(110%);
+  transition:transform .7s var(--ease);
+}
+.sec-head.is-shown .sec-head__en>span{transform:none}
+.sec-head__jp .ch{
+  display:inline-block;opacity:0;transform:translateY(18px);
+  transition:opacity .6s ease,transform .6s var(--ease);
+  transition-delay:calc(.035s * var(--n,0));
+}
+.sec-head.is-shown .sec-head__jp .ch{opacity:1;transform:none}
+.sec-head__jp::after{transform:translateX(-50%) scaleX(0);transition:transform .9s var(--ease) .35s}
+.sec-head.is-shown .sec-head__jp::after{transform:translateX(-50%) scaleX(1)}
+
+/* --- buttons: light sweep on hover --- */
+.btn{position:relative;overflow:hidden;isolation:isolate}
+.btn::after{
+  content:"";position:absolute;top:0;bottom:0;left:-60%;width:45%;z-index:-1;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);
+  transform:translateX(0);opacity:0;
+}
+.btn:hover::after{animation:sweep .75s var(--ease)}
+@keyframes sweep{
+  0%{opacity:1;transform:translateX(0)}
+  100%{opacity:1;transform:translateX(340%)}
+}
+
+/* --- cards: icon lifts and tints on hover --- */
+.svc-card__icon,.reason__icon,.flow__icon,.feat__icon,.targets__icon{
+  transition:transform .5s var(--ease),background .4s ease,border-color .4s ease,color .4s ease;
+}
+.svc-card:hover .svc-card__icon{transform:translateY(-4px) scale(1.06);border-color:var(--gold-2)}
+.reason:hover .reason__icon,.flow__step:hover .flow__icon{transform:translateY(-4px) scale(1.06)}
+.svc-card__tags li,.checks li{transition:transform .4s var(--ease)}
+.svc-card:hover .svc-card__tags li{transform:translateY(-2px)}
+
+/* --- count-up is reserved for quantities; years must never tick --- */
+.count{font-variant-numeric:tabular-nums}
+
+/* --- year badge pops in once the hero has settled --- */
+.hero__badge{opacity:0;transform:translateY(14px) scale(.96)}
+.hero.is-in .hero__badge{
+  animation:badgePop .8s var(--ease) 1.15s forwards;
+}
+@keyframes badgePop{to{opacity:1;transform:none}}
+
+/* --- hero grid drifts almost imperceptibly --- */
+@media(prefers-reduced-motion:no-preference){
+  .hero__bg::after{animation:gridDrift 40s linear infinite}
+}
+@keyframes gridDrift{
+  from{background-position:0 0,0 0}
+  to{background-position:104px 0,0 104px}
+}
+
+/* --- values strip: gold hairline draws across on reveal --- */
+.values__list li{position:relative}
+.values__list li::after{
+  content:"";position:absolute;left:0;bottom:-14px;height:1px;width:100%;
+  background:linear-gradient(90deg,transparent,var(--gold-2),transparent);
+  transform:scaleX(0);transition:transform 1s var(--ease);
+}
+.values__list li.is-shown::after{transform:scaleX(1)}
+
+/* --- news / faq rows slide slightly on hover --- */
+.news-card{transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.news-card:hover{transform:translateX(4px)}
+.faq__q{transition:background .3s ease}
+.faq__q:hover{background:var(--bg-2)}
+
+/* --- page hero: label + title stagger in on load --- */
+.page-hero__en,.page-hero__ttl,.page-hero__lead,.breadcrumb{
+  opacity:0;transform:translateY(16px);
+  animation:phIn .8s var(--ease) forwards;
+}
+.breadcrumb{animation-delay:.05s}
+.page-hero__en{animation-delay:.15s}
+.page-hero__ttl{animation-delay:.25s}
+.page-hero__lead{animation-delay:.38s}
+@keyframes phIn{to{opacity:1;transform:none}}
+
+/* --- perf: skip painting offscreen sections (client flagged page weight) --- */
+.section,.values,.cta-band,.footer{content-visibility:auto;contain-intrinsic-size:auto 640px}
+
+/* =========================================================
    No-JS fallback
 ========================================================= */
 .no-js .loader{display:none}
@@ -1053,6 +1185,12 @@ body.is-locked .header .header__logo{visibility:hidden}
 .no-js [data-split] .ph-line>span{opacity:1;transform:none;filter:none}
 .no-js .hero__line>span span{opacity:1;transform:none;filter:none}
 .no-js .fab{opacity:1;transform:none;pointer-events:auto;visibility:visible}
+.no-js .sec-head__en>span,
+.no-js .sec-head__jp .ch{opacity:1;transform:none}
+.no-js .sec-head__jp::after{transform:translateX(-50%) scaleX(1)}
+.no-js .values__list li::after{transform:scaleX(1)}
+.no-js .progress{display:none}
+.no-js .hero__badge{opacity:1;transform:none}
 
 /* =========================================================
    Reduced motion
@@ -1069,4 +1207,10 @@ body.is-locked .header .header__logo{visibility:hidden}
   [data-split] .ph-line>span{opacity:1;transform:none;filter:none}
   .hero__blob{animation:none}
   .fab{opacity:1;transform:none;pointer-events:auto;visibility:visible}
+  .sec-head__en>span,.sec-head__jp .ch{opacity:1;transform:none}
+  .sec-head__jp::after{transform:translateX(-50%) scaleX(1)}
+  .values__list li::after{transform:scaleX(1)}
+  .page-hero__en,.page-hero__ttl,.page-hero__lead,.breadcrumb{opacity:1;transform:none}
+  .btn:hover::after{animation:none}
+  .hero__badge{opacity:1;transform:none}
 }
