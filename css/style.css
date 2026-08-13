@@ -276,6 +276,15 @@ body.is-locked .header .header__logo{visibility:hidden}
 .hero__photo::after{
   content:"";position:absolute;inset:14px;border:1px solid rgba(28,43,87,.14);border-radius:10px;
 }
+/* Drop-in photo layer: put a file at the expected path and it takes over the
+   frame. If the file is absent the <img> removes itself and the planned-shot
+   placeholder below stays visible, so nothing ever renders broken. */
+.ph-img{
+  position:absolute;inset:0;z-index:2;
+  width:100%;height:100%;object-fit:cover;
+  display:block;
+}
+
 /* Placeholders read as a planned shot list, not as a missing image.
    A washed-out grey box is the single biggest "unfinished / AI" tell. */
 .ph-note{
