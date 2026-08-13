@@ -10,7 +10,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Yuji+Syuku&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=16">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<meta property="og:site_name" content="株式会社NEXSELENT">
+<meta property="og:title" content="プライバシーポリシー|株式会社NEXSELENT">
+<meta property="og:description" content="株式会社NEXSELENTの個人情報保護方針。取得する情報、利用目的、第三者提供、開示請求の窓口について。">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<link rel="stylesheet" href="css/style.css?v=18">
 </head>
 <body>
 <a class="skip-link" href="#top">本文へスキップ</a>
@@ -32,6 +38,7 @@
         <li><a href="contact.html">お問い合わせ</a></li>
       </ul>
     </nav>
+    <a href="tel:05058969042" class="header__tel"><span class="header__tel-num">050-5896-9042</span><span class="header__tel-note">お電話でのご相談</span></a>
     <a href="contact.html" class="btn btn--line header__cta"><svg class="i-line" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 5.64 2 10.13c0 4.03 3.58 7.4 8.42 8.04.33.07.77.22.89.5.1.26.07.66.03.92l-.14.86c-.04.26-.2 1.01.89.55 1.08-.46 5.84-3.44 7.97-5.89C19.6 13.6 22 12.1 22 10.13 22 5.64 17.52 2 12 2z"/></svg>公式LINEで相談</a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="drawer" aria-label="メニューを開く"><span></span><span></span></button>
   </div>
@@ -94,20 +101,26 @@
         <p class="footer__logo"><span class="logo-mark logo-mark--light" aria-hidden="true">N</span>NEXSELENT</p>
         <p class="footer__addr">株式会社ネクセレント<br>北海道札幌市中央区南3条27丁目3-18-305<br>TEL <a href="tel:05058969042">050-5896-9042</a></p>
       </div>
-      <nav class="footer__nav" aria-label="フッターナビゲーション">
-        <a href="service.html">事業内容</a>
-        <a href="service-house.html">不動産・建築</a>
-        <a href="service-lifeplan.html">ライフプラン</a>
-        <a href="service-branding.html">ブランディング</a>
-        <a href="service-lifeline.html">ライフライン</a>
-        <a href="seminar.html">セミナー</a>
-        <a href="reason.html">選ばれる理由</a>
-        <a href="flow.html">ご相談の流れ・FAQ</a>
-        <a href="news.html">お知らせ</a>
-        <a href="about.html">会社情報</a>
-        <a href="contact.html">お問い合わせ</a>
-        <a href="disclosure.html">重要事項・法定表示</a>
-        <a href="privacy.html">プライバシーポリシー</a>
+      <nav class="footer__nav footer__nav--cols" aria-label="フッターナビゲーション">
+        <div class="footer__col">
+          <p class="footer__col-ttl">事業</p>
+          <a href="service.html">事業内容</a>
+          <a href="service-house.html">不動産・建築</a>
+          <a href="service-lifeplan.html">ライフプラン</a>
+          <a href="service-branding.html">ブランディング</a>
+          <a href="service-lifeline.html">ライフライン</a>
+          <a href="seminar.html">マネーセミナー</a>
+        </div>
+        <div class="footer__col">
+          <p class="footer__col-ttl">会社</p>
+          <a href="reason.html">選ばれる理由</a>
+          <a href="flow.html">ご相談の流れ・FAQ</a>
+          <a href="news.html">お知らせ</a>
+          <a href="about.html">会社情報</a>
+          <a href="contact.html">お問い合わせ</a>
+          <a href="disclosure.html">重要事項・法定表示</a>
+          <a href="privacy.html">プライバシーポリシー</a>
+        </div>
       </nav>
     </div>
     <div class="footer__foot">
@@ -117,8 +130,9 @@
   </div>
 </footer>
 
+<a href="tel:05058969042" class="fab fab--tel" id="fabTel" aria-label="電話をかける"><svg viewBox="0 0 24 24" aria-hidden="true" class="i-tel"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4.5 3.8h4l1.6 4.3-2.2 1.6a13.6 13.6 0 0 0 6.4 6.4l1.6-2.2 4.3 1.6v4c0 .9-.7 1.6-1.6 1.6C10.5 21.1 2.9 13.5 2.9 5.4c0-.9.7-1.6 1.6-1.6z"/></svg><span class="fab__txt">電話で<br>相談</span></a>
 <a href="contact.html" class="fab" id="fab" aria-label="LINEで相談する"><svg class="i-line" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 5.64 2 10.13c0 4.03 3.58 7.4 8.42 8.04.33.07.77.22.89.5.1.26.07.66.03.92l-.14.86c-.04.26-.2 1.01.89.55 1.08-.46 5.84-3.44 7.97-5.89C19.6 13.6 22 12.1 22 10.13 22 5.64 17.52 2 12 2z"/></svg><span class="fab__txt">LINEで<br>相談</span></a>
 
-<script src="js/main.js?v=16"></script>
+<script src="js/main.js?v=18"></script>
 </body>
 </html>

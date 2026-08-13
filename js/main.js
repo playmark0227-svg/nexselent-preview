@@ -96,12 +96,14 @@
   /* ---------- header shadow / floating LINE ---------- */
   const header = $("#header");
   const fab = $("#fab");
+  const fabTel = $("#fabTel");
   const bar = $("#progressBar");
   let ticking = false;
   const onScroll = () => {
     const y = window.scrollY;
     header && header.classList.toggle("is-scrolled", y > 10);
     fab && fab.classList.toggle("is-shown", y > 500);
+    fabTel && fabTel.classList.toggle("is-shown", y > 500);
     if (bar) {
       const max = document.documentElement.scrollHeight - innerHeight;
       bar.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
@@ -126,33 +128,17 @@
       .join("");
   });
 
-  /* ---------- count up numbers ---------- */
-  const runCount = el => {
-    const target = parseFloat(el.dataset.count);
-    if (!isFinite(target)) return;
-    if (reduceNow()) { el.textContent = el.dataset.suffix ? target + el.dataset.suffix : target; return; }
-    const dur = 1100, t0 = performance.now(), suf = el.dataset.suffix || "";
-    const step = now => {
-      const p = Math.min(1, (now - t0) / dur);
-      const eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(target * eased) + suf;
-      if (p < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  };
 
   /* ---------- reveal on scroll ---------- */
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add("is-shown");
-        $$("[data-count]", e.target).forEach(runCount);
-        if (e.target.hasAttribute("data-count")) runCount(e.target);
         io.unobserve(e.target);
       }
     });
   }, { threshold: 0.16, rootMargin: "0px 0px -30px 0px" });
-  $$("[data-reveal], [data-split], .sec-head, .values__list li, [data-count]").forEach(el => io.observe(el));
+  $$("[data-reveal], [data-split], .sec-head, .values__list li").forEach(el => io.observe(el));
 
   /* ---------- mobile drawer ---------- */
   const menuBtn = $("#menuBtn");
@@ -171,7 +157,8 @@
     document.body.classList.toggle("is-locked", open);
     if (pageMain) pageMain.inert = open;
     if (pageFooter) pageFooter.inert = open;
-    if (fab) fab.inert = open; // keep the floating button out of the modal's tab order
+    if (fab) fab.inert = open; // keep the floating buttons out of the modal's tab order
+    if (fabTel) fabTel.inert = open;
     if (open) requestAnimationFrame(() => { const f = $(".drawer__link"); f && f.focus(); });
   };
   menuBtn && menuBtn.addEventListener("click", () => setDrawer(!drawer.classList.contains("is-open")));
@@ -196,6 +183,7 @@
   if (form) {
     const fName = $("#fName");
     const fMail = $("#fMail");
+    const fAgree = $("#fAgree");
     const err = $("#formError");
     const done = $("#formDone");
     const setInvalid = (el, invalid) => {
@@ -214,9 +202,10 @@
       if (!name) problems.push("お名前をご入力ください");
       if (!mail) problems.push("メールアドレスをご入力ください");
       else if (!okMail) problems.push("メールアドレスの形式をご確認ください");
+      if (fAgree && !fAgree.checked) problems.push("プライバシーポリシーへの同意をお願いします");
       if (problems.length) {
         err.textContent = problems.join("。") + "。";
-        (!name ? fName : fMail).focus();
+        (!name ? fName : (!mail || !okMail) ? fMail : fAgree).focus();
         return;
       }
       err.textContent = "";

@@ -23,7 +23,7 @@
   --serif:"Shippori Mincho","Hiragino Mincho ProN",serif;
   --sans:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;
   --ease:cubic-bezier(.22,1,.36,1);
-  /* restrained, neutral elevation — clean rather than glossy */
+  /* 影は薄い2段構成 */
   --shadow-sm:0 1px 2px rgba(21,42,85,.04),0 4px 14px rgba(21,42,85,.05);
   --shadow-md:0 2px 6px rgba(21,42,85,.05),0 12px 32px rgba(21,42,85,.08);
   --shadow-lg:0 6px 16px rgba(21,42,85,.07),0 24px 56px rgba(21,42,85,.12);
@@ -31,6 +31,10 @@
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}
+/* 見出しはプロポーショナル詰め */
+h1,h2,h3,.msg__catch,.values__catch,.seminar-card__ttl,.cta-band__catch,.detail-quote{
+  font-feature-settings:"palt" 1;
+}
 body{
   font-family:var(--sans);
   color:var(--ink);
@@ -64,7 +68,7 @@ button{font-family:inherit;background:none;border:none;cursor:pointer;color:inhe
 .btn__arrow{transition:transform .35s var(--ease);font-weight:500}
 .btn:hover .btn__arrow{transform:translateX(4px)}
 .btn:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
-/* flat brand green — no glow, so the CTA reads confident rather than loud */
+/* LINEブランドカラー(フラット) */
 .btn--line{background:var(--green);color:var(--navy);border-color:rgba(4,140,60,.35)}
 .btn--line:hover{background:var(--green-2);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
 .btn--line-ghost{background:#fff;color:var(--green-text);border-color:var(--green)}
@@ -119,7 +123,7 @@ button{font-family:inherit;background:none;border:none;cursor:pointer;color:inhe
   transition:box-shadow .4s ease,border-color .4s ease,background .4s ease;
 }
 .header.is-scrolled{border-bottom-color:var(--hair);box-shadow:0 1px 12px rgba(21,42,85,.05)}
-/* keep the close (hamburger) button reachable above the open drawer */
+/* ドロワー展開中もハンバーガーを前面に */
 body.is-locked .header{z-index:75;background:transparent;backdrop-filter:none;box-shadow:none}
 body.is-locked .header .header__nav,
 body.is-locked .header .header__cta,
@@ -142,6 +146,11 @@ body.is-locked .header .header__logo{visibility:hidden}
 }
 .header__nav a:hover::after{transform:scaleX(1);transform-origin:left}
 .header__cta{white-space:nowrap;padding:10px 20px;font-size:13px}
+/* ヘッダーの電話番号(デスクトップのみ) */
+.header__tel{display:flex;flex-direction:column;align-items:flex-end;line-height:1.4}
+.header__tel-num{font-size:17px;font-weight:700;letter-spacing:.04em;color:var(--navy);font-variant-numeric:tabular-nums}
+.header__tel-note{font-size:9.5px;letter-spacing:.14em;color:var(--gray)}
+@media(max-width:900px){.header__tel{display:none}}
 .menu-btn{
   display:none;flex-direction:column;justify-content:center;gap:7px;
   width:44px;height:44px;z-index:71;
@@ -200,12 +209,12 @@ body.is-locked .header .header__logo{visibility:hidden}
   padding:clamp(128px,12vw,176px) 0 clamp(60px,6.5vw,100px);
   background:linear-gradient(180deg,#fcfdff 0%,#eff4fb 100%);
 }
-/* clean architectural field: a calm blue block + hairline grid, no blur effects */
+/* 背景: 青の面 + 罫線グリッド */
 .hero__bg{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .hero__bg::before{
   content:"";position:absolute;top:0;bottom:0;right:0;width:48%;
   background:linear-gradient(160deg,#e3ecf9 0%,#eef3fa 58%,#f7f2e8 100%);
-  /* fade the inner edge so the field reads as light, not as a seam */
+  /* 面の内側エッジをぼかす */
   -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 26%);
   mask-image:linear-gradient(90deg,transparent 0%,#000 26%);
 }
@@ -218,7 +227,6 @@ body.is-locked .header .header__logo{visibility:hidden}
   -webkit-mask-image:radial-gradient(78% 74% at 82% 14%,#000 0%,transparent 68%);
   mask-image:radial-gradient(78% 74% at 82% 14%,#000 0%,transparent 68%);
 }
-.hero__blob{display:none}
 @media(max-width:860px){.hero__bg::before{width:100%;top:auto;height:46%;bottom:0}}
 .hero__grid{
   display:grid;grid-template-columns:1.1fr .9fr;
@@ -239,7 +247,7 @@ body.is-locked .header .header__logo{visibility:hidden}
   line-height:1.45;letter-spacing:.05em;
 }
 .hero__line{display:block;padding-bottom:.1em;margin-bottom:-.05em}
-/* blur fade-up: soft-focus characters resolve into sharpness, staggered */
+/* 見出し: 1文字ずつフォーカスが合う演出 */
 .hero__chars, .hero__line>span{display:inline-block}
 .hero__line>span span{
   display:inline-block;
@@ -263,30 +271,21 @@ body.is-locked .header .header__logo{visibility:hidden}
 .hero.is-in .hero__visual{transition-delay:.5s}
 
 .hero__visual{position:relative}
-.hero__photo{
-  aspect-ratio:4/3.1;border-radius:18px;
-  background:
-    radial-gradient(120% 100% at 20% 0%,#e8eef8 0%,transparent 55%),
-    radial-gradient(120% 120% at 90% 100%,#efe6d2 0%,transparent 50%),
-    linear-gradient(150deg,#dfe6f2 0%,#eef1f0 60%,#e9e2d2 100%);
-  box-shadow:var(--shadow-md);
-  display:grid;place-items:center;
-  position:relative;overflow:hidden;
-}
-.hero__photo::after{
-  content:"";position:absolute;inset:14px;border:1px solid rgba(28,43,87,.14);border-radius:10px;
-}
-/* Drop-in photo layer: put a file at the expected path and it takes over the
-   frame. If the file is absent the <img> removes itself and the planned-shot
-   placeholder below stays visible, so nothing ever renders broken. */
+/* 写真レイヤー: img/ にファイルを置くと差し替わる */
 .ph-img{
   position:absolute;inset:0;z-index:2;
   width:100%;height:100%;object-fit:cover;
   display:block;
+  /* 写真のトーン統一 */
+  filter:saturate(.82) contrast(1.02) brightness(.99);
+}
+.hero__slide::after,.activity__ph::after,.msg__ph::after,.seminar-card__visual::after{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(180deg,rgba(21,42,85,.04) 0%,rgba(21,42,85,.14) 100%);
+  mix-blend-mode:multiply;
 }
 
-/* Placeholders read as a planned shot list, not as a missing image.
-   A washed-out grey box is the single biggest "unfinished / AI" tell. */
+/* 撮影予定カード */
 .ph-note{
   position:relative;z-index:1;
   display:inline-flex;flex-direction:column;align-items:center;gap:2px;
@@ -306,7 +305,7 @@ body.is-locked .header .header__logo{visibility:hidden}
   --cam:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 7h3l2-2h6l2 2h3v12H4z'/%3E%3Ccircle cx='12' cy='13' r='3.5'/%3E%3C/svg%3E");
 }
 .hero__badge{
-  position:absolute;left:-20px;bottom:-20px;z-index:4; /* above .ph-img (z-index:2) */
+  position:absolute;left:-20px;bottom:-20px;z-index:4; 
   background:#fff;border-radius:12px;
   box-shadow:var(--shadow-md),0 0 0 1px var(--hair);
   padding:14px 20px;display:flex;align-items:center;gap:14px;
@@ -333,10 +332,6 @@ body.is-locked .header .header__logo{visibility:hidden}
   color:#fff;padding:clamp(48px,5vw,72px) 0;
   position:relative;overflow:hidden;
 }
-.values::after{
-  content:"";position:absolute;right:-80px;top:-80px;width:280px;height:280px;border-radius:50%;
-  border:1px solid rgba(195,168,107,.25);pointer-events:none;
-}
 .values__catch{
   font-family:var(--serif);font-weight:600;
   font-size:clamp(19px,2.4vw,26px);letter-spacing:.14em;
@@ -351,7 +346,8 @@ body.is-locked .header .header__logo{visibility:hidden}
   border-left:1px solid rgba(255,255,255,.14);
 }
 .values__list li:first-child{border-left:none}
-.values__icon{width:34px;height:34px;color:var(--gold-2)}
+/* 帯は罫線とタイトルのみで構成 */
+.values__icon{display:none}
 .values__icon svg{width:100%;height:100%}
 .values__ttl{font-family:var(--serif);font-size:17px;font-weight:600;letter-spacing:.2em}
 .values__txt{font-size:12px;line-height:2;color:rgba(255,255,255,.72)}
@@ -381,8 +377,22 @@ body.is-locked .header .header__logo{visibility:hidden}
 }
 .sec-head__lead{margin-top:18px;font-size:14px;color:var(--gray)}
 
-/* editorial variant — breaks the "centred heading over an even grid" rhythm
-   that repeats on every section and makes a page read as templated */
+/* 見出しバリエーション: 左見出し+右リンク */
+.sec-head--bar{
+  display:flex;align-items:baseline;justify-content:space-between;gap:18px;
+  text-align:left;margin-bottom:26px;
+  border-bottom:1px solid var(--border);padding-bottom:14px;
+}
+.sec-head--bar .sec-head__jp{padding-bottom:0;font-size:clamp(20px,2.4vw,26px)}
+.sec-head--bar .sec-head__jp::after{display:none}
+.sec-head__more{
+  flex:none;font-size:12.5px;font-weight:500;letter-spacing:.06em;color:var(--navy);
+  border-bottom:1px solid var(--border-strong);padding-bottom:2px;
+  transition:border-color .3s;
+}
+.sec-head__more:hover{border-color:var(--navy)}
+
+/* 見出しバリエーション: 左見出し+右リード */
 .sec-head--split{
   display:grid;grid-template-columns:auto 1fr;
   align-items:end;gap:clamp(20px,4vw,64px);
@@ -397,7 +407,7 @@ body.is-locked .header .header__logo{visibility:hidden}
   .sec-head--split .sec-head__lead{border-bottom:none}
 }
 
-/* one card carries more weight than the rest, instead of four identical tiles */
+/* 先頭カードを大きく */
 .svc-card--feature{grid-column:span 2}
 .svc-card--feature .svc-card__ttl{font-size:clamp(20px,2.2vw,25px)}
 .svc-card--feature .svc-card__txt{font-size:13.5px;max-width:42em}
@@ -454,7 +464,7 @@ body.is-locked .header .header__logo{visibility:hidden}
 .svc-card__tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
 .svc-card__tags li{
   font-size:10.5px;letter-spacing:.06em;color:var(--navy);
-  background:var(--bg-2);border-radius:100px;padding:4px 12px;
+  background:var(--bg-2);border-radius:3px;padding:3px 10px;
 }
 .svc-card--cta{
   align-items:center;justify-content:center;text-align:center;gap:16px;
@@ -478,7 +488,7 @@ body.is-locked .header .header__logo{visibility:hidden}
   text-align:center;position:relative;
   transition:transform .45s var(--ease),box-shadow .45s var(--ease);
 }
-.reason:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+
 .reason__num{
   position:absolute;top:14px;left:18px;
   font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--gold-text);
@@ -511,7 +521,7 @@ body.is-locked .header .header__logo{visibility:hidden}
   box-shadow:var(--shadow-sm);
   transition:transform .45s var(--ease),box-shadow .45s var(--ease);
 }
-.flow__step:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}
+
 .flow__step::after{
   content:"";position:absolute;top:50%;right:-18px;z-index:1;
   width:14px;height:14px;border-top:2px solid var(--gold-2);border-right:2px solid var(--gold-2);
@@ -558,11 +568,6 @@ body.is-locked .header .header__logo{visibility:hidden}
     linear-gradient(160deg,#d9e2ef 0%,#ebe4d5 100%);
   display:grid;place-items:center;
 }
-.msg__cap{
-  margin-top:14px;font-size:12px;letter-spacing:.14em;color:var(--gray);
-  display:flex;align-items:baseline;gap:12px;
-}
-.msg__cap strong{font-family:var(--serif);font-size:19px;color:var(--navy);letter-spacing:.2em}
 .msg__catch{
   font-family:var(--serif);font-weight:600;color:var(--navy);
   font-size:clamp(22px,2.7vw,30px);line-height:1.85;letter-spacing:.1em;
@@ -592,13 +597,13 @@ body.is-locked .header .header__logo{visibility:hidden}
 /* =========================================================
    FAQ
 ========================================================= */
-.faq{display:flex;flex-direction:column;gap:12px}
+/* FAQ: 罫線アコーディオン */
+.faq{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border)}
 .faq__item{
-  background:#fff;border:1px solid var(--border);border-radius:12px;
-  box-shadow:var(--shadow-sm);overflow:hidden;
-  transition:box-shadow .3s ease;
+  background:transparent;border:none;border-bottom:1px solid var(--border);border-radius:0;
+  box-shadow:none;overflow:hidden;
 }
-.faq__item[open]{box-shadow:var(--shadow-md)}
+.faq__item[open]{background:rgba(21,42,85,.025)}
 .faq__q{
   list-style:none;cursor:pointer;
   display:flex;align-items:center;gap:14px;
@@ -633,10 +638,6 @@ body.is-locked .header .header__logo{visibility:hidden}
   color:#fff;padding:clamp(56px,6vw,84px) 0;
   position:relative;overflow:hidden;
 }
-.cta-band::before{
-  content:"";position:absolute;left:-60px;bottom:-120px;width:300px;height:300px;border-radius:50%;
-  border:1px solid rgba(195,168,107,.22);
-}
 .cta-band__inner{text-align:center}
 .cta-band__catch{
   font-family:var(--serif);font-weight:600;
@@ -670,6 +671,18 @@ body.is-locked .header .header__logo{visibility:hidden}
 .form__req{
   font-size:9.5px;font-weight:700;letter-spacing:.12em;color:#fff;
   background:var(--navy);border-radius:4px;padding:2px 8px;
+}
+.form__opt{
+  font-size:9.5px;font-weight:700;letter-spacing:.12em;color:var(--gray);
+  background:var(--bg-2);border:1px solid var(--border);border-radius:4px;padding:1px 8px;
+}
+.form__agree{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:12.5px;color:var(--ink);line-height:1.9;
+  margin-bottom:16px;cursor:pointer;
+}
+.form__agree input{
+  width:17px;height:17px;margin-top:4px;accent-color:var(--navy);flex:none;
 }
 .form__input{
   width:100%;font-family:inherit;font-size:16px;color:var(--ink);
@@ -719,6 +732,11 @@ body.is-locked .header .header__logo{visibility:hidden}
 .footer__addr{font-size:12px;line-height:2.1;color:rgba(255,255,255,.66);letter-spacing:.06em}
 .footer__addr a{color:rgba(255,255,255,.85)}
 .footer__nav{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:flex-start;max-width:420px}
+/* フッターのリンク分類 */
+.footer__nav--cols{display:flex;gap:clamp(28px,4vw,64px);max-width:none}
+.footer__col{display:flex;flex-direction:column;gap:6px}
+.footer__col-ttl{font-size:10.5px;font-weight:700;letter-spacing:.22em;color:rgba(255,255,255,.42);margin-bottom:6px}
+@media(max-width:680px){.footer__nav--cols{gap:32px}}
 .footer__nav a{
   font-size:12.5px;letter-spacing:.1em;color:rgba(255,255,255,.78);
   padding:4px 0;position:relative;
@@ -753,7 +771,12 @@ body.is-locked .header .header__logo{visibility:hidden}
 .fab:hover{background:var(--green-2)}
 .fab .i-line{width:22px;height:22px}
 .fab__txt{font-size:9.5px;font-weight:700;line-height:1.3;text-align:center;letter-spacing:.03em}
-/* skip link for keyboard users */
+/* 電話ボタン(モバイルのみ・LINEの上) */
+.fab--tel{bottom:92px;background:var(--navy);color:#fff;box-shadow:0 8px 24px rgba(21,42,85,.35)}
+.fab--tel:hover{background:var(--navy-2)}
+.fab--tel .i-tel{width:20px;height:20px}
+@media(min-width:861px){.fab--tel{display:none}}
+/* キーボード用スキップリンク */
 .skip-link{
   position:fixed;top:10px;left:10px;z-index:120;
   background:var(--navy);color:#fff;font-size:13px;font-weight:700;
@@ -874,15 +897,13 @@ body.is-locked .header .header__logo{visibility:hidden}
 /* --- こんな方におすすめ --- */
 .targets{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .targets li{
-  background:#fff;border:1px solid var(--border);border-radius:12px;
-  padding:18px 14px;text-align:center;
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  box-shadow:var(--shadow-sm);font-size:12.5px;line-height:1.9;color:var(--ink);
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  border-left:3px solid var(--gold-2);
+  padding:14px 16px;text-align:left;
+  font-size:12.5px;line-height:1.9;color:var(--ink);
 }
-.targets__icon{
-  display:grid;place-items:center;width:44px;height:44px;border-radius:50%;
-  background:#eaf0f9;border:1px solid #dbe4f1;color:var(--navy);
-}
+.targets li br{display:none}
+.targets__icon{display:none}
 .targets__icon svg{width:24px;height:24px}
 @media(max-width:760px){.targets{grid-template-columns:repeat(2,1fr)}}
 
@@ -949,7 +970,7 @@ body.is-locked .header .header__logo{visibility:hidden}
 .more-link{text-align:center;margin-top:clamp(26px,2.8vw,36px)}
 #faq{scroll-margin-top:90px}
 
-/* --- reference-mock style: flat gold-icon columns (top page 選ばれる理由) --- */
+/* --- 選ばれる理由(トップ): 罫線区切りの3カラム --- */
 .reason-grid--line{gap:0}
 .reason--line{
   background:transparent;border-radius:0;box-shadow:none;
@@ -973,7 +994,7 @@ body.is-locked .header .header__logo{visibility:hidden}
 /* =========================================================
    Hero slideshow (calm crossfade, no video)
 ========================================================= */
-/* white mat frame — border (not padding) so the absolutely-placed slides inset correctly */
+/* 写真の白マット枠 */
 .hero__slides{
   position:relative;aspect-ratio:4/3.1;overflow:hidden;
   border:10px solid #fff;border-radius:16px;
@@ -987,7 +1008,7 @@ body.is-locked .header .header__logo{visibility:hidden}
 .hero__slide::after{
   content:"";position:absolute;inset:14px;border:1px solid rgba(28,43,87,.14);border-radius:10px;
 }
-/* blueprint-ish line motif so an empty frame still looks art-directed */
+/* 写真枠の下地(方眼) */
 .hero__slide::before,.activity__ph::before,.msg__ph::before,.seminar-card__visual::before{
   content:"";position:absolute;inset:0;pointer-events:none;
   background-image:
@@ -1000,7 +1021,7 @@ body.is-locked .header .header__logo{visibility:hidden}
 .hero__slide--a{background:radial-gradient(110% 95% at 22% 4%,#d3e3f6 0%,transparent 58%),linear-gradient(152deg,#c3d6ec 0%,#e4ebf1 58%,#e0d5bd 100%)}
 .hero__slide--b{background:radial-gradient(105% 95% at 82% 8%,#e0d3b5 0%,transparent 52%),linear-gradient(158deg,#d3e0f0 0%,#e5dbc7 100%)}
 .hero__slide--c{background:radial-gradient(115% 115% at 50% 100%,#c9dcf2 0%,transparent 56%),linear-gradient(142deg,#e5e0d1 0%,#cddced 100%)}
-/* bottom-right inside the frame, clear of the year badge */
+/* スライド操作ドット(右下) */
 .hero__dots{
   position:absolute;right:12px;bottom:12px;
   display:flex;gap:7px;z-index:3;
@@ -1074,18 +1095,19 @@ body.is-locked .header .header__logo{visibility:hidden}
 }
 .news-tabs button:hover{border-color:var(--navy)}
 .news-tabs button[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
-.news-list{display:flex;flex-direction:column;gap:12px}
+/* お知らせ: 罫線リスト */
+.news-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border)}
 .news-card{
   display:grid;grid-template-columns:110px 92px 1fr;gap:16px;align-items:baseline;
-  background:#fff;border:1px solid var(--border);border-radius:12px;
-  padding:18px 22px;box-shadow:var(--shadow-sm);
-  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+  background:transparent;border:none;border-bottom:1px solid var(--border);border-radius:0;
+  padding:17px 6px;box-shadow:none;
+  transition:background .3s ease,transform .35s var(--ease);
 }
-.news-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.news-card:hover{background:rgba(21,42,85,.03);transform:none}
 .news-card__date{font-size:12.5px;color:var(--gray);letter-spacing:.08em}
 .news-card__cat{
   font-size:10.5px;font-weight:700;letter-spacing:.1em;text-align:center;
-  border-radius:100px;padding:3px 0;
+  border-radius:3px;padding:3px 0;
 }
 .news-card__cat--seminar{background:#eef2f9;color:var(--navy)}
 .news-card__cat--recruit{background:#eef7f0;color:#1c6b3a}
@@ -1115,7 +1137,7 @@ body.is-locked .header .header__logo{visibility:hidden}
   padding:16px 20px;box-shadow:var(--shadow-sm);
   transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .3s;
 }
-.doc-item:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:var(--border-strong)}
+
 .doc-item__icon{
   flex:none;width:38px;height:38px;display:grid;place-items:center;
   border-radius:9px;background:var(--bg-2);color:var(--navy);
@@ -1139,7 +1161,7 @@ body.is-locked .header .header__logo{visibility:hidden}
    Every rule stays on transform/opacity so it composites cheaply.
 ========================================================= */
 
-/* --- scroll progress bar --- */
+/* --- スクロール進捗バー --- */
 .progress{
   position:fixed;top:0;left:0;right:0;height:2px;z-index:60;pointer-events:none;
   background:transparent;
@@ -1149,7 +1171,7 @@ body.is-locked .header .header__logo{visibility:hidden}
   background:linear-gradient(90deg,var(--navy),var(--gold-2));
 }
 
-/* --- section label wipes in, heading letters rise --- */
+/* --- 見出しの出現 --- */
 .sec-head__en{
   overflow:hidden;
 }
@@ -1167,20 +1189,20 @@ body.is-locked .header .header__logo{visibility:hidden}
 .sec-head__jp::after{transform:translateX(-50%) scaleX(0);transition:transform .9s var(--ease) .35s}
 .sec-head.is-shown .sec-head__jp::after{transform:translateX(-50%) scaleX(1)}
 
-/* --- buttons: light sweep on hover --- */
+/* --- ボタンのホバー光沢 --- */
 .btn{position:relative;overflow:hidden;isolation:isolate}
 .btn::after{
   content:"";position:absolute;top:0;bottom:0;left:-60%;width:45%;z-index:-1;
   background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);
   transform:translateX(0);opacity:0;
 }
-.btn:hover::after{animation:sweep .75s var(--ease)}
+.btn--line:hover::after,.btn--navy:hover::after{animation:sweep .75s var(--ease)}
 @keyframes sweep{
   0%{opacity:1;transform:translateX(0)}
   100%{opacity:1;transform:translateX(340%)}
 }
 
-/* --- cards: icon lifts and tints on hover --- */
+/* --- カードアイコンのホバー --- */
 .svc-card__icon,.reason__icon,.flow__icon,.feat__icon,.targets__icon{
   transition:transform .5s var(--ease),background .4s ease,border-color .4s ease,color .4s ease;
 }
@@ -1192,14 +1214,14 @@ body.is-locked .header .header__logo{visibility:hidden}
 /* --- count-up is reserved for quantities; years must never tick --- */
 .count{font-variant-numeric:tabular-nums}
 
-/* --- year badge pops in once the hero has settled --- */
+/* --- 設立年バッジの出現 --- */
 .hero__badge{opacity:0;transform:translateY(14px) scale(.96)}
 .hero.is-in .hero__badge{
   animation:badgePop .8s var(--ease) 1.15s forwards;
 }
 @keyframes badgePop{to{opacity:1;transform:none}}
 
-/* --- hero grid drifts almost imperceptibly --- */
+/* --- 背景グリッドの微小ドリフト --- */
 @media(prefers-reduced-motion:no-preference){
   .hero__bg::after{animation:gridDrift 40s linear infinite}
 }
@@ -1208,7 +1230,7 @@ body.is-locked .header .header__logo{visibility:hidden}
   to{background-position:104px 0,0 104px}
 }
 
-/* --- values strip: gold hairline draws across on reveal --- */
+/* --- 帯の罫線ドロー --- */
 .values__list li{position:relative}
 .values__list li::after{
   content:"";position:absolute;left:0;bottom:-14px;height:1px;width:100%;
@@ -1217,13 +1239,12 @@ body.is-locked .header .header__logo{visibility:hidden}
 }
 .values__list li.is-shown::after{transform:scaleX(1)}
 
-/* --- news / faq rows slide slightly on hover --- */
-.news-card{transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
-.news-card:hover{transform:translateX(4px)}
+/* --- 行ホバー --- */
+
 .faq__q{transition:background .3s ease}
 .faq__q:hover{background:var(--bg-2)}
 
-/* --- page hero: label + title stagger in on load --- */
+/* --- 下層ヒーローの出現 --- */
 .page-hero__en,.page-hero__ttl,.page-hero__lead,.breadcrumb{
   opacity:0;transform:translateY(16px);
   animation:phIn .8s var(--ease) forwards;
@@ -1234,7 +1255,7 @@ body.is-locked .header .header__logo{visibility:hidden}
 .page-hero__lead{animation-delay:.38s}
 @keyframes phIn{to{opacity:1;transform:none}}
 
-/* --- perf: skip painting offscreen sections (client flagged page weight) --- */
+/* --- 画面外セクションの描画省略 --- */
 .section,.values,.cta-band,.footer{content-visibility:auto;contain-intrinsic-size:auto 640px}
 
 /* =========================================================
