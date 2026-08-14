@@ -73,6 +73,10 @@ button{font-family:inherit;background:none;border:none;cursor:pointer;color:inhe
 .btn--navy:hover{background:var(--navy-2);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
 .btn--ghost{background:#fff;color:var(--navy);border-color:var(--border-strong)}
 .btn--ghost:hover{background:var(--navy);color:#fff;border-color:var(--navy);transform:translateY(-2px)}
+/* URL未確定のボタン(押せないことを見た目で示す) */
+.btn.is-pending{background:var(--bg-2);color:var(--gray);border-color:var(--border-strong);cursor:default;white-space:nowrap}
+.btn.is-pending:hover{transform:none;box-shadow:none}
+.btn.is-pending .i-line{opacity:.45}
 .i-line{width:19px;height:19px;flex:none}
 
 /* ============ logo ============ */
