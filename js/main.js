@@ -11,10 +11,6 @@
   const $  = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 
-  /* ---------- hero: 表示と同時にフェードイン ---------- */
-  const hero = $(".hero");
-  if (hero) requestAnimationFrame(() => hero.classList.add("is-in"));
-
   /* ---------- hero slideshow (calm crossfade, no video) ---------- */
   const slideBox = $("#heroSlides");
   if (slideBox) {
