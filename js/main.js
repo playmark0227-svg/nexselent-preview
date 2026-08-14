@@ -4,8 +4,6 @@
 (() => {
   "use strict";
 
-  document.documentElement.classList.remove("no-js");
-
   const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
   const reduceNow = () => mq.matches;
   const $  = (s, c = document) => c.querySelector(s);
@@ -86,7 +84,9 @@
       }
     });
   }, { threshold: 0.16, rootMargin: "0px 0px -30px 0px" });
-  $$("[data-reveal], [data-split], .sec-head, .values__list li").forEach(el => io.observe(el));
+  $$("[data-reveal], .values__list li").forEach(el => io.observe(el));
+  // ここまで到達して初めてフォールバックを外す(途中で失敗しても要素が消えない)
+  document.documentElement.classList.remove("no-js");
 
   /* ---------- mobile drawer ---------- */
   const menuBtn = $("#menuBtn");
