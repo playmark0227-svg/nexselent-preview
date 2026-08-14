@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="NEXSELENT">
+  <rect width="64" height="64" rx="13" fill="#152a55"/>
+  <!-- 右の縦画だけ上へ伸びる = NEXT / この先へ。対角(選び取った道)は金 -->
+  <g fill="none" stroke-width="5" stroke-linecap="round">
+    <path d="M21 46V21" stroke="#ffffff"/>
+    <path d="M43 46V14" stroke="#ffffff"/>
+    <path d="M21 21 43 46" stroke="#c3a86b"/>
+  </g>
+</svg>

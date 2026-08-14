@@ -27,6 +27,7 @@
   --shadow-sm:0 1px 2px rgba(21,42,85,.04),0 4px 14px rgba(21,42,85,.05);
   --shadow-md:0 2px 6px rgba(21,42,85,.05),0 12px 32px rgba(21,42,85,.08);
   --shadow-lg:0 6px 16px rgba(21,42,85,.07),0 24px 56px rgba(21,42,85,.12);
+  --cam:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 7h3l2-2h6l2 2h3v12H4z'/%3E%3Ccircle cx='12' cy='13' r='3.5'/%3E%3C/svg%3E");
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -80,14 +81,7 @@ button{font-family:inherit;background:none;border:none;cursor:pointer;color:inhe
 .i-line{width:19px;height:19px;flex:none}
 
 /* ============ logo ============ */
-.logo-mark{
-  display:inline-grid;place-items:center;
-  width:34px;height:34px;border-radius:9px;
-  background:linear-gradient(135deg,var(--navy) 0%,#2c4180 100%);
-  color:#fff;font-family:var(--serif);font-weight:700;font-size:18px;
-  flex:none;
-}
-.logo-mark--light{background:#fff;color:var(--navy)}
+.logo-mark{width:34px;height:34px;flex:none;display:block}
 .logo-type{display:flex;flex-direction:column;line-height:1.3}
 .logo-type__en{font-weight:700;font-size:17px;letter-spacing:.16em;color:var(--navy)}
 .logo-type__jp{font-size:9.5px;letter-spacing:.24em;color:var(--gray)}
@@ -106,10 +100,7 @@ button{font-family:inherit;background:none;border:none;cursor:pointer;color:inhe
   opacity:0;transform:translateY(12px);
   animation:loaderIn .7s var(--ease) .1s forwards;
 }
-.loader__mark{
-  display:inline-grid;place-items:center;width:40px;height:40px;border-radius:10px;
-  background:var(--navy);color:#fff;font-family:var(--serif);font-size:21px;
-}
+.loader__mark{width:40px;height:40px;display:block}
 @keyframes loaderIn{to{opacity:1;transform:none}}
 .loader.is-done{opacity:0;visibility:hidden;pointer-events:none}
 
@@ -123,6 +114,18 @@ button{font-family:inherit;background:none;border:none;cursor:pointer;color:inhe
   transition:box-shadow .4s ease,border-color .4s ease,background .4s ease;
 }
 .header.is-scrolled{border-bottom-color:var(--hair);box-shadow:0 1px 12px rgba(21,42,85,.05)}
+/* 全画面ヒーローの上では透過(最上部のみ)。少しでもスクロールしたら白帯に戻す */
+body.has-hero .header:not(.is-scrolled){
+  background:transparent;backdrop-filter:none;border-bottom-color:transparent;box-shadow:none;
+}
+body.has-hero .header:not(.is-scrolled) .logo-type__en{color:#fff}
+body.has-hero .header:not(.is-scrolled) .logo-type__jp{color:rgba(255,255,255,.65)}
+body.has-hero .header:not(.is-scrolled) .header__nav a{color:rgba(255,255,255,.92)}
+body.has-hero .header:not(.is-scrolled) .header__nav a::after{background:#fff}
+body.has-hero .header:not(.is-scrolled) .header__tel-num{color:#fff}
+body.has-hero .header:not(.is-scrolled) .header__tel-note{color:rgba(255,255,255,.6)}
+body.has-hero .header:not(.is-scrolled) .menu-btn span{background:#fff}
+body.has-hero .header:not(.is-scrolled) .logo-mark{content:url("../img/logo-light.svg")}
 /* ドロワー展開中もハンバーガーを前面に */
 body.is-locked .header{z-index:75;background:transparent;backdrop-filter:none;box-shadow:none}
 body.is-locked .header .header__nav,
@@ -202,89 +205,156 @@ body.is-locked .header .header__logo{visibility:hidden}
 .drawer__line{margin-top:auto}
 
 /* =========================================================
-   Hero
+   Hero — 全画面ビジュアル
 ========================================================= */
 .hero{
-  position:relative;overflow:hidden;
-  padding:clamp(128px,12vw,176px) 0 clamp(60px,6.5vw,100px);
-  background:linear-gradient(180deg,#fcfdff 0%,#eff4fb 100%);
+  position:relative;isolation:isolate;overflow:hidden;
+  min-height:100svh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(96px,12vh,140px) 0 clamp(96px,14vh,150px);
+  background:var(--navy-3);
+  color:#fff;
 }
-/* 背景: 青の面 + 罫線グリッド */
-.hero__bg{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-.hero__bg::before{
-  content:"";position:absolute;top:0;bottom:0;right:0;width:48%;
-  background:linear-gradient(160deg,#e3ecf9 0%,#eef3fa 58%,#f7f2e8 100%);
-  /* 面の内側エッジをぼかす */
-  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 26%);
-  mask-image:linear-gradient(90deg,transparent 0%,#000 26%);
+/* --- 背景スライド --- */
+.hero__media{position:absolute;inset:0;z-index:-2}
+.hero__slide{
+  position:absolute;inset:0;
+  opacity:0;transition:opacity 1.6s ease;
+  display:grid;place-items:center;
 }
-.hero__bg::after{
-  content:"";position:absolute;inset:0;
-  background-image:
-    repeating-linear-gradient(90deg,var(--hair) 0 1px,transparent 1px 104px),
-    repeating-linear-gradient(0deg,var(--hair) 0 1px,transparent 1px 104px);
-  opacity:.45;
-  -webkit-mask-image:radial-gradient(78% 74% at 82% 14%,#000 0%,transparent 68%);
-  mask-image:radial-gradient(78% 74% at 82% 14%,#000 0%,transparent 68%);
+.hero__slide.is-active{opacity:1}
+.hero__slide .ph-img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:saturate(.78) contrast(1.03) brightness(.92);
+  transform:scale(1.06);transition:transform 8s ease-out;
 }
-@media(max-width:860px){.hero__bg::before{width:100%;top:auto;height:46%;bottom:0}}
-.hero__grid{
-  display:grid;grid-template-columns:1.1fr .9fr;
-  gap:clamp(32px,5vw,64px);align-items:center;
-  position:relative;
+.hero__slide.is-active .ph-img{transform:scale(1)}
+/* 写真が未配置のときの下地 */
+.hero__slide--a{background:linear-gradient(152deg,#1c3357 0%,#24405f 60%,#3b4657 100%)}
+.hero__slide--b{background:linear-gradient(158deg,#1b3050 0%,#3a4152 100%)}
+.hero__slide--c{background:linear-gradient(142deg,#2a3a52 0%,#1a2c4c 100%)}
+/* --- 文字を読ませるためのスクリム --- */
+.hero__scrim{
+  position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+    linear-gradient(100deg,rgba(8,20,42,.90) 0%,rgba(8,20,42,.70) 38%,rgba(8,20,42,.30) 70%,rgba(8,20,42,.42) 100%),
+    linear-gradient(180deg,rgba(8,20,42,.62) 0%,rgba(8,20,42,.10) 26%,rgba(8,20,42,.12) 58%,rgba(8,20,42,.70) 100%);
 }
+/* --- コピー --- */
+.hero__inner{position:relative;width:min(1120px,90vw)}
 .hero__eyebrow{
   display:flex;align-items:center;gap:14px;
-  font-size:11px;font-weight:700;letter-spacing:.3em;color:var(--gold-text);
-  text-transform:uppercase;margin-bottom:22px;
+  font-size:11px;font-weight:700;letter-spacing:.3em;color:var(--gold-2);
+  text-transform:uppercase;margin-bottom:24px;
 }
-.hero__eyebrow::before{
-  content:"";width:38px;height:1px;background:var(--gold-2);flex:none;
-}
+.hero__eyebrow::before{content:"";width:38px;height:1px;background:var(--gold-2);flex:none}
 .hero__title{
-  font-family:var(--serif);font-weight:600;color:var(--navy);
-  font-size:clamp(34px,4.9vw,58px);
-  line-height:1.45;letter-spacing:.05em;
+  font-family:var(--serif);font-weight:600;color:#fff;
+  font-size:clamp(32px,5.6vw,68px);
+  line-height:1.42;letter-spacing:.05em;
+  text-shadow:0 2px 24px rgba(8,20,42,.45);
 }
-.hero__line{display:block;padding-bottom:.1em;margin-bottom:-.05em}
-/* 見出し: 1文字ずつフォーカスが合う演出 */
-.hero__chars, .hero__line>span{display:inline-block}
+.hero__line{display:block;padding-bottom:.12em;margin-bottom:-.06em}
+.hero__line>span{display:inline-block}
 .hero__line>span span{
   display:inline-block;
-  opacity:0;transform:translateY(22px);filter:blur(6px);
+  opacity:0;transform:translateY(26px);filter:blur(7px);
 }
 .hero.is-in .hero__line>span span{
-  animation:heroChar .9s cubic-bezier(.2,.7,.15,1) forwards;
+  animation:heroChar .95s cubic-bezier(.2,.7,.15,1) forwards;
   animation-delay:var(--hd,0s);
   will-change:transform,filter;
 }
 @keyframes heroChar{to{opacity:1;transform:translateY(0);filter:blur(0)}}
 .hero__lead{
-  margin-top:24px;font-size:clamp(14px,1.3vw,15.5px);line-height:2.15;color:var(--gray);
+  margin-top:26px;max-width:40em;
+  font-size:clamp(13.5px,1.25vw,15.5px);line-height:2.15;
+  color:rgba(255,255,255,.86);
+  text-shadow:0 1px 14px rgba(8,20,42,.5);
 }
-.hero__btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.hero__btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.btn--onphoto{
+  background:rgba(255,255,255,.10);color:#fff;border-color:rgba(255,255,255,.55);
+  backdrop-filter:blur(6px);
+}
+.btn--onphoto:hover{background:#fff;color:var(--navy);border-color:#fff;transform:translateY(-2px)}
 [data-hero-fade]{opacity:0;transform:translateY(20px);transition:opacity .9s ease,transform .9s var(--ease)}
 .hero.is-in [data-hero-fade]{opacity:1;transform:none}
-.hero.is-in .hero__lead{transition-delay:.75s}
-.hero.is-in .hero__btns{transition-delay:.95s}
 .hero.is-in .hero__eyebrow{transition-delay:.1s}
-.hero.is-in .hero__visual{transition-delay:.5s}
+.hero.is-in .hero__lead{transition-delay:.8s}
+.hero.is-in .hero__btns{transition-delay:1s}
+/* --- 下端: 会社の一行情報 + スライド操作 --- */
+.hero__foot{
+  position:absolute;left:50%;transform:translateX(-50%);
+  bottom:clamp(26px,4.5vh,44px);width:min(1120px,90vw);
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  opacity:0;transition:opacity 1s ease 1.2s;
+}
+.hero.is-in .hero__foot{opacity:1}
+.hero__meta{
+  font-size:11px;letter-spacing:.16em;color:rgba(255,255,255,.62);
+}
+.hero__dots{display:flex;gap:9px}
+.hero__dots button{
+  width:26px;height:3px;border-radius:2px;padding:0;
+  background:rgba(255,255,255,.32);transition:background .3s,width .3s;
+}
+.hero__dots button[aria-current="true"]{background:var(--gold-2);width:42px}
+.hero__dots button:focus-visible{outline:2px solid #fff;outline-offset:4px}
+/* --- スクロール誘導 --- */
+.hero__scroll{
+  position:absolute;right:clamp(16px,3vw,40px);bottom:0;
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  color:rgba(255,255,255,.7);
+  opacity:0;transition:opacity 1s ease 1.4s;
+}
+.hero.is-in .hero__scroll{opacity:1}
+.hero__scroll span{
+  writing-mode:vertical-rl;font-size:10px;letter-spacing:.3em;
+}
+.hero__scroll::after{
+  content:"";width:1px;height:64px;background:rgba(255,255,255,.3);position:relative;overflow:hidden;
+}
+.hero__scroll:hover{color:#fff}
+/* 縦の狭いウィンドウでも1画面に収める */
+@media(min-width:861px) and (max-height:760px){
+  .hero{padding:clamp(80px,11vh,116px) 0 clamp(74px,10vh,104px)}
+  .hero__title{font-size:clamp(30px,4.4vw,50px);line-height:1.36}
+  .hero__lead{margin-top:20px;line-height:2}
+  .hero__btns{margin-top:26px}
+  .hero__eyebrow{margin-bottom:18px}
+}
+@media(max-width:860px){
+  .hero{padding:clamp(104px,16vh,150px) 0 clamp(104px,16vh,150px)}
+  .hero__scroll{display:none}
+  .hero__foot{
+    flex-direction:row;align-items:center;justify-content:space-between;gap:14px;
+    bottom:22px;
+  }
+  .hero__eyebrow{font-size:10px;letter-spacing:.24em;gap:11px;margin-bottom:20px}
+  .hero__eyebrow::before{width:26px}
+  .hero__meta{font-size:10px;letter-spacing:.1em}
+  .hero__dots button{width:20px}
+  .hero__dots button[aria-current="true"]{width:32px}
+  .hero__scrim{
+    background:
+      linear-gradient(180deg,rgba(8,20,42,.72) 0%,rgba(8,20,42,.42) 38%,rgba(8,20,42,.55) 72%,rgba(8,20,42,.86) 100%);
+  }
+}
 
-.hero__visual{position:relative}
-/* 写真レイヤー: img/ にファイルを置くと差し替わる */
+/* =========================================================
+   写真プレースホルダ (img/ にファイルを置くと差し替わる)
+========================================================= */
 .ph-img{
   position:absolute;inset:0;z-index:2;
-  width:100%;height:100%;object-fit:cover;
-  display:block;
-  /* 写真のトーン統一 */
+  width:100%;height:100%;object-fit:cover;display:block;
   filter:saturate(.82) contrast(1.02) brightness(.99);
 }
-.hero__slide::after,.activity__ph::after,.msg__ph::after,.seminar-card__visual::after{
+.activity__ph::after,.msg__ph::after,.seminar-card__visual::after{
   content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
   background:linear-gradient(180deg,rgba(21,42,85,.04) 0%,rgba(21,42,85,.14) 100%);
   mix-blend-mode:multiply;
 }
-
 /* 撮影予定カード */
 .ph-note{
   position:relative;z-index:1;
@@ -300,28 +370,6 @@ body.is-locked .header .header__logo{visibility:hidden}
   content:"";width:22px;height:22px;margin-bottom:4px;
   background:currentColor;opacity:.55;
   -webkit-mask:var(--cam) center/contain no-repeat;mask:var(--cam) center/contain no-repeat;
-}
-:root{
-  --cam:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 7h3l2-2h6l2 2h3v12H4z'/%3E%3Ccircle cx='12' cy='13' r='3.5'/%3E%3C/svg%3E");
-}
-.hero__badge{
-  position:absolute;left:-20px;bottom:-20px;z-index:4; 
-  background:#fff;border-radius:12px;
-  box-shadow:var(--shadow-md),0 0 0 1px var(--hair);
-  padding:14px 20px;display:flex;align-items:center;gap:14px;
-}
-.hero__badge-num{font-family:var(--serif);font-size:25px;font-weight:700;color:var(--gold-text);letter-spacing:.02em}
-.hero__badge-txt{
-  font-size:10.5px;line-height:1.75;letter-spacing:.1em;color:var(--gray);
-  padding-left:14px;border-left:1px solid var(--border);
-}
-@media(max-width:860px){
-  .hero__grid{grid-template-columns:1fr}
-  .hero__visual{max-width:480px}
-  /* keep the badge clear of the slideshow dots (bottom-right) */
-  .hero__badge{left:-6px;right:auto;bottom:-16px;padding:11px 16px}
-  .hero__badge-num{font-size:21px}
-  .hero__badge-txt{font-size:10px;padding-left:12px}
 }
 
 /* =========================================================
@@ -992,24 +1040,9 @@ body.is-locked .header .header__logo{visibility:hidden}
 }
 
 /* =========================================================
-   Hero slideshow (calm crossfade, no video)
+   写真枠の下地(方眼)
 ========================================================= */
-/* 写真の白マット枠 */
-.hero__slides{
-  position:relative;aspect-ratio:4/3.1;overflow:hidden;
-  border:10px solid #fff;border-radius:16px;
-  box-shadow:var(--shadow-md),0 0 0 1px var(--hair);
-}
-.hero__slide{
-  position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease;
-  display:grid;place-items:center;
-}
-.hero__slide.is-active{opacity:1}
-.hero__slide::after{
-  content:"";position:absolute;inset:14px;border:1px solid rgba(28,43,87,.14);border-radius:10px;
-}
-/* 写真枠の下地(方眼) */
-.hero__slide::before,.activity__ph::before,.msg__ph::before,.seminar-card__visual::before{
+.activity__ph::before,.msg__ph::before,.seminar-card__visual::before{
   content:"";position:absolute;inset:0;pointer-events:none;
   background-image:
     repeating-linear-gradient(90deg,rgba(21,42,85,.07) 0 1px,transparent 1px 44px),
@@ -1018,22 +1051,6 @@ body.is-locked .header .header__logo{visibility:hidden}
   mask-image:radial-gradient(90% 80% at 30% 20%,#000 0%,transparent 78%);
 }
 .activity__ph,.msg__ph,.seminar-card__visual{position:relative;overflow:hidden}
-.hero__slide--a{background:radial-gradient(110% 95% at 22% 4%,#d3e3f6 0%,transparent 58%),linear-gradient(152deg,#c3d6ec 0%,#e4ebf1 58%,#e0d5bd 100%)}
-.hero__slide--b{background:radial-gradient(105% 95% at 82% 8%,#e0d3b5 0%,transparent 52%),linear-gradient(158deg,#d3e0f0 0%,#e5dbc7 100%)}
-.hero__slide--c{background:radial-gradient(115% 115% at 50% 100%,#c9dcf2 0%,transparent 56%),linear-gradient(142deg,#e5e0d1 0%,#cddced 100%)}
-/* スライド操作ドット(右下) */
-.hero__dots{
-  position:absolute;right:12px;bottom:12px;
-  display:flex;gap:7px;z-index:3;
-  background:rgba(255,255,255,.9);border-radius:100px;padding:7px 10px;
-  box-shadow:0 1px 4px rgba(21,42,85,.08);
-}
-.hero__dots button{
-  width:7px;height:7px;border-radius:50%;padding:0;
-  background:rgba(21,42,85,.28);transition:background .3s,transform .3s;
-}
-.hero__dots button[aria-current="true"]{background:var(--navy);transform:scale(1.25)}
-.hero__dots button:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
 
 /* =========================================================
    Signature (digital brush font)
@@ -1215,20 +1232,9 @@ body.is-locked .header .header__logo{visibility:hidden}
 .count{font-variant-numeric:tabular-nums}
 
 /* --- 設立年バッジの出現 --- */
-.hero__badge{opacity:0;transform:translateY(14px) scale(.96)}
-.hero.is-in .hero__badge{
-  animation:badgePop .8s var(--ease) 1.15s forwards;
-}
 @keyframes badgePop{to{opacity:1;transform:none}}
 
 /* --- 背景グリッドの微小ドリフト --- */
-@media(prefers-reduced-motion:no-preference){
-  .hero__bg::after{animation:gridDrift 40s linear infinite}
-}
-@keyframes gridDrift{
-  from{background-position:0 0,0 0}
-  to{background-position:104px 0,0 104px}
-}
 
 /* --- 帯の罫線ドロー --- */
 .values__list li{position:relative}
@@ -1272,7 +1278,6 @@ body.is-locked .header .header__logo{visibility:hidden}
 .no-js .sec-head__jp::after{transform:translateX(-50%) scaleX(1)}
 .no-js .values__list li::after{transform:scaleX(1)}
 .no-js .progress{display:none}
-.no-js .hero__badge{opacity:1;transform:none}
 
 /* =========================================================
    Reduced motion
@@ -1287,12 +1292,10 @@ body.is-locked .header .header__logo{visibility:hidden}
   [data-reveal],[data-hero-fade]{opacity:1;transform:none}
   .hero__line>span span{opacity:1;transform:none;filter:none}
   [data-split] .ph-line>span{opacity:1;transform:none;filter:none}
-  .hero__blob{animation:none}
   .fab{opacity:1;transform:none;pointer-events:auto;visibility:visible}
   .sec-head__en>span,.sec-head__jp .ch{opacity:1;transform:none}
   .sec-head__jp::after{transform:translateX(-50%) scaleX(1)}
   .values__list li::after{transform:scaleX(1)}
   .page-hero__en,.page-hero__ttl,.page-hero__lead,.breadcrumb{opacity:1;transform:none}
   .btn:hover::after{animation:none}
-  .hero__badge{opacity:1;transform:none}
 }

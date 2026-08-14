@@ -31,6 +31,7 @@
   /* ---------- loader → hero in ---------- */
   const loader = $("#loader");
   const hero = $(".hero");
+  if (hero) document.body.classList.add("has-hero");
   const finishLoader = () => {
     if (!loader || loader.classList.contains("is-done")) return;
     loader.classList.add("is-done");
@@ -101,7 +102,7 @@
   let ticking = false;
   const onScroll = () => {
     const y = window.scrollY;
-    header && header.classList.toggle("is-scrolled", y > 10);
+    header && header.classList.toggle("is-scrolled", y > (document.body.classList.contains("has-hero") ? 60 : 10));
     fab && fab.classList.toggle("is-shown", y > 500);
     fabTel && fabTel.classList.toggle("is-shown", y > 500);
     if (bar) {
