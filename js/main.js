@@ -11,41 +11,9 @@
   const $  = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 
-  /* ---------- hero: per-char blur fade-up ---------- */
-  let heroCharCount = 0;
-  $$("[data-hero-chars]").forEach(el => {
-    el.innerHTML = [...el.textContent]
-      .map(ch => `<span style="--hd:${(0.25 + heroCharCount++ * 0.05).toFixed(3)}s">${ch}</span>`)
-      .join("");
-  });
-  // release composite layers once each character's intro finishes
-  $$("[data-hero-chars] span").forEach(sp => {
-    sp.addEventListener("animationend", () => { sp.style.willChange = "auto"; }, { once: true });
-  });
-
-  // [data-split] catch lines: wrap contents so the blur fade-up has a target
-  $$("[data-split] .ph-line").forEach(line => {
-    line.innerHTML = `<span>${line.innerHTML}</span>`;
-  });
-
-  /* ---------- loader → hero in ---------- */
-  const loader = $("#loader");
+  /* ---------- hero: 表示と同時にフェードイン ---------- */
   const hero = $(".hero");
-  if (hero) document.body.classList.add("has-hero");
-  const finishLoader = () => {
-    if (!loader || loader.classList.contains("is-done")) return;
-    loader.classList.add("is-done");
-    hero && hero.classList.add("is-in");
-  };
-  if (reduceNow()) {
-    finishLoader();
-  } else {
-    const t0 = performance.now();
-    window.addEventListener("load", () => {
-      setTimeout(finishLoader, Math.max(0, 900 - (performance.now() - t0)));
-    });
-    setTimeout(finishLoader, 2500); // hard cap if loading drags on
-  }
+  if (hero) requestAnimationFrame(() => hero.classList.add("is-in"));
 
   /* ---------- hero slideshow (calm crossfade, no video) ---------- */
   const slideBox = $("#heroSlides");
@@ -68,7 +36,7 @@
     };
     const restart = () => {
       if (timer) clearInterval(timer);
-      if (!reduceNow() && !paused && slides.length > 1) timer = setInterval(() => go(idx + 1), 5000);
+      if (!reduceNow() && !paused && slides.length > 1) timer = setInterval(() => go(idx + 1), 6000);
     };
     // WCAG 2.2.2: allow pausing the auto-advance on hover/focus
     const pause = () => { paused = true; if (timer) { clearInterval(timer); timer = null; } };
@@ -98,17 +66,12 @@
   const header = $("#header");
   const fab = $("#fab");
   const fabTel = $("#fabTel");
-  const bar = $("#progressBar");
   let ticking = false;
   const onScroll = () => {
     const y = window.scrollY;
-    header && header.classList.toggle("is-scrolled", y > (document.body.classList.contains("has-hero") ? 60 : 10));
+    header && header.classList.toggle("is-scrolled", y > 10);
     fab && fab.classList.toggle("is-shown", y > 500);
     fabTel && fabTel.classList.toggle("is-shown", y > 500);
-    if (bar) {
-      const max = document.documentElement.scrollHeight - innerHeight;
-      bar.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
-    }
     ticking = false;
   };
   const requestScrollUpdate = () => {
@@ -117,18 +80,6 @@
   addEventListener("scroll", requestScrollUpdate, { passive: true });
   addEventListener("resize", requestScrollUpdate, { passive: true });
   onScroll();
-
-  /* ---------- section headings: wrap label + split JP title ---------- */
-  $$(".sec-head__en").forEach(el => {
-    if (!el.querySelector("span")) el.innerHTML = `<span>${el.textContent}</span>`;
-  });
-  $$(".sec-head__jp").forEach(el => {
-    if (el.querySelector(".ch")) return;
-    el.innerHTML = [...el.textContent]
-      .map((c, i) => c === " " ? c : `<span class="ch" style="--n:${i}">${c}</span>`)
-      .join("");
-  });
-
 
   /* ---------- reveal on scroll ---------- */
   const io = new IntersectionObserver(entries => {

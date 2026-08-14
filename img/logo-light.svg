@@ -1,8 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="NEXSELENT">
-  <rect width="64" height="64" rx="13" fill="#ffffff"/>
-  <g fill="none" stroke-width="5" stroke-linecap="round">
-    <path d="M21 46V21" stroke="#152a55"/>
-    <path d="M43 46V14" stroke="#152a55"/>
-    <path d="M21 21 43 46" stroke="#a08544"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 40">
+  <g fill="none" stroke-width="4.6" stroke-linecap="round">
+    <path d="M4 36V11" stroke="#ffffff"/>
+    <path d="M26 36V4" stroke="#ffffff"/>
+    <path d="M4 11 26 36" stroke="#c3a86b"/>
   </g>
 </svg>
