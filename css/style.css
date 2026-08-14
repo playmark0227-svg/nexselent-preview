@@ -1034,7 +1034,7 @@ body.is-locked .header .header__logo{visibility:hidden}
 /* お知らせ: 罫線リスト */
 .news-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border)}
 .news-card{
-  display:grid;grid-template-columns:104px auto 1fr;gap:16px;align-items:baseline;
+  display:grid;grid-template-columns:104px 76px 1fr;gap:16px;align-items:baseline;
   background:transparent;border:none;border-bottom:1px solid var(--border);border-radius:0;
   padding:17px 6px;box-shadow:none;
   transition:background .3s ease,transform .35s var(--ease);
@@ -1042,8 +1042,9 @@ body.is-locked .header .header__logo{visibility:hidden}
 a.news-card:hover{background:rgba(21,42,85,.03)}
 .news-card__date{font-size:12.5px;color:var(--gray);letter-spacing:.08em}
 .news-card__cat{
-  font-size:10.5px;font-weight:700;letter-spacing:.1em;text-align:center;
-  border-radius:3px;padding:3px 0;
+  justify-self:start;
+  font-size:10.5px;font-weight:700;letter-spacing:.1em;
+  border-radius:3px;padding:3px 9px;
 }
 .news-card__cat--seminar{background:#eef2f9;color:var(--navy)}
 .news-card__cat--recruit{background:#eef7f0;color:#1c6b3a}
@@ -1114,6 +1115,14 @@ a.news-card:hover{background:rgba(21,42,85,.03)}
   animation:phIn .5s var(--ease) forwards;
 }
 @keyframes phIn{to{opacity:1;transform:none}}
+
+/* =========================================================
+   制作用の注記(公開時は body.is-draft を外すと一括で消える)
+========================================================= */
+.draft-note,.ph-note,.doc-item__state{display:none}
+.is-draft .draft-note{display:block}
+.is-draft .ph-note{display:inline-flex}
+.is-draft .doc-item__state{display:inline-block}
 
 /* =========================================================
    No-JS fallback
