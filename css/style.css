@@ -262,16 +262,34 @@ body.is-locked .header .header__logo{visibility:hidden}
   .hero__btns{margin-top:26px}
 }
 @media(max-width:860px){
-  /* モバイルは写真を上に見せ、下の白地に文字を置く */
-  .hero{justify-content:flex-end;padding:clamp(100px,15vw,140px) 0 clamp(140px,30vw,190px)}
-  .hero__scrim{
-    background:linear-gradient(180deg,rgba(247,250,253,0) 0%,rgba(247,250,253,.16) 32%,rgba(247,250,253,.9) 58%,#f7fafd 82%);
+  /* モバイルは写真とテキストを上下に分ける(写真の明るさに左右されない) */
+  .hero{
+    display:block;min-height:0;
+    padding:0 0 clamp(26px,7vw,38px);
+    background:var(--bg);
   }
-  .hero__title{font-size:clamp(27px,7vw,34px)}
-  .hero__foot{flex-direction:column;align-items:stretch;gap:12px;bottom:20px}
+  .hero__media{
+    position:relative;z-index:0;
+    height:min(44svh,340px);margin-top:74px;
+  }
+  .hero__scrim{display:none}
+  .hero__inner{
+    opacity:0;transform:translateY(10px);
+    padding-top:clamp(26px,7vw,36px);
+  }
+  .hero__title{font-size:clamp(26px,6.6vw,32px);line-height:1.6}
+  .hero__lead{margin-top:16px}
+  .hero__btns{margin-top:24px;flex-direction:column;align-items:stretch}
+  .hero__btns .btn{width:100%}
+  .hero__foot{
+    position:static;transform:none;
+    width:min(1120px,90vw);margin:clamp(22px,6vw,30px) auto 0;
+    flex-direction:column;align-items:stretch;gap:14px;
+  }
   .hero__news{max-width:none}
   .hero__news-ttl{flex:1}
   .hero__dots{justify-content:center}
+  .hero__dots button{background:var(--border-strong);box-shadow:none}
 }
 
 /* =========================================================
