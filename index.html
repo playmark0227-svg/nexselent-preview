@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
-<link rel="stylesheet" href="css/style.css?v=44">
+<link rel="stylesheet" href="css/style.css?v=52">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -153,6 +153,121 @@
     </div>
   </section>
 
+  <!-- ひとつの窓口(比較図) -->
+  <section class="section section--tight onedoor" id="onedoor">
+    <div class="container">
+      <header class="sec-head sec-head--split" data-reveal>
+        <div>
+          <p class="sec-head__en" lang="en">Our Approach</p>
+          <h2 class="sec-head__jp">ひとつの窓口で考える</h2>
+        </div>
+        <p class="sec-head__lead">住まい・お金・固定費は本来つながっています。別々に相談すると、その関係が誰にも見えません。</p>
+      </header>
+    </div>
+
+    <div class="container container--wide" data-reveal>
+      <figure class="onedoor__fig">
+        <svg class="onedoor__svg" viewBox="0 0 1200 330" role="img"
+             aria-labelledby="odTtl odDesc" preserveAspectRatio="xMidYMid meet">
+          <title id="odTtl">相談先が分かれている場合と、ネクセレントにまとめた場合の比較図</title>
+          <desc id="odDesc">左は不動産会社・保険代理店・電力/通信・制作会社にそれぞれ相談し、内容が互いに共有されない状態。右はネクセレントのひとつの窓口を通して、住まい・お金・固定費・発信をまとめて検討する状態。</desc>
+
+          <!-- ── 左: よくある状態 ── -->
+          <text x="0" y="16" class="od-cap">よくある状態</text>
+          <g class="od-left">
+            <rect x="0"   y="42"  width="150" height="46" rx="6"/>
+            <text x="75"  y="70">不動産会社</text>
+            <rect x="0"   y="102" width="150" height="46" rx="6"/>
+            <text x="75"  y="130">保険代理店</text>
+            <rect x="0"   y="162" width="150" height="46" rx="6"/>
+            <text x="75"  y="190">電力・通信</text>
+            <rect x="0"   y="222" width="150" height="46" rx="6"/>
+            <text x="75"  y="250">制作会社</text>
+          </g>
+          <!-- ばらばらに伸びる線 -->
+          <g class="od-line od-line--dashed">
+            <path d="M150 65  C 210 65, 230 140, 288 150"/>
+            <path d="M150 125 C 205 125, 235 145, 288 152"/>
+            <path d="M150 185 C 205 185, 235 160, 288 156"/>
+            <path d="M150 245 C 210 245, 230 170, 288 160"/>
+          </g>
+          <g class="od-person">
+            <circle cx="316" cy="140" r="11"/>
+            <path d="M296 178c0-13 9-21 20-21s20 8 20 21"/>
+            <text x="316" y="206">お客様</text>
+          </g>
+          <text x="316" y="232" class="od-note">同じ話を4回。
+            <tspan x="316" dy="17">つながりは誰も見ていない。</tspan></text>
+
+          <!-- ── 区切り ── -->
+          <line class="od-div" x1="452" y1="30" x2="452" y2="300"/>
+
+          <!-- ── 右: ネクセレント ── -->
+          <text x="500" y="16" class="od-cap od-cap--on">ネクセレントの場合</text>
+          <g class="od-person od-person--on">
+            <circle cx="528" cy="140" r="11"/>
+            <path d="M508 178c0-13 9-21 20-21s20 8 20 21"/>
+            <text x="528" y="206">お客様</text>
+          </g>
+          <g class="od-line od-line--solid">
+            <path d="M556 150 H 636"/>
+          </g>
+          <!-- 窓口 -->
+          <g class="od-door">
+            <rect x="636" y="86" width="132" height="128" rx="10"/>
+            <text x="702" y="136">ひとつの</text>
+            <text x="702" y="162">窓口</text>
+            <text x="702" y="190" class="od-door__sub">担当はひとり</text>
+          </g>
+          <!-- 4事業へ分岐 -->
+          <g class="od-line od-line--solid">
+            <path d="M768 122 C 826 122, 838 62,  892 62"/>
+            <path d="M768 140 C 830 140, 842 122, 892 122"/>
+            <path d="M768 160 C 830 160, 842 182, 892 182"/>
+            <path d="M768 178 C 826 178, 838 242, 892 242"/>
+          </g>
+          <g class="od-right">
+            <rect x="892" y="40"  width="176" height="44" rx="6"/>
+            <text x="980" y="67">住まい</text>
+            <rect x="892" y="100" width="176" height="44" rx="6"/>
+            <text x="980" y="127">お金</text>
+            <rect x="892" y="160" width="176" height="44" rx="6"/>
+            <text x="980" y="187">固定費</text>
+            <rect x="892" y="220" width="176" height="44" rx="6"/>
+            <text x="980" y="247">発信</text>
+          </g>
+          <!-- 4事業をつなぐ縦の括り -->
+          <path class="od-brace" d="M1086 44 h10 v216 h-10"/>
+          <text x="1108" y="146" class="od-note od-note--v">まとめて
+            <tspan x="1108" dy="17">検討できる</tspan></text>
+        </svg>
+
+        <!-- 狭い画面用: 図の内容を縦組みで -->
+        <div class="onedoor__stack">
+          <div class="od-card od-card--before">
+            <p class="od-card__cap">よくある状態</p>
+            <ul class="od-card__list">
+              <li>不動産会社</li><li>保険代理店</li><li>電力・通信</li><li>制作会社</li>
+            </ul>
+            <p class="od-card__note">同じ話を4回。つながりは誰も見ていない。</p>
+          </div>
+          <p class="od-arrow" aria-hidden="true">↓</p>
+          <div class="od-card od-card--after">
+            <p class="od-card__cap">ネクセレントの場合</p>
+            <p class="od-card__door">ひとつの窓口<span>担当はひとり</span></p>
+            <ul class="od-card__list od-card__list--on">
+              <li>住まい</li><li>お金</li><li>固定費</li><li>発信</li>
+            </ul>
+            <p class="od-card__note">まとめて検討できる。</p>
+          </div>
+        </div>
+        <figcaption class="onedoor__cap">
+          住まいの予算は保険と固定費で変わり、固定費は暮らし方で変わります。分けて相談するほど、この関係が見えなくなります。
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
   <!-- 事業内容 -->
   <section class="section" id="service">
     <div class="container">
@@ -161,7 +276,10 @@
           <p class="sec-head__en" lang="en">Service</p>
           <h2 class="sec-head__jp">事業内容</h2>
         </div>
-        <p class="sec-head__lead">暮らしとお金にまつわることを、まとめてご相談いただけます。</p>
+        <div class="sec-head__side">
+          <p class="sec-head__lead">暮らしとお金にまつわることを、まとめてご相談いただけます。</p>
+          <a href="service.html" class="sec-head__more">事業内容を詳しく見る<span aria-hidden="true">→</span></a>
+        </div>
       </header>
       <div class="svc-grid">
         <a class="svc-card svc-card--feature" href="service-house.html" data-reveal style="--i:0">
@@ -172,7 +290,7 @@
           <ul class="svc-card__tags"><li>CGアプローチ</li><li>建築設計</li><li>賃貸・売買</li><li>テナント仲介</li></ul>
         </a>
         <a class="svc-card" href="service-lifeplan.html" data-reveal style="--i:1">
-          <span class="svc-card__icon" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M7 29l7-7 5 4 8-11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 14h6v6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 10v4M10.5 12h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span>
+          <span class="svc-card__icon" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M7 29l7-7 5 4 8-11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 14h6v6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 10v4M10.5 12h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
           <p class="svc-card__en" lang="en">Life Plan</p>
           <h3 class="svc-card__ttl">ライフプラン</h3>
           <p class="svc-card__txt">ライフプラン表を一緒に作成し、貯める・守る・増やすの配分を家計に合わせて設計します。</p>
@@ -197,38 +315,39 @@
           <span class="btn btn--navy">まとめて相談する<span class="btn__arrow" aria-hidden="true">→</span></span>
         </a>
       </div>
-      <p class="more-link" data-reveal><a href="service.html" class="btn btn--ghost">事業内容を詳しく見る</a></p>
     </div>
   </section>
 
   <!-- 選ばれる理由 -->
   <section class="section section--tint" id="reason">
     <div class="container">
-      <header class="sec-head" data-reveal>
-        <p class="sec-head__en" lang="en">Reason</p>
-        <h2 class="sec-head__jp">選ばれる理由</h2>
+      <header class="sec-head sec-head--bar" data-reveal>
+        <div>
+          <p class="sec-head__en" lang="en">Reason</p>
+          <h2 class="sec-head__jp">選ばれる理由</h2>
+        </div>
+        <a href="reason.html" class="sec-head__more">私たちの考え方を読む<span aria-hidden="true">→</span></a>
       </header>
-      <div class="reason-grid reason-grid--line">
-        <div class="reason reason--line" data-reveal style="--i:0">
-          <span class="reason__num" aria-hidden="true">01</span>
-          <span class="reason__icon" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="13" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 34c1-7 5.5-10 12-10s11 3 12 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-          <h3 class="reason__ttl">セールスではなく、<br>コンサルティング</h3>
-          <p class="reason__txt">その方のライフプランから逆算し、商品よりも先に暮らしの計画を組み立てる進め方です。</p>
-        </div>
-        <div class="reason reason--line" data-reveal style="--i:1">
-          <span class="reason__num" aria-hidden="true">02</span>
-          <span class="reason__icon" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M6 8h22v16H16l-6 6v-6H6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 14h10M12 18h7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M30 14h4v12h-3v4l-4-4h-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
-          <h3 class="reason__ttl">専門用語を<br>使わない説明</h3>
-          <p class="reason__txt">専門用語に頼らず、図や身近な例に置き換えて、図に描いて、分かるまでご説明します。</p>
-        </div>
-        <div class="reason reason--line" data-reveal style="--i:2">
-          <span class="reason__num" aria-hidden="true">03</span>
-          <span class="reason__icon" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 34s-13-7.5-13-16a7.5 7.5 0 0113-5 7.5 7.5 0 0113 5c0 8.5-13 16-13 16z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
-          <h3 class="reason__ttl">契約後も続く<br>見直しサポート</h3>
-          <p class="reason__txt">ご契約後も、暮らしの変化に合わせて年1回を目安に内容を見直します。お客様一生涯の安心を目指します。</p>
-        </div>
-      </div>
-      <p class="more-link" data-reveal><a href="reason.html" class="btn btn--ghost">選ばれる理由を詳しく見る</a></p>
+      <ol class="reason-list">
+        <li class="reason-item" data-reveal style="--i:0">
+          <span class="reason-item__num" aria-hidden="true">01</span>
+          <span class="reason-item__icon" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="13" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 34c1-7 5.5-10 12-10s11 3 12 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <h3 class="reason-item__ttl">セールスではなく、<br>コンサルティング</h3>
+          <p class="reason-item__txt">その方のライフプランから逆算し、商品よりも先に暮らしの計画を組み立てる進め方です。</p>
+        </li>
+        <li class="reason-item" data-reveal style="--i:1">
+          <span class="reason-item__num" aria-hidden="true">02</span>
+          <span class="reason-item__icon" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M6 8h22v16H16l-6 6v-6H6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 14h10M12 18h7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M30 14h4v12h-3v4l-4-4h-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+          <h3 class="reason-item__ttl">専門用語を<br>使わない説明</h3>
+          <p class="reason-item__txt">専門用語に頼らず、図や身近な例に置き換えて、分かるまでご説明します。</p>
+        </li>
+        <li class="reason-item" data-reveal style="--i:2">
+          <span class="reason-item__num" aria-hidden="true">03</span>
+          <span class="reason-item__icon" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 34s-13-7.5-13-16a7.5 7.5 0 0113-5 7.5 7.5 0 0113 5c0 8.5-13 16-13 16z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+          <h3 class="reason-item__ttl">契約後も続く<br>見直しサポート</h3>
+          <p class="reason-item__txt">ご契約後も、暮らしの変化に合わせて年1回を目安に内容を見直します。お客様一生涯の安心を目指します。</p>
+        </li>
+      </ol>
     </div>
   </section>
 
@@ -256,9 +375,12 @@
   <!-- ご相談の流れ -->
   <section class="section" id="flow">
     <div class="container">
-      <header class="sec-head" data-reveal>
-        <p class="sec-head__en" lang="en">Flow</p>
-        <h2 class="sec-head__jp">ご相談の流れ</h2>
+      <header class="sec-head sec-head--bar" data-reveal>
+        <div>
+          <p class="sec-head__en" lang="en">Flow</p>
+          <h2 class="sec-head__jp">ご相談の流れ</h2>
+        </div>
+        <a href="flow.html" class="sec-head__more">よくある質問も見る<span aria-hidden="true">→</span></a>
       </header>
       <ol class="flow">
         <li class="flow__step" data-reveal style="--i:0">
@@ -286,7 +408,6 @@
           <p class="flow__txt">ご契約後も、進学や住み替えなどの節目ごとに内容を見直します。</p>
         </li>
       </ol>
-      <p class="more-link" data-reveal><a href="flow.html" class="btn btn--ghost">流れとよくある質問を見る</a></p>
     </div>
   </section>
 
@@ -315,7 +436,9 @@
           <p class="sec-head__en" lang="en">Gallery</p>
           <h2 class="sec-head__jp">活動の様子</h2>
         </div>
-        <p class="sec-head__lead">セミナーや個別相談の様子を掲載しています。</p>
+        <div class="sec-head__side">
+          <p class="sec-head__lead">セミナーや個別相談の様子を掲載しています。</p>
+        </div>
       </header>
       <div class="activity-grid">
         <figure class="activity" data-reveal style="--i:0">
@@ -414,12 +537,12 @@
   </div>
 </footer>
 
-<a href="tel:05058969042" class="fab fab--tel" id="fabTel" aria-label="電話をかける"><svg viewBox="0 0 24 24" aria-hidden="true" class="i-tel"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4.5 3.8h4l1.6 4.3-2.2 1.6a13.6 13.6 0 0 0 6.4 6.4l1.6-2.2 4.3 1.6v4c0 .9-.7 1.6-1.6 1.6C10.5 21.1 2.9 13.5 2.9 5.4c0-.9.7-1.6 1.6-1.6z"/></svg><span class="fab__txt">電話で<br>相談</span></a>
+<a href="tel:05058969042" class="fab fab--tel" id="fabTel" aria-label="電話をかける"><svg viewBox="0 0 24 24" aria-hidden="true" class="i-tel"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M4.5 3.8h4l1.6 4.3-2.2 1.6a13.6 13.6 0 0 0 6.4 6.4l1.6-2.2 4.3 1.6v4c0 .9-.7 1.6-1.6 1.6C10.5 21.1 2.9 13.5 2.9 5.4c0-.9.7-1.6 1.6-1.6z"/></svg><span class="fab__txt">電話で<br>相談</span></a>
 <a href="contact.html" class="fab" id="fab" aria-label="LINEで相談する">
   <svg class="i-line" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 5.64 2 10.13c0 4.03 3.58 7.4 8.42 8.04.33.07.77.22.89.5.1.26.07.66.03.92l-.14.86c-.04.26-.2 1.01.89.55 1.08-.46 5.84-3.44 7.97-5.89C19.6 13.6 22 12.1 22 10.13 22 5.64 17.52 2 12 2z"/></svg>
   <span class="fab__txt">LINEで<br>相談</span>
 </a>
 
-<script src="js/main.js?v=44"></script>
+<script src="js/main.js?v=52"></script>
 </body>
 </html>
