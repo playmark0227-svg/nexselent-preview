@@ -8,7 +8,10 @@
 <!-- ※デザイン案。一部コピー・FAQ回答は草案。LINE公式アカウントURL確認後、CTAリンクを設定します。 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- 和文フォントは重いのでレンダリングを止めない。読み込むまではヒラギノ等で表示される -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"></noscript>
 <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 <meta property="og:site_name" content="株式会社NEXSELENT">
 <meta property="og:title" content="事業内容|株式会社NEXSELENT">
@@ -21,7 +24,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
-<link rel="stylesheet" href="css/style.css?v=52">
+<link rel="stylesheet" href="css/style.css?v=58">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -105,7 +108,87 @@
   <div class="section">
     <div class="container">
       <nav class="svc-tabs" aria-label="事業内容メニュー" data-reveal><a href="service-house.html">不動産・建築</a><a href="service-lifeplan.html">ライフプラン</a><a href="service-branding.html">ブランディング</a><a href="service-lifeline.html">ライフライン</a></nav>
-      <p class="detail-txt" style="text-align:center;margin-top:32px" data-reveal>暮らしにまつわる4つの事業を、ひとつの窓口で。<br>分野をまたいで最適な答えを設計できることが、ネクセレントの強みです。</p>
+      <p class="svc-intro" data-reveal>暮らしにまつわる4つの事業を、ひとつの窓口で。<br>分野をまたいで最適な答えを設計できることが、ネクセレントの強みです。</p>
+      <section class="matrix-wrap" data-reveal>
+        <h2 class="matrix__ttl">こんなとき、どの窓口か</h2>
+        <p class="matrix__lead">お困りごとから探せます。複数にまたがる場合も、窓口はひとつです。</p>
+        <div class="matrix__scroll">
+          <table class="matrix">
+            <caption class="matrix__cap">ご相談内容と、担当する事業の対応表</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="matrix__q">ご相談の内容</th>
+                <th scope="col"><a href="service-house.html">不動産<span>建築</span></a></th>
+                <th scope="col"><a href="service-lifeplan.html">ライフ<span>プラン</span></a></th>
+                <th scope="col"><a href="service-lifeline.html">ライフ<span>ライン</span></a></th>
+                <th scope="col"><a href="service-branding.html">ブラン<span>ディング</span></a></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">購入か賃貸か迷っている</th>
+                <td data-on="1"><span class="matrix__on" aria-label="主に担当">●</span></td>
+                <td data-on="2"><span class="matrix__sub" aria-label="あわせて検討">○</span></td>
+                <td data-on="2"><span class="matrix__sub" aria-label="あわせて検討">○</span></td>
+                <td></td></tr>
+              <tr><th scope="row">住宅費・家賃を抑えたい</th>
+                <td data-on="1"><span class="matrix__on" aria-label="主に担当">●</span></td>
+                <td data-on="2"><span class="matrix__sub" aria-label="あわせて検討">○</span></td>
+                <td data-on="1"><span class="matrix__on" aria-label="主に担当">●</span></td>
+                <td></td></tr>
+              <tr><th scope="row">新築・リノベを検討している</th>
+                <td data-on="1"><span class="matrix__on" aria-label="主に担当">●</span></td>
+                <td data-on="2"><span class="matrix__sub" aria-label="あわせて検討">○</span></td>
+                <td></td>
+                <td></td></tr>
+              <tr><th scope="row">将来のお金が漠然と不安</th>
+                <td></td>
+                <td data-on="1"><span class="matrix__on" aria-label="主に担当">●</span></td>
+                <td data-on="2"><span class="matrix__sub" aria-label="あわせて検討">○</span></td>
+                <td></td></tr>
+              <tr><th scope="row">保険の見直しをしたい</th>
+                <td></td>
+                <td data-on="1"><span class="matrix__on" aria-label="主に担当">●</span></td>
+                <td></td>
+                <td></td></tr>
+              <tr><th scope="row">教育費や住宅資金を準備したい</th>
+                <td data-on="2"><span class="matrix__sub" aria-label="あわせて検討">○</span></td>
+                <td data-on="1"><span class="matrix__on" aria-label="主に担当">●</span></td>
+                <td data-on="2"><span class="matrix__sub" aria-label="あわせて検討">○</span></td>
+                <td></td></tr>
+              <tr><th scope="row">電気代・通信費が高いと感じる</th>
+                <td></td>
+                <td data-on="2"><span class="matrix__sub" aria-label="あわせて検討">○</span></td>
+                <td data-on="1"><span class="matrix__on" aria-label="主に担当">●</span></td>
+                <td></td></tr>
+              <tr><th scope="row">引っ越し・新生活のタイミング</th>
+                <td data-on="1"><span class="matrix__on" aria-label="主に担当">●</span></td>
+                <td data-on="2"><span class="matrix__sub" aria-label="あわせて検討">○</span></td>
+                <td data-on="1"><span class="matrix__on" aria-label="主に担当">●</span></td>
+                <td></td></tr>
+              <tr><th scope="row">店舗・テナントを探している</th>
+                <td data-on="1"><span class="matrix__on" aria-label="主に担当">●</span></td>
+                <td></td>
+                <td data-on="2"><span class="matrix__sub" aria-label="あわせて検討">○</span></td>
+                <td data-on="2"><span class="matrix__sub" aria-label="あわせて検討">○</span></td></tr>
+              <tr><th scope="row">集客や採用につなげたい</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-on="1"><span class="matrix__on" aria-label="主に担当">●</span></td></tr>
+              <tr><th scope="row">ホームページが古い・持っていない</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-on="1"><span class="matrix__on" aria-label="主に担当">●</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="matrix__legend">
+          <span><i class="matrix__on">●</i> 主に担当します</span>
+          <span><i class="matrix__sub">○</i> あわせて検討します</span>
+        </p>
+      </section>
+
       <div class="container--narrow" style="margin-top:clamp(36px,6vh,52px)">
 <h2 class="num-head" data-reveal><span class="num-head__num">1</span><span class="num-head__ttl">不動産・建築</span></h2>
         <p class="detail-txt" data-reveal>古くから残る不動産業界の慣習にとらわれず、一生に一度の住まい選びに、こだわりを。当社独自のCGアプローチで仕上がりを事前に再現する建築設計から、賃貸・売買仲介、テナント仲介まで。ライフプランの見直しと組み合わせると、住まいにかけられる予算そのものに余裕が生まれます。</p>
@@ -176,6 +259,6 @@
 <a href="tel:05058969042" class="fab fab--tel" id="fabTel" aria-label="電話をかける"><svg viewBox="0 0 24 24" aria-hidden="true" class="i-tel"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M4.5 3.8h4l1.6 4.3-2.2 1.6a13.6 13.6 0 0 0 6.4 6.4l1.6-2.2 4.3 1.6v4c0 .9-.7 1.6-1.6 1.6C10.5 21.1 2.9 13.5 2.9 5.4c0-.9.7-1.6 1.6-1.6z"/></svg><span class="fab__txt">電話で<br>相談</span></a>
 <a href="contact.html" class="fab" id="fab" aria-label="LINEで相談する"><svg class="i-line" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 5.64 2 10.13c0 4.03 3.58 7.4 8.42 8.04.33.07.77.22.89.5.1.26.07.66.03.92l-.14.86c-.04.26-.2 1.01.89.55 1.08-.46 5.84-3.44 7.97-5.89C19.6 13.6 22 12.1 22 10.13 22 5.64 17.52 2 12 2z"/></svg><span class="fab__txt">LINEで<br>相談</span></a>
 
-<script src="js/main.js?v=52"></script>
+<script src="js/main.js?v=58"></script>
 </body>
 </html>

@@ -8,7 +8,10 @@
 <!-- ※デザイン案。一部コピー・FAQ回答は草案。LINE公式アカウントURL確認後、CTAリンクを設定します。 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- 和文フォントは重いのでレンダリングを止めない。読み込むまではヒラギノ等で表示される -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"></noscript>
 <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 <meta property="og:site_name" content="株式会社NEXSELENT">
 <meta property="og:title" content="不動産・建築|株式会社NEXSELENT">
@@ -21,7 +24,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
-<link rel="stylesheet" href="css/style.css?v=52">
+<link rel="stylesheet" href="css/style.css?v=58">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -107,13 +110,13 @@
       <nav class="svc-tabs" aria-label="事業内容メニュー" data-reveal><a href="service-house.html" aria-current="page">不動産・建築</a><a href="service-lifeplan.html">ライフプラン</a><a href="service-branding.html">ブランディング</a><a href="service-lifeline.html">ライフライン</a></nav>
       <div class="detail" style="margin-top:clamp(36px,6vh,52px)">
         <div class="detail__main">
-<h2 class="num-head" data-reveal><span class="num-head__num">1</span><span class="num-head__ttl">概要</span></h2>
+<h2 class="num-head" id="sec1" data-reveal><span class="num-head__num">1</span><span class="num-head__ttl">概要</span></h2>
           <p class="detail-quote" data-reveal>古くから残る不動産業界の慣習にとらわれず、<br>一生に一度の住まい選びに、こだわりを。</p>
           <p class="detail-txt" data-reveal>ネクセレントの住まいづくりの合言葉は「伝統にとらわれない」。物件ありき・慣例ありきの提案ではなく、住む人の暮らしから発想します。</p>
           <p class="detail-txt" data-reveal>ライフプラン事業と組み合わせることで、お部屋選びや注文住宅のコスト面に余裕が生まれ、固定費を先に軽くしておくと、住まいにかけられる予算そのものが増えます。住まいの選択を、人生の選択として一緒に考えます。</p>
-<h2 class="num-head" data-reveal><span class="num-head__num">2</span><span class="num-head__ttl">こんな方におすすめ</span></h2>
+<h2 class="num-head" id="sec2" data-reveal><span class="num-head__num">2</span><span class="num-head__ttl">こんな方におすすめ</span></h2>
           <ul class="targets"><li data-reveal>購入か賃貸か<br>迷っている</li><li data-reveal>住宅費・家賃を<br>抑えたい</li><li data-reveal>新築・リノベを<br>検討している</li><li data-reveal>店舗・テナントを<br>探している</li></ul>
-<h2 class="num-head" data-reveal><span class="num-head__num">3</span><span class="num-head__ttl">サービス内容</span></h2>
+<h2 class="num-head" id="sec3" data-reveal><span class="num-head__num">3</span><span class="num-head__ttl">サービス内容</span></h2>
           <article class="feat" data-reveal>
             <div class="feat__head"><h3 class="feat__ttl">CGアプローチ</h3></div>
             <p class="feat__txt">当社独自のCGアプローチで、外観から内観、壁紙やインテリアなど細部に至るまで事前に再現。「イメージと違った」という仕上がりの違いをなくします。</p>
@@ -130,9 +133,9 @@
             <div class="feat__head"><h3 class="feat__ttl">テナント仲介</h3></div>
             <p class="feat__txt">立地や広さ、業種に合ったテナントをお探しします。広告や宣伝で立地の弱さをカバーする集客のご提案から、HP制作など経営のお手伝いまで。「その後」まで考えたテナント探しをお任せください。</p>
           </article>
-<h2 class="num-head" data-reveal><span class="num-head__num">4</span><span class="num-head__ttl">ライフプランとの連携</span></h2>
+<h2 class="num-head" id="sec4" data-reveal><span class="num-head__num">4</span><span class="num-head__ttl">ライフプランとの連携</span></h2>
           <p class="detail-txt" data-reveal>住まいの支出は、人生でもっとも大きな固定費です。保険や光熱費・通信費の見直しと住まい探しを同じ窓口で進められるので、「無理のない予算で、妥協のない住まい」に手が届きます。</p>
-<h2 class="num-head" data-reveal><span class="num-head__num">5</span><span class="num-head__ttl">よくある質問</span></h2>
+<h2 class="num-head" id="sec5" data-reveal><span class="num-head__num">5</span><span class="num-head__ttl">よくある質問</span></h2>
           <div class="faq" data-reveal>
         <details class="faq__item">
           <summary class="faq__q">賃貸探しだけの相談もできますか?<span class="faq__mark" aria-hidden="true"></span></summary>
@@ -146,6 +149,7 @@
 <p class="draft-note" data-reveal>※回答は草案です。公開前に内容をご確認ください。</p>
         </div>
         <aside class="side-card" data-reveal>
+          <nav class="side-toc" aria-label="このページの目次"><p class="side-toc__ttl">このページの内容</p><ol class="side-toc__list"><li><a href="#sec1"><span class="side-toc__n">1</span>概要</a></li><li><a href="#sec2"><span class="side-toc__n">2</span>こんな方におすすめ</a></li><li><a href="#sec3"><span class="side-toc__n">3</span>サービス内容</a></li><li><a href="#sec4"><span class="side-toc__n">4</span>ライフプランとの連携</a></li><li><a href="#sec5"><span class="side-toc__n">5</span>よくある質問</a></li></ol></nav>
           <p class="side-card__ttl">LINEで無料相談</p>
           <ul class="side-card__checks">
             <li>賃貸だけでもOK</li>
@@ -209,6 +213,6 @@
 <a href="tel:05058969042" class="fab fab--tel" id="fabTel" aria-label="電話をかける"><svg viewBox="0 0 24 24" aria-hidden="true" class="i-tel"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M4.5 3.8h4l1.6 4.3-2.2 1.6a13.6 13.6 0 0 0 6.4 6.4l1.6-2.2 4.3 1.6v4c0 .9-.7 1.6-1.6 1.6C10.5 21.1 2.9 13.5 2.9 5.4c0-.9.7-1.6 1.6-1.6z"/></svg><span class="fab__txt">電話で<br>相談</span></a>
 <a href="contact.html" class="fab" id="fab" aria-label="LINEで相談する"><svg class="i-line" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 5.64 2 10.13c0 4.03 3.58 7.4 8.42 8.04.33.07.77.22.89.5.1.26.07.66.03.92l-.14.86c-.04.26-.2 1.01.89.55 1.08-.46 5.84-3.44 7.97-5.89C19.6 13.6 22 12.1 22 10.13 22 5.64 17.52 2 12 2z"/></svg><span class="fab__txt">LINEで<br>相談</span></a>
 
-<script src="js/main.js?v=52"></script>
+<script src="js/main.js?v=58"></script>
 </body>
 </html>

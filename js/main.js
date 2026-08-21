@@ -88,6 +88,36 @@
   // ここまで到達して初めてフォールバックを外す(途中で失敗しても要素が消えない)
   document.documentElement.classList.remove("no-js");
 
+  /* ---------- 下層ページの目次: 現在読んでいる節を示す ---------- */
+  const tocLinks = $$(".side-toc__list a");
+  if (tocLinks.length) {
+    const targets = tocLinks
+      .map(a => ({ a, el: document.getElementById(a.getAttribute("href").slice(1)) }))
+      .filter(t => t.el);
+    let current = null;
+    const markCurrent = () => {
+      // ヘッダーの下に入った見出しのうち、いちばん下のものを現在地とする
+      const line = (header ? header.offsetHeight : 0) + 24;
+      let found = targets[0];
+      targets.forEach(t => { if (t.el.getBoundingClientRect().top <= line) found = t; });
+      if (found === current) return;
+      current = found;
+      targets.forEach(t => t.a.setAttribute("aria-current", String(t === found)));
+    };
+    let tocTicking = false;   // ヘッダー側の ticking とは別に持つ(共有すると取りこぼす)
+    const onTocScroll = () => {
+      if (tocTicking) return;
+      tocTicking = true;
+      // rAF が止まる環境(バックグラウンドタブ等)でも取りこぼさないよう保険を掛ける
+      const run = () => { markCurrent(); tocTicking = false; };
+      requestAnimationFrame(run);
+      setTimeout(() => { if (tocTicking) run(); }, 120);
+    };
+    addEventListener("scroll", onTocScroll, { passive: true });
+    addEventListener("resize", onTocScroll, { passive: true });
+    markCurrent();
+  }
+
   /* ---------- mobile drawer ---------- */
   const menuBtn = $("#menuBtn");
   const drawer = $("#drawer");

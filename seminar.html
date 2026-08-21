@@ -8,7 +8,10 @@
 <!-- ※デザイン案。一部コピー・FAQ回答は草案。LINE公式アカウントURL確認後、CTAリンクを設定します。 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- 和文フォントは重いのでレンダリングを止めない。読み込むまではヒラギノ等で表示される -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"></noscript>
 <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 <meta property="og:site_name" content="株式会社NEXSELENT">
 <meta property="og:title" content="マネーセミナー|株式会社NEXSELENT">
@@ -21,7 +24,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
-<link rel="stylesheet" href="css/style.css?v=52">
+<link rel="stylesheet" href="css/style.css?v=58">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -147,13 +150,13 @@
     <div class="container">
       <div class="detail">
         <div class="detail__main">
-<h2 class="num-head" data-reveal><span class="num-head__num">1</span><span class="num-head__ttl">概要</span></h2>
+<h2 class="num-head" id="sec1" data-reveal><span class="num-head__num">1</span><span class="num-head__ttl">概要</span></h2>
           <p class="detail-quote" data-reveal>知ってから選べるように、まず全体像をお話しします。</p>
           <p class="detail-txt" data-reveal>お金の話は、そもそも誰に聞けばいいのか分かりにくいものです。だからネクセレントは、個別のご相談の前に「まず知っていただく場」として、自社でマネーセミナーを開催しています。</p>
           <p class="detail-txt" data-reveal>企画から当日の講師まで自社で担当。日々のご相談で実際にいただく疑問をそのまま題材にしているので、教科書的ではない、暮らしに直結した内容をお届けします。</p>
-<h2 class="num-head" data-reveal><span class="num-head__num">2</span><span class="num-head__ttl">こんな方におすすめ</span></h2>
+<h2 class="num-head" id="sec2" data-reveal><span class="num-head__num">2</span><span class="num-head__ttl">こんな方におすすめ</span></h2>
           <ul class="targets"><li data-reveal>お金の勉強を<br>はじめたい</li><li data-reveal>いきなり相談は<br>ハードルが高い</li><li data-reveal>何が分からないかが<br>分からない</li><li data-reveal>家計や将来設計を<br>見直したい</li></ul>
-<h2 class="num-head" data-reveal><span class="num-head__num">3</span><span class="num-head__ttl">セミナーでお話しすること</span></h2>
+<h2 class="num-head" id="sec3" data-reveal><span class="num-head__num">3</span><span class="num-head__ttl">セミナーでお話しすること</span></h2>
           <article class="feat" data-reveal>
             <div class="feat__head"><h3 class="feat__ttl">お金の基本</h3></div>
             <p class="feat__txt">家計の仕組み、固定費、保険、税金、社会保障。暮らしとお金の全体像を、専門用語に頼らずご説明します。</p>
@@ -166,14 +169,14 @@
             <div class="feat__head"><h3 class="feat__ttl">住まいとお金</h3></div>
             <p class="feat__txt">住宅の購入や住み替えは、人生でもっとも大きな支出のひとつ。資金計画の考え方をお伝えします。</p>
           </article>
-<h2 class="num-head" data-reveal><span class="num-head__num">4</span><span class="num-head__ttl">当日の流れ</span></h2>
+<h2 class="num-head" id="sec4" data-reveal><span class="num-head__num">4</span><span class="num-head__ttl">当日の流れ</span></h2>
           <ol class="flow flow--2col">
             <li class="flow__step" data-reveal style="--i:0"><span class="flow__num">1</span><h3 class="flow__ttl">お申し込み</h3><p class="flow__txt">LINEまたはフォームからお申し込みください。会場・オンラインをお選びいただけます。</p></li>
             <li class="flow__step" data-reveal style="--i:1"><span class="flow__num">2</span><h3 class="flow__ttl">ご受講</h3><p class="flow__txt">講義形式で進みます。途中のご質問も歓迎です。</p></li>
             <li class="flow__step" data-reveal style="--i:2"><span class="flow__num">3</span><h3 class="flow__ttl">質疑応答</h3><p class="flow__txt">その場で気になったことを、そのままぶつけてください。</p></li>
             <li class="flow__step" data-reveal style="--i:3"><span class="flow__num">4</span><h3 class="flow__ttl">個別相談(希望制)</h3><p class="flow__txt">さらに詳しく聞きたい方のみ、後日あらためて個別にご相談を承ります。</p></li>
           </ol>
-<h2 class="num-head" data-reveal><span class="num-head__num">5</span><span class="num-head__ttl">セミナー後の個別相談について</span></h2>
+<h2 class="num-head" id="sec5" data-reveal><span class="num-head__num">5</span><span class="num-head__ttl">セミナー後の個別相談について</span></h2>
           <p class="detail-txt" data-reveal>セミナーは、その場で何かをご契約いただく場ではありません。ご希望をいただいた方にだけ、あらためて個別相談の場をご用意しています。</p>
           <ul class="checks" style="margin-top:14px" data-reveal>
             <li>セミナー・個別相談とも費用はいただきません</li>
@@ -181,7 +184,7 @@
             <li>ご相談は何度でも。ご契約後も継続してサポートします</li>
             <li>オンラインでのご受講・ご相談にも対応しています</li>
           </ul>
-<h2 class="num-head" data-reveal><span class="num-head__num">6</span><span class="num-head__ttl">よくある質問</span></h2>
+<h2 class="num-head" id="sec6" data-reveal><span class="num-head__num">6</span><span class="num-head__ttl">よくある質問</span></h2>
           <div class="faq" data-reveal>
         <details class="faq__item">
           <summary class="faq__q">参加費はかかりますか?<span class="faq__mark" aria-hidden="true"></span></summary>
@@ -203,6 +206,7 @@
           <p class="draft-note" data-reveal>※開催頻度・会場・定員などの具体的な情報は、確定次第あらためて掲載します。</p>
         </div>
         <aside class="side-card" data-reveal>
+          <nav class="side-toc" aria-label="このページの目次"><p class="side-toc__ttl">このページの内容</p><ol class="side-toc__list"><li><a href="#sec1"><span class="side-toc__n">1</span>概要</a></li><li><a href="#sec2"><span class="side-toc__n">2</span>こんな方におすすめ</a></li><li><a href="#sec3"><span class="side-toc__n">3</span>セミナーでお話しすること</a></li><li><a href="#sec4"><span class="side-toc__n">4</span>当日の流れ</a></li><li><a href="#sec5"><span class="side-toc__n">5</span>セミナー後の個別相談について</a></li><li><a href="#sec6"><span class="side-toc__n">6</span>よくある質問</a></li></ol></nav>
           <p class="side-card__ttl">セミナーのご案内</p>
           <ul class="side-card__checks">
             <li>参加費は無料</li>
@@ -266,6 +270,6 @@
 <a href="tel:05058969042" class="fab fab--tel" id="fabTel" aria-label="電話をかける"><svg viewBox="0 0 24 24" aria-hidden="true" class="i-tel"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M4.5 3.8h4l1.6 4.3-2.2 1.6a13.6 13.6 0 0 0 6.4 6.4l1.6-2.2 4.3 1.6v4c0 .9-.7 1.6-1.6 1.6C10.5 21.1 2.9 13.5 2.9 5.4c0-.9.7-1.6 1.6-1.6z"/></svg><span class="fab__txt">電話で<br>相談</span></a>
 <a href="contact.html" class="fab" id="fab" aria-label="LINEで相談する"><svg class="i-line" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 5.64 2 10.13c0 4.03 3.58 7.4 8.42 8.04.33.07.77.22.89.5.1.26.07.66.03.92l-.14.86c-.04.26-.2 1.01.89.55 1.08-.46 5.84-3.44 7.97-5.89C19.6 13.6 22 12.1 22 10.13 22 5.64 17.52 2 12 2z"/></svg><span class="fab__txt">LINEで<br>相談</span></a>
 
-<script src="js/main.js?v=52"></script>
+<script src="js/main.js?v=58"></script>
 </body>
 </html>

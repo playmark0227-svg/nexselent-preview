@@ -8,7 +8,10 @@
 <!-- ※デザイン案。一部コピー・FAQ回答は草案。LINE公式アカウントURL確認後、CTAリンクを設定します。 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- 和文フォントは重いのでレンダリングを止めない。読み込むまではヒラギノ等で表示される -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"></noscript>
 <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 <meta property="og:site_name" content="株式会社NEXSELENT">
 <meta property="og:title" content="ブランディング|株式会社NEXSELENT">
@@ -21,7 +24,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
-<link rel="stylesheet" href="css/style.css?v=52">
+<link rel="stylesheet" href="css/style.css?v=58">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -107,10 +110,10 @@
       <nav class="svc-tabs" aria-label="事業内容メニュー" data-reveal><a href="service-house.html">不動産・建築</a><a href="service-lifeplan.html">ライフプラン</a><a href="service-branding.html" aria-current="page">ブランディング</a><a href="service-lifeline.html">ライフライン</a></nav>
       <div class="detail" style="margin-top:clamp(36px,6vh,52px)">
         <div class="detail__main">
-<h2 class="num-head" data-reveal><span class="num-head__num">1</span><span class="num-head__ttl">概要</span></h2>
+<h2 class="num-head" id="sec1" data-reveal><span class="num-head__num">1</span><span class="num-head__ttl">概要</span></h2>
           <p class="detail-quote" data-reveal>届ける・盛り上げる・向上させる。</p>
           <p class="detail-txt" data-reveal>いまや、さまざまなSNSで情報を調べる時代。ネクセレントは、SNS・WEBを活用した情報発信とサイト制作で、事業者様の売上向上を後押しします。</p>
-<h2 class="num-head" data-reveal><span class="num-head__num">2</span><span class="num-head__ttl">SNSのいま</span></h2>
+<h2 class="num-head" id="sec2" data-reveal><span class="num-head__num">2</span><span class="num-head__ttl">SNSのいま</span></h2>
           <article class="feat" data-reveal>
             <div class="feat__head"><h3 class="feat__ttl">ユーザー数が拡大</h3></div>
             <p class="feat__txt">消費者はソーシャルメディアに集まっており、国内の利用者は幅広い年代に広がっています。SNSは「一部の人のもの」ではなく、生活のインフラになりました。</p>
@@ -119,7 +122,7 @@
             <div class="feat__head"><h3 class="feat__ttl">検索で使われる</h3></div>
             <p class="feat__txt">検索エンジンではなくSNSから店舗や商品を見つける方が増えています。情報獲得の主戦場は、検索エンジンからSNSへと広がっています。</p>
           </article>
-<h2 class="num-head" data-reveal><span class="num-head__num">3</span><span class="num-head__ttl">サービス内容</span></h2>
+<h2 class="num-head" id="sec3" data-reveal><span class="num-head__num">3</span><span class="num-head__ttl">サービス内容</span></h2>
           <article class="feat" data-reveal>
             <div class="feat__head"><h3 class="feat__ttl">SNS・WEB発信</h3></div>
             <p class="feat__txt">SNS・WEBを通じて商品やサービスの魅力を「届ける」。キャンペーンや企画で「盛り上げる」。継続的な発信で顧客を広げ、売上を「向上させる」。3つのステップで発信を設計します。</p>
@@ -132,9 +135,9 @@
             <div class="feat__head"><h3 class="feat__ttl">ローカルブランディング</h3></div>
             <p class="feat__txt">世の中のブランディング手法はITを活用した東京発信のものであふれていますが、北海道では必ずしもそれが正解とは限りません。地元に好かれるローカルなブランディングを目的に、チラシ作成やテレビ取材のサポートも行っています。</p>
           </article>
-<h2 class="num-head" data-reveal><span class="num-head__num">4</span><span class="num-head__ttl">こんな方におすすめ</span></h2>
+<h2 class="num-head" id="sec4" data-reveal><span class="num-head__num">4</span><span class="num-head__ttl">こんな方におすすめ</span></h2>
           <ul class="targets"><li data-reveal>SNSを始めたいが<br>続かない</li><li data-reveal>ホームページが<br>古い・持っていない</li><li data-reveal>札幌・北海道で<br>認知を広げたい</li><li data-reveal>集客や採用に<br>つなげたい</li></ul>
-<h2 class="num-head" data-reveal><span class="num-head__num">5</span><span class="num-head__ttl">よくある質問</span></h2>
+<h2 class="num-head" id="sec5" data-reveal><span class="num-head__num">5</span><span class="num-head__ttl">よくある質問</span></h2>
           <div class="faq" data-reveal>
         <details class="faq__item">
           <summary class="faq__q">小さな店舗でも依頼できますか?<span class="faq__mark" aria-hidden="true"></span></summary>
@@ -148,6 +151,7 @@
 <p class="draft-note" data-reveal>※回答は草案です。公開前に内容をご確認ください。</p>
         </div>
         <aside class="side-card" data-reveal>
+          <nav class="side-toc" aria-label="このページの目次"><p class="side-toc__ttl">このページの内容</p><ol class="side-toc__list"><li><a href="#sec1"><span class="side-toc__n">1</span>概要</a></li><li><a href="#sec2"><span class="side-toc__n">2</span>SNSのいま</a></li><li><a href="#sec3"><span class="side-toc__n">3</span>サービス内容</a></li><li><a href="#sec4"><span class="side-toc__n">4</span>こんな方におすすめ</a></li><li><a href="#sec5"><span class="side-toc__n">5</span>よくある質問</a></li></ol></nav>
           <p class="side-card__ttl">LINEで無料相談</p>
           <ul class="side-card__checks">
             <li>小規模店も歓迎</li>
@@ -211,6 +215,6 @@
 <a href="tel:05058969042" class="fab fab--tel" id="fabTel" aria-label="電話をかける"><svg viewBox="0 0 24 24" aria-hidden="true" class="i-tel"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M4.5 3.8h4l1.6 4.3-2.2 1.6a13.6 13.6 0 0 0 6.4 6.4l1.6-2.2 4.3 1.6v4c0 .9-.7 1.6-1.6 1.6C10.5 21.1 2.9 13.5 2.9 5.4c0-.9.7-1.6 1.6-1.6z"/></svg><span class="fab__txt">電話で<br>相談</span></a>
 <a href="contact.html" class="fab" id="fab" aria-label="LINEで相談する"><svg class="i-line" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 5.64 2 10.13c0 4.03 3.58 7.4 8.42 8.04.33.07.77.22.89.5.1.26.07.66.03.92l-.14.86c-.04.26-.2 1.01.89.55 1.08-.46 5.84-3.44 7.97-5.89C19.6 13.6 22 12.1 22 10.13 22 5.64 17.52 2 12 2z"/></svg><span class="fab__txt">LINEで<br>相談</span></a>
 
-<script src="js/main.js?v=52"></script>
+<script src="js/main.js?v=58"></script>
 </body>
 </html>
