@@ -1257,7 +1257,7 @@ html:not(.no-js) [data-reveal]:not(.is-shown) .onedoor__svg :is(.od-left,.od-lin
   content:"";position:absolute;left:0;bottom:0;
   width:var(--rule-w);height:var(--rule-h);background:var(--navy);
 }
-.contact-ch{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,22px)}
+.contact-ch{margin-bottom:clamp(36px,6vw,48px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,22px)}
 .contact-ch__item{
   background:#fff;border:1px solid var(--border);border-radius:var(--r-md);
   box-shadow:var(--shadow-sm);padding:clamp(24px,2.6vw,32px) clamp(18px,2vw,26px);
