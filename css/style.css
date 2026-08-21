@@ -105,6 +105,16 @@ body{
 body.is-locked{overflow:hidden}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
+/* 本文中のリンクは下線で示す(ナビ・ボタン・カードは除く) */
+.detail-txt a,.faq__a a,.msg__txt a,.co-table__row dd a,.matrix__lead a,
+.draft-note a,.onedoor__cap a,.seminar-card__txt a{
+  color:var(--navy);text-decoration:underline;
+  text-underline-offset:4px;text-decoration-thickness:1px;
+  text-decoration-color:rgba(21,42,85,.35);
+  transition:text-decoration-color .3s;
+}
+.detail-txt a:hover,.faq__a a:hover,.msg__txt a:hover,
+.co-table__row dd a:hover{text-decoration-color:var(--navy)}
 ul,ol,li{list-style:none}
 button{font-family:inherit;background:none;border:none;cursor:pointer;color:inherit}
 ::selection{background:var(--navy);color:#fff}
@@ -443,16 +453,23 @@ body.is-locked .header .header__logo{visibility:hidden}
 /* 図の中の文字 */
 .onedoor__svg text{
   font-family:var(--sans);fill:var(--ink);
-  font-size:14px;letter-spacing:var(--ls-body);text-anchor:middle;
+  /* SVGは width:100% で縮むので、文字は viewBox 単位を保ちつつ
+     狭い画面では相対的に大きくする */
+  font-size:15px;letter-spacing:var(--ls-body);text-anchor:middle;
+}
+@media(min-width:861px) and (max-width:1120px){
+  .onedoor__svg text{font-size:17px}
+  .od-cap,.od-note{font-size:13.5px!important}
+  .od-door text{font-size:19px}
 }
 .od-cap{
   text-anchor:start!important;
-  font-size:11.5px!important;font-weight:700;
+  font-size:12.5px!important;font-weight:700;
   letter-spacing:var(--ls-label)!important;fill:var(--gray)!important;
 }
 .od-cap--on{fill:var(--navy)!important}
 .od-note{
-  font-size:11.5px!important;fill:var(--gray)!important;line-height:var(--lh-head);
+  font-size:12.5px!important;fill:var(--gray)!important;line-height:var(--lh-head);
 }
 .od-note--v{text-anchor:start!important}
 /* 左: 分かれている状態 */
@@ -544,7 +561,7 @@ html:not(.no-js) [data-reveal]:not(.is-shown) .onedoor__svg :is(.od-left,.od-lin
   text-align:left;margin-bottom:26px;
   border-bottom:1px solid var(--border);padding-bottom:14px;
 }
-.sec-head--bar .sec-head__jp{padding-bottom:0;font-size:var(--fs-7)}
+.sec-head--bar .sec-head__jp{padding-bottom:0}
 .sec-head--bar .sec-head__jp::after{display:none}
 .sec-head__more{
   flex:none;display:inline-flex;align-items:center;gap:8px;
@@ -667,7 +684,7 @@ html:not(.no-js) [data-reveal]:not(.is-shown) .onedoor__svg :is(.od-left,.od-lin
    ── カード組みを避け、大きな連番と横罫で読ませる
 ========================================================= */
 .reason-list{
-  border-top:1px solid var(--border);
+  border-top:1px solid var(--border-strong);
   counter-reset:reason;
 }
 .reason-item{
@@ -676,13 +693,13 @@ html:not(.no-js) [data-reveal]:not(.is-shown) .onedoor__svg :is(.od-left,.od-lin
   align-items:start;
   column-gap:clamp(20px,3vw,44px);row-gap:6px;
   padding:clamp(26px,3vw,40px) 0;
-  border-bottom:1px solid var(--border);
+  border-bottom:1px solid var(--border-strong);
 }
 .reason-item__num{
   grid-row:1 / span 2;
   font-family:var(--serif);font-weight:600;
   font-size:clamp(28px,3.4vw,42px);line-height:1;
-  color:var(--navy);opacity:.28;
+  color:var(--navy);opacity:.42;
   font-variant-numeric:tabular-nums;
   padding-top:.1em;
 }
@@ -1011,7 +1028,7 @@ html:not(.no-js) [data-reveal]:not(.is-shown) .onedoor__svg :is(.od-left,.od-lin
 .page-hero__ttl{
   font-family:var(--serif);font-weight:600;color:var(--navy);
   font-size:var(--fs-8);letter-spacing:var(--ls-label);line-height:1.5;
-  padding-left:20px;margin-left:-20px;
+  padding-left:18px;
   border-left:3px solid var(--navy);
 }
 .breadcrumb{
@@ -1062,6 +1079,7 @@ html:not(.no-js) [data-reveal]:not(.is-shown) .onedoor__svg :is(.od-left,.od-lin
 
 /* --- numbered heading --- */
 .num-head{
+  scroll-margin-top:112px;   /* 固定ヘッダーの下に潜らせない */
   display:flex;align-items:baseline;gap:16px;
   margin:clamp(44px,4.6vw,64px) 0 20px;
   padding-bottom:12px;border-bottom:1px solid var(--border);
@@ -1264,6 +1282,18 @@ html:not(.no-js) [data-reveal]:not(.is-shown) .onedoor__svg :is(.od-left,.od-lin
   .contact-ch{grid-template-columns:1fr;max-width:420px;margin-inline:auto}
 }
 
+/* 事業ページの実例カット */
+.detail-fig{margin:clamp(28px,3vw,40px) 0 clamp(34px,3.6vw,48px)}
+.detail-fig__ph{
+  position:relative;aspect-ratio:16/9;overflow:hidden;
+  border-radius:var(--r-md);border:1px solid var(--border);background:var(--bg-2);
+}
+.detail-fig__cap{
+  margin-top:12px;font-size:var(--fs-1);line-height:var(--lh-body);color:var(--gray);
+  padding-left:1.1em;text-indent:-1.1em;
+}
+.detail-fig__cap::before{content:"— ";color:var(--border-strong)}
+
 /* =========================================================
    ご相談内容 × 事業 の対応表(service.html)
    ── どの窓口に行けばいいかを、文章ではなく表で示す
@@ -1317,11 +1347,11 @@ html:not(.no-js) [data-reveal]:not(.is-shown) .onedoor__svg :is(.od-left,.od-lin
 }
 .matrix tbody td{
   text-align:center;padding:15px 8px;border-bottom:1px solid var(--border);
-  color:var(--border-strong);
+  color:var(--gray);
 }
 .matrix tbody tr:hover th,.matrix tbody tr:hover td{background:var(--bg-2)}
 .matrix__on{color:var(--navy);font-size:var(--fs-4);line-height:1}
-.matrix__sub{color:var(--border-strong);font-size:var(--fs-2);line-height:1}
+.matrix__sub{color:var(--gray);font-size:var(--fs-2);line-height:1}
 .matrix__legend{
   display:flex;flex-wrap:wrap;gap:20px;margin-top:16px;
   font-size:var(--fs-1);color:var(--gray);
@@ -1381,6 +1411,7 @@ html:not(.no-js) [data-reveal]:not(.is-shown) .onedoor__svg :is(.od-left,.od-lin
 /* =========================================================
    Team cards
 ========================================================= */
+.team-grid--single{grid-template-columns:minmax(0,220px)!important;justify-content:start}
 .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px)}
 .team{
   background:#fff;border:1px solid var(--border);border-radius:var(--r-md);
@@ -1444,6 +1475,7 @@ a.news-card:hover{background:rgba(21,42,85,.03)}
 ========================================================= */
 .doc-list{display:flex;flex-direction:column;gap:10px;margin-top:6px}
 .doc-item{
+  cursor:default;
   display:flex;align-items:center;gap:16px;
   background:#fff;border:1px solid var(--border);border-radius:var(--r-md);
   padding:16px 20px;box-shadow:var(--shadow-sm);
@@ -1464,7 +1496,8 @@ a.news-card:hover{background:rgba(21,42,85,.03)}
   background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r-pill);padding:4px 12px;
 }
 @media(max-width:600px){
-  .doc-item{flex-wrap:wrap;gap:12px}
+  .doc-item{
+  cursor:default;flex-wrap:wrap;gap:12px}
   .doc-item__state{margin-left:0}
 }
 
@@ -1494,10 +1527,16 @@ a.news-card:hover{background:rgba(21,42,85,.03)}
 /* =========================================================
    制作用の注記(公開時は body.is-draft を外すと一括で消える)
 ========================================================= */
-.draft-note,.ph-note,.doc-item__state{display:none}
+/* 制作側への注記だけを is-draft で切り替える。
+   「撮影予定」カードと書面の状態表示は、外すと空箱・押せない項目が
+   残ってしまうので常時表示にする(写真やPDFが入れば要素ごと不要になる) */
+.draft-note{display:none}
 .is-draft .draft-note{display:block}
-.is-draft .ph-note{display:inline-flex}
-.is-draft .doc-item__state{display:inline-block}
+.ph-note{display:inline-flex}
+.doc-item__state{display:inline-block}
+/* 写真が未提供のブロックは、枠だけ出さずセクションごと伏せられるようにする */
+.needs-photo{display:none}
+.is-draft .needs-photo{display:block}
 
 /* =========================================================
    フォーカスリング(キーボード操作時のみ・全要素で同じ形)
