@@ -933,7 +933,7 @@ html:not(.no-js) [data-reveal]:not(.is-shown) .onedoor__svg :is(.od-left,.od-lin
 .form__done-ttl{font-family:var(--serif);font-size:var(--fs-8);font-weight:600;color:var(--navy);letter-spacing:var(--ls-label)}
 .form__done-txt{font-size:var(--fs-4);color:var(--gray);line-height:2.1}
 
-.draft-note{margin-top:14px;font-size:var(--fs-1);color:var(--gray);letter-spacing:var(--ls-wide)}
+.draft-note{margin-top:14px;margin-bottom:8px;font-size:var(--fs-1);color:var(--gray);letter-spacing:var(--ls-wide)}
 
 /* =========================================================
    Footer
@@ -1261,6 +1261,7 @@ html:not(.no-js) [data-reveal]:not(.is-shown) .onedoor__svg :is(.od-left,.od-lin
 }
 /* メールは押しボタンではなく本文リンクの形に(アドレスを詰め込まない) */
 .contact-ch__mail{
+  align-self:center;              /* 下線を文字幅に収める */
   font-size:var(--fs-2);color:var(--navy);word-break:break-all;
   border-bottom:1px solid var(--border-strong);padding-bottom:2px;
   transition:border-color .3s;
@@ -1398,6 +1399,7 @@ html:not(.no-js) [data-reveal]:not(.is-shown) .onedoor__svg :is(.od-left,.od-lin
 .signature__name{
   font-family:var(--serif);font-weight:600;
   font-size:var(--fs-6);color:var(--navy);letter-spacing:var(--ls-label);
+  margin-right:calc(var(--ls-label) * -1);   /* 末尾の字送り分を戻す */
 }
 
 /* =========================================================
@@ -1436,7 +1438,7 @@ html:not(.no-js) [data-reveal]:not(.is-shown) .onedoor__svg :is(.od-left,.od-lin
 /* =========================================================
    Team cards
 ========================================================= */
-.team-grid--single{grid-template-columns:minmax(0,220px)!important;justify-content:start}
+.team-grid--single{grid-template-columns:minmax(0,240px)!important;justify-content:start}
 .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px)}
 .team{
   background:#fff;border:1px solid var(--border);border-radius:var(--r-md);
