@@ -166,6 +166,7 @@
 .ed-media__img{position:relative}
 .ed-media__img img{width:100%;height:auto;aspect-ratio:1.25/1;object-fit:cover}
 .ed-image-note{margin-top:10px;font-size:9px;line-height:1.7;letter-spacing:.08em;color:#8a897f}
+.photo-note{margin-top:10px;font-family:var(--sans);font-size:13px;font-weight:400;line-height:1.7;letter-spacing:.01em;color:#626965;text-align:left}
 .ed-checks{display:grid;gap:10px;margin-top:26px}
 .ed-checks li{position:relative;padding-left:20px;font-size:14px;color:#555f66}
 .ed-checks li::before{content:"";position:absolute;left:0;top:.65em;width:5px;height:5px;background:var(--ed-gold)}
