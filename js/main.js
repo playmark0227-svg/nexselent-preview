@@ -1,199 +1,82 @@
-/* =========================================================
-   NEXSELENT Inc. — interactions (light design)
-========================================================= */
+/* NEXSELENT — navigation and page interactions */
 (() => {
   "use strict";
 
-  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const reduceNow = () => mq.matches;
-  const $  = (s, c = document) => c.querySelector(s);
-  const $$ = (s, c = document) => [...c.querySelectorAll(s)];
-
-  /* ---------- hero slideshow (calm crossfade, no video) ---------- */
-  const slideBox = $("#heroSlides");
-  if (slideBox) {
-    const slides = $$(".hero__slide", slideBox);
-    const dotsWrap = $("#heroDots");
-    let idx = 0, timer = null, paused = false;
-    const dots = slides.map((_, i) => {
-      const b = document.createElement("button");
-      b.type = "button";
-      b.setAttribute("aria-label", `スライド${i + 1}を表示`);
-      b.addEventListener("click", () => { go(i); restart(); });
-      dotsWrap && dotsWrap.appendChild(b);
-      return b;
-    });
-    const go = i => {
-      idx = (i + slides.length) % slides.length;
-      slides.forEach((s, n) => s.classList.toggle("is-active", n === idx));
-      dots.forEach((d, n) => d.setAttribute("aria-current", String(n === idx)));
-    };
-    const restart = () => {
-      if (timer) clearInterval(timer);
-      if (!reduceNow() && !paused && slides.length > 1) timer = setInterval(() => go(idx + 1), 6000);
-    };
-    // WCAG 2.2.2: allow pausing the auto-advance on hover/focus
-    const pause = () => { paused = true; if (timer) { clearInterval(timer); timer = null; } };
-    const resume = () => { paused = false; restart(); };
-    slideBox.addEventListener("mouseenter", pause);
-    slideBox.addEventListener("mouseleave", resume);
-    slideBox.addEventListener("focusin", pause);
-    slideBox.addEventListener("focusout", resume);
-    go(0);
-    restart();
-  }
-
-  /* ---------- news category filter ---------- */
-  const newsTabs = $("#newsTabs");
-  if (newsTabs) {
-    const cards = $$(".news-card");
-    newsTabs.addEventListener("click", e => {
-      const btn = e.target.closest("button[data-cat]");
-      if (!btn) return;
-      const cat = btn.dataset.cat;
-      $$("button[data-cat]", newsTabs).forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
-      cards.forEach(c => c.classList.toggle("is-hidden", cat !== "all" && c.dataset.cat !== cat));
-    });
-  }
-
-  /* ---------- header shadow / floating LINE ---------- */
-  const header = $("#header");
-  const fab = $("#fab");
-  const fabTel = $("#fabTel");
-  let ticking = false;
-  const onScroll = () => {
-    const y = window.scrollY;
-    header && header.classList.toggle("is-scrolled", y > 10);
-    fab && fab.classList.toggle("is-shown", y > 500);
-    fabTel && fabTel.classList.toggle("is-shown", y > 500);
-    ticking = false;
-  };
-  const requestScrollUpdate = () => {
-    if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
-  };
-  addEventListener("scroll", requestScrollUpdate, { passive: true });
-  addEventListener("resize", requestScrollUpdate, { passive: true });
-  onScroll();
-
-  /* ---------- reveal on scroll ---------- */
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add("is-shown");
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.16, rootMargin: "0px 0px -30px 0px" });
-  $$("[data-reveal], .values__list li").forEach(el => io.observe(el));
-  // ここまで到達して初めてフォールバックを外す(途中で失敗しても要素が消えない)
+  const menuBtn = document.getElementById("menuBtn");
+  const drawer = document.getElementById("drawer");
+  const main = document.querySelector("main");
+  const footer = document.querySelector("footer");
+  const header = document.getElementById("header");
   document.documentElement.classList.remove("no-js");
 
-  /* ---------- 下層ページの目次: 現在読んでいる節を示す ---------- */
-  const tocLinks = $$(".side-toc__list a");
-  if (tocLinks.length) {
-    const targets = tocLinks
-      .map(a => ({ a, el: document.getElementById(a.getAttribute("href").slice(1)) }))
-      .filter(t => t.el);
-    let current = null;
-    const markCurrent = () => {
-      // ヘッダーの下に入った見出しのうち、いちばん下のものを現在地とする
-      const line = (header ? header.offsetHeight : 0) + 24;
-      let found = targets[0];
-      targets.forEach(t => { if (t.el.getBoundingClientRect().top <= line) found = t; });
-      if (found === current) return;
-      current = found;
-      targets.forEach(t => t.a.setAttribute("aria-current", String(t === found)));
-    };
-    let tocTicking = false;   // ヘッダー側の ticking とは別に持つ(共有すると取りこぼす)
-    const onTocScroll = () => {
-      if (tocTicking) return;
-      tocTicking = true;
-      // rAF が止まる環境(バックグラウンドタブ等)でも取りこぼさないよう保険を掛ける
-      const run = () => { markCurrent(); tocTicking = false; };
-      requestAnimationFrame(run);
-      setTimeout(() => { if (tocTicking) run(); }, 120);
-    };
-    addEventListener("scroll", onTocScroll, { passive: true });
-    addEventListener("resize", onTocScroll, { passive: true });
-    markCurrent();
-  }
-
-  /* ---------- mobile drawer ---------- */
-  const menuBtn = $("#menuBtn");
-  const drawer = $("#drawer");
-  const pageMain = $("main");
-  const pageFooter = $("footer");
   const setDrawer = open => {
     if (!drawer || !menuBtn) return;
-    if (!open && !drawer.classList.contains("is-open")) return;
-    if (!open) menuBtn.focus(); // restore focus before hiding the dialog
+    if (!open) menuBtn.focus();
     drawer.classList.toggle("is-open", open);
     menuBtn.classList.toggle("is-open", open);
     menuBtn.setAttribute("aria-expanded", String(open));
     menuBtn.setAttribute("aria-label", open ? "メニューを閉じる" : "メニューを開く");
     drawer.setAttribute("aria-hidden", String(!open));
     document.body.classList.toggle("is-locked", open);
-    if (pageMain) pageMain.inert = open;
-    if (pageFooter) pageFooter.inert = open;
-    if (fab) fab.inert = open; // keep the floating buttons out of the modal's tab order
-    if (fabTel) fabTel.inert = open;
-    if (open) requestAnimationFrame(() => { const f = $(".drawer__link"); f && f.focus(); });
+    if (main) main.inert = open;
+    if (footer) footer.inert = open;
+    if (open) requestAnimationFrame(() => drawer.querySelector("a")?.focus());
   };
-  menuBtn && menuBtn.addEventListener("click", () => setDrawer(!drawer.classList.contains("is-open")));
-  // close the drawer if the viewport crosses into desktop layout (hamburger disappears)
-  const deskMq = window.matchMedia("(min-width: 1081px)");
-  deskMq.addEventListener && deskMq.addEventListener("change", e => { if (e.matches) setDrawer(false); });
-  $$(".drawer__link, .drawer__line").forEach(a => a.addEventListener("click", () => setDrawer(false)));
-  const drawerBg = $(".drawer__bg");
-  drawerBg && drawerBg.addEventListener("click", () => setDrawer(false));
-  addEventListener("keydown", e => { if (e.key === "Escape") setDrawer(false); });
 
-  /* ---------- FAQ: close others when opening one ---------- */
-  const faqItems = $$(".faq__item");
-  faqItems.forEach(d => {
-    d.addEventListener("toggle", () => {
-      if (d.open) faqItems.forEach(o => { if (o !== d) o.open = false; });
-    });
+  menuBtn?.addEventListener("click", () => setDrawer(!drawer.classList.contains("is-open")));
+  drawer?.querySelector(".drawer__bg")?.addEventListener("click", () => setDrawer(false));
+  drawer?.querySelectorAll("a").forEach(link => link.addEventListener("click", () => setDrawer(false)));
+  window.matchMedia("(min-width: 1081px)").addEventListener("change", event => {
+    if (event.matches && drawer?.classList.contains("is-open")) setDrawer(false);
+  });
+  document.addEventListener("keydown", event => {
+    if (!drawer?.classList.contains("is-open")) return;
+    if (event.key === "Escape") setDrawer(false);
+    if (event.key !== "Tab") return;
+    const links = [...drawer.querySelectorAll("a[href]")];
+    const focusable = [menuBtn, ...links];
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   });
 
-  /* ---------- contact form (demo) ---------- */
-  const form = $("#contactForm");
-  if (form) {
-    const fName = $("#fName");
-    const fMail = $("#fMail");
-    const fAgree = $("#fAgree");
-    const err = $("#formError");
-    const done = $("#formDone");
-    const setInvalid = (el, invalid) => {
-      el.setAttribute("aria-invalid", String(invalid));
-      if (invalid) el.setAttribute("aria-describedby", "formError");
-      else el.removeAttribute("aria-describedby");
-    };
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-      const name = fName.value.trim();
-      const mail = fMail.value.trim();
-      const okMail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail);
-      setInvalid(fName, !name);
-      setInvalid(fMail, !mail || !okMail);
-      const problems = [];
-      if (!name) problems.push("お名前をご入力ください");
-      if (!mail) problems.push("メールアドレスをご入力ください");
-      else if (!okMail) problems.push("メールアドレスの形式をご確認ください");
-      if (fAgree && !fAgree.checked) problems.push("プライバシーポリシーへの同意をお願いします");
-      if (problems.length) {
-        err.textContent = problems.join("。") + "。";
-        (!name ? fName : (!mail || !okMail) ? fMail : fAgree).focus();
-        return;
-      }
-      err.textContent = "";
-      form.classList.add("is-done");
-      $$("input, select, textarea, button", form).forEach(c => { c.disabled = true; });
-      done && done.focus();
+  const sections = [...document.querySelectorAll(".side-toc__list a")].map(link => ({
+    link,
+    section: document.getElementById(link.hash.slice(1))
+  })).filter(item => item.section);
+  let pending = false;
+  const updatePagePosition = () => {
+    header?.classList.toggle("is-scrolled", window.scrollY > 10);
+    const threshold = (header?.offsetHeight || 0) + 24;
+    let current = sections[0];
+    sections.forEach(item => {
+      if (item.section.getBoundingClientRect().top <= threshold) current = item;
     });
-  }
+    sections.forEach(item => item.link.setAttribute("aria-current", String(item === current)));
+    pending = false;
+  };
+  const requestUpdate = () => {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(updatePagePosition);
+  };
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate, { passive: true });
+  updatePagePosition();
 
-  /* ---------- footer year ---------- */
-  const year = $("#year");
+  const questions = [...document.querySelectorAll(".faq__item")];
+  questions.forEach(question => question.addEventListener("toggle", () => {
+    if (question.open) questions.forEach(other => {
+      if (other !== question) other.open = false;
+    });
+  }));
+
+  const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 })();
