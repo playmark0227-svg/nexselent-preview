@@ -178,6 +178,7 @@
 .ed-media{display:grid;grid-template-columns:1.08fr .92fr;gap:64px;align-items:center}
 .ed-media__img{position:relative}
 .ed-media__img img{width:100%;height:auto;aspect-ratio:1.25/1;object-fit:cover;filter:saturate(.72)}
+.ed-image-note{margin-top:10px;font-size:9px;line-height:1.7;letter-spacing:.08em;color:#8a897f}
 .ed-checks{display:grid;gap:10px;margin-top:26px}
 .ed-checks li{position:relative;padding-left:20px;font-size:12px;color:#60666c}
 .ed-checks li::before{content:"";position:absolute;left:0;top:.65em;width:5px;height:5px;background:var(--ed-gold)}
@@ -220,6 +221,11 @@
 .ed-breadcrumb li+li::before{content:"/";margin-right:10px}
 .ed-page-hero .ed-title{font-size:clamp(34px,4.5vw,56px)}
 .ed-page-hero__desc{max-width:760px;margin-top:20px;font-size:13px;line-height:2;color:#687077}
+.ed-page-hero__grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(360px,1.1fr);gap:62px;align-items:center}
+.ed-page-hero__visual{position:relative;margin:0}
+.ed-page-hero__visual::before{content:"";position:absolute;inset:-10px 10px 10px -10px;border:1px solid var(--ed-gold-soft)}
+.ed-page-hero__visual picture,.ed-page-hero__visual img{display:block;width:100%}
+.ed-page-hero__visual img{position:relative;z-index:1;height:auto;aspect-ratio:1.5/1;object-fit:cover;filter:saturate(.78) contrast(.96)}
 
 /* About */
 .ed-meaning-grid{display:grid;grid-template-columns:repeat(3,1fr);margin-top:48px;border-block:1px solid var(--ed-line)}
@@ -293,8 +299,9 @@
   .editorial-site .header__nav,.editorial-site .ed-header-contact{display:none}
 }
 @media(max-width:960px){
-  .ed-hero__grid,.ed-thinking,.ed-media,.ed-message{grid-template-columns:1fr;gap:44px}
+  .ed-hero__grid,.ed-thinking,.ed-media,.ed-message,.ed-page-hero__grid{grid-template-columns:1fr;gap:44px}
   .ed-hero__visual{max-width:760px}
+  .ed-page-hero__visual{max-width:760px}
   .ed-benefit{grid-template-columns:1fr;gap:28px}
   .ed-flow,.ed-process{grid-template-columns:repeat(2,1fr)}
   .ed-flow__step:nth-child(2),.ed-process__item:nth-child(2){border-right:0}
@@ -310,6 +317,7 @@
   .ed-hero__grid{grid-template-columns:1fr;gap:42px}
   .ed-hero__title{font-size:clamp(34px,9.3vw,47px)}
   .ed-hero__visual::before{inset:-8px 8px 8px -8px}
+  .ed-page-hero__visual::before{inset:-8px 8px 8px -8px}
   .ed-hero__visual img{aspect-ratio:1.35/1}
   .ed-metrics{grid-template-columns:1fr}
   .ed-metric{padding:30px 20px;border-right:0;border-bottom:1px solid var(--ed-line)}
