@@ -180,7 +180,7 @@ body.is-locked .header .header__nav,
 body.is-locked .header .header__cta,
 body.is-locked .header .header__logo{visibility:hidden}
 .header__inner{
-  width:var(--wrap);margin-inline:auto;
+  width:var(--wrap-wide);margin-inline:auto;
   display:flex;align-items:center;gap:clamp(14px,1.6vw,22px);
   padding:14px 0;
 }
@@ -201,7 +201,7 @@ body.is-locked .header .header__logo{visibility:hidden}
 .header__tel{display:flex;flex-direction:column;align-items:flex-end;line-height:1.4}
 .header__tel-num{font-size:var(--fs-6);white-space:nowrap;font-weight:700;letter-spacing:var(--ls-body);color:var(--navy);font-variant-numeric:tabular-nums}
 .header__tel-note{font-size:var(--fs-1);letter-spacing:var(--ls-label);color:var(--gray)}
-@media(max-width:1180px){.header__tel{display:none}}
+@media(max-width:1320px){.header__tel{display:none}}
 .menu-btn{
   display:none;flex-direction:column;justify-content:center;gap:7px;
   width:44px;height:44px;z-index:71;
