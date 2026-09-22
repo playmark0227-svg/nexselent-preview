@@ -17,7 +17,9 @@
     menuBtn.setAttribute("aria-expanded", String(open));
     menuBtn.setAttribute("aria-label", open ? "メニューを閉じる" : "メニューを開く");
     drawer.setAttribute("aria-hidden", String(!open));
+    drawer.inert = !open;
     document.body.classList.toggle("is-locked", open);
+    document.documentElement.classList.toggle("is-locked", open);
     if (main) main.inert = open;
     if (footer) footer.inert = open;
     if (open) requestAnimationFrame(() => drawer.querySelector("a")?.focus());
