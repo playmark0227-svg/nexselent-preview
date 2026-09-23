@@ -129,8 +129,14 @@
 
 /* Services */
 .ed-service-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:56px;margin-top:40px}
-.ed-service{display:flex;flex-direction:column;min-height:210px;padding:28px 0;border-top:1px solid var(--ed-line);background:transparent;transition:color .2s}
-.ed-service:hover{background:var(--ed-cream)}
+.ed-service{position:relative;isolation:isolate;display:flex;flex-direction:column;min-height:210px;padding:28px 0;border-top:1px solid var(--ed-line)}
+/* ホバーの色面だけを左右に広げる。本文の左端は見出しと揃えたままにしたいので、
+   カードの余白ではなく擬似要素を外側へはみ出させて、文字が色の縁に触れないようにする */
+.ed-service::before{
+  content:"";position:absolute;z-index:-1;inset:0 -20px;
+  background:var(--ed-cream);opacity:0;transition:opacity .25s ease;
+}
+.ed-service:hover::before,.ed-service:focus-visible::before{opacity:1}
 .ed-service__num{font-family:Georgia,"Times New Roman",serif;color:#7a6435;font-size:11px;letter-spacing:.16em}
 .ed-service h3{margin-top:0;font-family:var(--sans);font-size:22px;font-weight:500;letter-spacing:.025em;color:var(--ed-navy)}
 .ed-service p{margin-top:13px;font-size:15px;line-height:1.9;color:#555f66}
@@ -323,7 +329,8 @@
   .ed-metric{padding:30px 20px;border-right:0;border-bottom:1px solid var(--ed-line)}
   .ed-metric:last-child{border-bottom:0}
   .ed-service-grid,.ed-compare,.ed-model-grid,.ed-advantage-grid,.ed-job__grid,.ed-job-subgrid{grid-template-columns:1fr}
-  .ed-service{min-height:250px;padding:28px}
+  .ed-service{min-height:250px}
+  .ed-service::before,.editorial-site .faq__item::before,.editorial-site .faq__q::after{inset:0 -16px}
   .ed-compare__side+ .ed-compare__side{border-left:0;border-top:1px solid var(--ed-line)}
   .ed-compare__channels,.ed-compare__areas{grid-template-columns:repeat(2,1fr)}
   .ed-benefits{padding-left:42px}

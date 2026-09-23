@@ -330,10 +330,17 @@ html.is-locked,body.is-locked{overflow:hidden}
 /* FAQ: 罫線アコーディオン */
 .faq{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border)}
 .faq__item{
+  position:relative;isolation:isolate;
   background:transparent;border:none;border-bottom:1px solid var(--border);border-radius:0;
-  box-shadow:none;overflow:hidden;
+  box-shadow:none;
 }
-.faq__item[open]{background:rgba(21,42,85,.025)}
+/* 開いた時・ホバー時の色面は左右に広げる。
+   見出しとの左揃えを崩したくないので、余白ではなく擬似要素を外側へはみ出させる */
+.faq__item::before{
+  content:"";position:absolute;z-index:-1;inset:0 -20px;
+  background:rgba(21,42,85,.025);opacity:0;transition:opacity .25s ease;
+}
+.faq__item[open]::before{opacity:1}
 .faq__q{
   list-style:none;cursor:pointer;
   display:flex;align-items:center;gap:14px;
@@ -713,8 +720,12 @@ a.news-card:hover{background:rgba(21,42,85,.03)}
 }
 .svc-card__tags li,.checks li{transition:transform .4s var(--ease)}
 
-.faq__q{transition:background .3s ease}
-.faq__q:hover{background:var(--bg-2)}
+.faq__q{position:relative}
+.faq__q::after{
+  content:"";position:absolute;z-index:-1;inset:0 -20px;
+  background:var(--bg-2);opacity:0;transition:opacity .25s ease;
+}
+.faq__q:hover::after{opacity:1}
 
 /* --- 下層ヒーローの出現 --- */
 .page-hero__en,.page-hero__ttl,.page-hero__lead,.breadcrumb{
