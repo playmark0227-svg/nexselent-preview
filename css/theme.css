@@ -341,3 +341,43 @@
 .footer__col-ttl{color:#9aa6b8}                       /* 紺地で 7.05:1（旧 白42% は 4.02:1） */
 .tp-label{color:#7d6532}                              /* 薄い地で 5.18:1（旧 4.39:1） */
 .tp-hero__cap,.tp-cta__media .photo-note,.page-hero__media .photo-note{background:rgba(10,26,51,.78)}  /* 明るい写真の上でも 4.5:1 以上 */
+
+/* ---------- ご相談いただけること：ライフプランを中心に ----------
+   9/24 MTG 07:14〜08:03。住まいは独立した柱ではなく、ライフプランの中の例。
+   ライフプランを大きな1枚にし、住まい・教育費などは例のタグとして中に入れる。 */
+.tp-services{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);grid-template-rows:auto auto;gap:18px;margin-top:36px}
+.tp-card--main{grid-row:1/span 2;padding:32px 30px 28px;border-color:var(--border-strong);background:linear-gradient(180deg,#fff 0%,var(--bg-2) 100%)}
+.tp-card--main .i-ico{width:48px;height:48px}
+.tp-card--main .tp-card__ttl{font-family:var(--serif);font-weight:600;font-size:var(--fs-7);letter-spacing:.05em}
+.tp-card--main .tp-card__txt{font-size:var(--fs-4);color:var(--ink)}
+.tp-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.tp-chips li{padding:5px 12px;border:1px solid var(--border-strong);border-radius:var(--r-pill);background:#fff;font-size:var(--fs-2);font-weight:700;letter-spacing:var(--ls-body);color:var(--navy);white-space:nowrap}
+.tp-card__go--text{display:inline-flex;align-items:center;gap:8px;justify-content:flex-start;font-size:var(--fs-3);font-weight:700;letter-spacing:var(--ls-body)}
+.tp-card__go--text span{transition:transform .3s var(--ease)}
+.tp-card:hover .tp-card__go--text span{transform:translateX(4px)}
+@media(max-width:860px){
+  .tp-services{grid-template-columns:1fr;grid-template-rows:none}
+  .tp-card--main{grid-row:auto}
+}
+
+/* ---------- 住まいは「例」として（9/24 MTG 07:14〜08:03） ----------
+   番号付きの見出しにせず、概要の下に「例えば」の枠で置く。 */
+.ex-box{margin:28px 0 8px;padding:clamp(22px,2.6vw,30px) clamp(20px,2.6vw,32px);border:1px solid var(--border);border-left:4px solid var(--green);border-radius:var(--r-sm);background:var(--bg-2)}
+.ex-box__label{font-size:var(--fs-2);font-weight:700;letter-spacing:var(--ls-wide);color:#7d6532}
+.ex-box__ttl{margin-top:6px;font-family:var(--serif);font-weight:600;font-size:var(--fs-6);line-height:1.6;letter-spacing:.04em;color:var(--navy)}
+.ex-box .detail-txt{margin-top:12px}
+.ex-box .checks{margin-top:16px}
+.ex-box .feat__note{margin-top:14px}
+.txt-link{display:inline-flex;align-items:center;gap:6px;margin-left:.4em;font-weight:700;color:var(--navy);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.txt-link span{text-decoration:none;transition:transform .3s var(--ease)}
+.txt-link:hover span{transform:translateX(3px)}
+/* 事業カード：3枚とも「〜を詳しく→」の文字リンクにそろえる */
+.tp-card--main{justify-content:center}
+.tp-card--main .tp-card__go--text{margin-top:28px;padding-top:0}
+.tp-card:not(.tp-card--main) .tp-card__go--text{align-self:flex-start}
+@media(max-width:560px){
+  .svc-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+  .svc-tabs a{padding:8px 4px;text-align:center;letter-spacing:.02em;white-space:nowrap}
+}
+@media(max-width:600px){.svc-intro{text-align:left}}
+@media(max-width:360px){.svc-tabs a{padding:8px 2px;font-size:12px;letter-spacing:0}}
