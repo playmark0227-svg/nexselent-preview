@@ -22,6 +22,8 @@
     document.documentElement.classList.toggle("is-locked", open);
     if (main) main.inert = open;
     if (footer) footer.inert = open;
+    const fabEl = document.getElementById("fab");
+    if (fabEl) fabEl.inert = open;
     if (open) requestAnimationFrame(() => drawer.querySelector("a")?.focus());
   };
 
@@ -53,8 +55,10 @@
     section: document.getElementById(link.hash.slice(1))
   })).filter(item => item.section);
   let pending = false;
+  const fab = document.getElementById("fab");
   const updatePagePosition = () => {
     header?.classList.toggle("is-scrolled", window.scrollY > 10);
+    fab?.classList.toggle("is-shown", window.scrollY > 500);
     const threshold = (header?.offsetHeight || 0) + 24;
     let current = sections[0];
     sections.forEach(item => {
