@@ -38,7 +38,7 @@
 /* 追従のLINEボタン（モックアップ右下の緑の丸） */
 .fab{background:var(--green);color:#fff;box-shadow:0 8px 24px rgba(14,135,67,.35)}
 .fab:hover{background:var(--green-2)}
-.fab__txt{font-size:10px;font-weight:700;line-height:1.25;text-align:center;letter-spacing:.02em}
+.fab__txt{font-size:11px;font-weight:700;line-height:1.25;text-align:center;letter-spacing:0}
 
 /* ---------- ヘッダー ---------- */
 .header__nav a[aria-current="page"]{color:var(--navy)}
@@ -62,7 +62,13 @@
   color:var(--navy);text-align:center;
 }
 .tp-title::before,.tp-title::after{content:"";flex:0 1 72px;height:1px;background:var(--border-strong)}
-@media(max-width:560px){.tp-title{gap:12px;font-size:24px;letter-spacing:.04em}.tp-title::before,.tp-title::after{flex-basis:20px}}
+/* スマホ：左右の罫を外し、見出しの下に短い罫を1本。見出しに横幅をすべて使う */
+@media(max-width:560px){
+  .tp-title{flex-direction:column;gap:14px;font-size:24px;letter-spacing:.04em}
+  .tp-title::before{display:none}
+  .tp-title::after{flex:none;width:32px;height:1px;background:var(--navy);opacity:.35}
+}
+@media(max-width:359px){.tp-title{font-size:22px}}
 .tp-lead{max-width:720px;margin:18px auto 0;text-align:center;font-size:var(--fs-5);line-height:var(--lh-body);color:var(--gray)}
 .tp-more{margin-top:28px;text-align:right}
 .tp-more a{display:inline-flex;align-items:center;gap:8px;font-size:var(--fs-3);font-weight:700;letter-spacing:var(--ls-body);color:var(--navy)}
@@ -94,16 +100,43 @@
 .tp-hero__note span{display:inline-block}
 .tp-hero__cap,.tp-cta__media .photo-note,.page-hero__media .photo-note{padding:2px 8px;border-radius:3px;background:rgba(10,26,51,.55);color:#fff;font-size:11px;line-height:1.6;text-shadow:none}
 .tp-hero__cap{position:absolute;right:max(16px,calc((100% - 1120px)/2));bottom:14px;z-index:1;margin:0}
-/* スマホ：写真を上、文字を下に分ける（文字を写真に重ねると読めなくなるため） */
-@media(max-width:760px){
-  .tp-hero{background:#fff}
-  .tp-hero__media{position:relative;inset:auto;aspect-ratio:4/3}
-  .tp-hero__media img{object-position:72% 50%}
-  .tp-hero__media::after{background:linear-gradient(180deg,rgba(255,255,255,0) 70%,#fff 100%)}
-  .tp-hero__inner{min-height:0;padding:8px 0 44px}
-  .tp-hero__title{font-size:31px}
+/* スマホ・タブレット：写真と見出しを1枚の絵として組む。
+   見出しは写真の上に重ね、説明文とボタンは写真の下に置く（説明文まで重ねると人物に掛かって読みにくいため）。 */
+@media(max-width:1023px){
+  .tp-hero{display:grid;grid-template-columns:100%;background:#fff}
+  .tp-hero__media{position:relative;inset:auto;grid-area:1/1;width:100%}
+  .tp-hero__inner,.tp-hero__body{display:contents}
+  .tp-hero__head{grid-area:1/1;position:relative;z-index:1;width:var(--tp-wrap);margin-inline:auto}
+  .tp-hero__title{text-shadow:0 0 18px rgba(255,255,255,.9),0 0 2px rgba(255,255,255,.9)}
+  .tp-hero__sub{grid-area:2/1;width:var(--tp-wrap);margin-inline:auto;padding:28px 0 48px}
+  .tp-hero__lead{margin-top:0;max-width:none}
+  .tp-hero__note{max-width:none}
+  .tp-hero__cap{grid-area:1/1;align-self:end;justify-self:end;position:relative;inset:auto;margin:0 10px 10px 0}
+}
+/* スマホ（縦）：同じ家族写真の上に空を描き足した縦長版（hero-family-sp-v1）。空の部分に見出しを置く */
+@media(max-width:760px) and (orientation:portrait){
+  .tp-hero__media{aspect-ratio:3/5;max-height:calc(100svh - var(--header-h,73px))}
+  .tp-hero__media img{object-position:50% 100%}
+  .tp-hero__media::after{background:linear-gradient(180deg,rgba(255,255,255,.94) 0%,rgba(255,255,255,.82) 16%,rgba(255,255,255,.5) 30%,rgba(255,255,255,0) 44%)}
+  .tp-hero__head{align-self:start;margin-top:clamp(26px,8vw,40px)}
+  .tp-hero__kicker{font-size:13px;letter-spacing:.14em}
+  .tp-hero__title{margin-top:10px;font-size:clamp(26px,8vw,33px);line-height:1.5;letter-spacing:.06em}
+  .tp-hero__sub{padding:26px 0 44px}
+  .tp-hero__lead{font-size:15px;line-height:1.95}
+  .tp-hero__btns{margin-top:24px}
   .tp-hero__btns .btn{flex:1 1 100%}
-  .tp-hero__cap{top:calc(var(--header-h,64px) + 8px);bottom:auto;right:12px}
+  .tp-hero__note{display:flex;flex-wrap:wrap;gap:2px 16px;margin-top:16px;font-size:12.5px;line-height:1.9}
+  /* 区切りの「／」が行頭に来ないよう、スマホは小さなチェック印の並びに */
+  .tp-hero__note span::before,.tp-hero__note span+span::before{content:"";display:inline-block;width:9px;height:5px;margin:0 7px 3px 1px;border-left:1.5px solid var(--green);border-bottom:1.5px solid var(--green);transform:rotate(-45deg)}
+}
+/* タブレット・スマホ（横）：横長の写真のまま、家族を右に寄せ、左の白いぼかしの上に見出しを置く */
+@media(min-width:761px) and (max-width:1023px),(max-width:760px) and (orientation:landscape){
+  .tp-hero__media{aspect-ratio:16/9}
+  .tp-hero__media img{object-position:78% 40%}
+  .tp-hero__media::after{background:linear-gradient(90deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,.85) 34%,rgba(255,255,255,.4) 48%,rgba(255,255,255,0) 60%)}
+  .tp-hero__head{align-self:center}
+  .tp-hero__title{font-size:clamp(24px,4.2vw,40px)}
+  .tp-hero__lead{max-width:40em}
 }
 
 /* ---------- 2. 紺の帯 ---------- */
@@ -114,8 +147,8 @@
 .tp-band__item+.tp-band__item{border-left:1px solid rgba(255,255,255,.28)}
 .tp-band__item .i-ico{width:36px;height:36px;color:#fff}
 @media(max-width:760px){
-  .tp-band__items{flex-direction:column;align-items:center;gap:14px}
-  .tp-band__item{padding:0;min-width:210px}
+  .tp-band__items{display:grid;justify-content:center;gap:14px}
+  .tp-band__item{padding:0;min-width:0}
   .tp-band__item+.tp-band__item{border-left:0}
 }
 
@@ -224,7 +257,6 @@
 .tp-links a span{transition:transform .3s var(--ease)}
 .tp-links a:hover span{transform:translateX(4px)}
 @media(max-width:960px){.tp-bottom{grid-template-columns:1fr}}
-@media(max-width:560px){.tp-message{grid-template-columns:96px minmax(0,1fr);gap:18px}}
 
 /* ---------- 9. お問い合わせ（紺の角丸＋写真） ---------- */
 .tp-cta{
@@ -265,9 +297,18 @@
 .page-hero__media img{object-fit:cover;object-position:50% 40%}
 .page-hero__media::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,var(--navy) 0%,rgba(16,40,76,.55) 30%,rgba(16,40,76,0) 62%)}
 .page-hero__media .photo-note{position:absolute;right:12px;bottom:8px;z-index:2;margin:0}
+/* スマホ：写真のあるページは、写真の下半分に紺のぼかしを掛けて、見出しを写真の上に重ねる（トップと同じく写真と見出しを1枚に組む）。
+   写真ごとの切り出し位置は figure の --sp-pos で調整する */
 @media(max-width:760px){
-  .page-hero__media{position:relative;width:auto;height:180px;margin:22px -20px -1px}
-  .page-hero__media::before{background:linear-gradient(180deg,var(--navy) 0%,rgba(16,40,76,0) 45%)}
+  .page-hero:has(.page-hero__media){display:grid;grid-template-columns:100%;padding:var(--header-h,73px) 0 0}
+  .page-hero__media{grid-area:1/1;position:relative;inset:auto;width:100%;height:min(clamp(340px,100vw,440px),calc(100svh - var(--header-h,73px)));margin:0}
+  .page-hero__media img{object-position:var(--sp-pos,50% 30%)!important}
+  .page-hero__media::before{background:linear-gradient(0deg,rgba(16,40,76,.97) 0%,rgba(16,40,76,.9) 30%,rgba(16,40,76,.66) 52%,rgba(16,40,76,0) 76%)}
+  .page-hero:has(.page-hero__media) :is(.breadcrumb,.breadcrumb a){color:#fff;text-shadow:0 1px 3px rgba(10,26,51,.9),0 0 10px rgba(10,26,51,.6)}   /* 明るい写真の上でも 4.5:1 以上 */
+  .page-hero__media .photo-note{top:10px;right:10px;bottom:auto}
+  .page-hero:has(.page-hero__media) .container{grid-area:1/1;align-self:end;z-index:2;padding-bottom:28px}
+  .page-hero:has(.page-hero__media) .breadcrumb{margin-bottom:12px}
+  .page-hero:has(.page-hero__media) .page-hero__lead{margin-top:10px}
 }
 
 /* 下層：おすすめをアイコン付きに（モックアップ右ページ 2 こんな方におすすめ） */
@@ -285,14 +326,24 @@
 .nw{white-space:nowrap}
 
 /* ---------- 改行 ----------
-   語の途中で行を分けない（「家／計」「それ／ぞれ」など）。
-   auto-phrase 未対応のブラウザでは text-wrap:pretty で最終行の1〜2文字残りだけ防ぐ。 */
+   本文（p・li・dd）は日本語の通常の組み方：行末まで詰めて折り返し、禁則だけ守る。
+   文節で折る（auto-phrase）と、Chrome では行末がそろわず、iPhone（Safari）は未対応で
+   語の途中で短い行が残るため、本文には掛けない（style.css の方針に戻す）。
+   見出し・キャッチ・ボタン・中央ぞろえの短い文だけ文節で折る。Safari では要所を .nw で守る。 */
 :is(p,li,dd,dt,h1,h2,h3,.btn,.tp-card__ttl,.tp-step__ttl){line-break:strict;overflow-wrap:anywhere}
-:is(p,li,dd){text-wrap:pretty}
-:is(h1,h2,h3,.tp-title,.tp-h2,.tp-sub,.tp-band__title,.tp-cta__ttl,.tp-message__quote){text-wrap:balance}
+:is(p,li,dd){word-break:normal;text-wrap:wrap}
+:is(h1,h2,h3,.tp-title,.tp-h2,.tp-sub,.tp-band__title,.tp-cta__ttl,.tp-message__quote,
+    .tp-lead,.tp-reason__txt,.cta-band__catch,.cta-band__sub,.page-hero__lead,.sec-head__lead,.detail-quote){text-wrap:balance}
 @supports (word-break:auto-phrase){
-  :is(p,li,dd,dt,h1,h2,h3){word-break:auto-phrase}
-  :is(p,li,dd){text-wrap:wrap}
+  :is(p,li,dd){text-wrap:pretty}   /* Chrome：最終行に1〜2文字だけ残るのを防ぐ（Safari の pretty は段落全体を短くするので使わない） */
+  :is(h1,h2,h3,dt,.btn,.faq__q,.tp-lead,.tp-reason__txt,.cta-band__catch,.cta-band__sub,.page-hero__lead,
+      .sec-head__lead,.tp-message__quote,.detail-quote,.tp-hero__kicker,.targets li,.tp-band__item){word-break:auto-phrase}
+  :is(.tp-lead,.tp-reason__txt,.cta-band__catch,.cta-band__sub,.page-hero__lead,.sec-head__lead,.tp-message__quote,.detail-quote){text-wrap:balance}
+}
+@supports not (word-break:auto-phrase){
+  .tp-title{word-break:keep-all}   /* flex の見出しは .nw を入れられないため、句読点でだけ折る */
+  /* style.css が本文クラスに掛けている pretty も、Safari では通常の折り返しに戻す */
+  :is(.hero__lead,.detail-txt,.svc-card__txt,.reason__txt,.flow__txt,.seminar-card__txt,.msg__txt,.tp-hero__lead){text-wrap:wrap}
 }
 
 /* ---------- 動き ----------
@@ -332,8 +383,6 @@
 @media(max-width:760px){
   /* スマホの「こんな方におすすめ」：アイコンを上、文字を下にして2行に収める */
   .targets li{flex-direction:column;align-items:flex-start;gap:8px}
-  /* スマホの紺の帯：写真に掛ける紺のグラデーションを短くして人物を見せる */
-  .page-hero__media::before{background:linear-gradient(180deg,var(--navy) 0%,rgba(16,40,76,0) 25%)}
 }
 .i-ico--line{color:var(--green);stroke:none}   /* LINEのロゴは塗りの形なので、線画用の枠線を消して緑で塗る */
 
@@ -368,16 +417,254 @@
 .ex-box .detail-txt{margin-top:12px}
 .ex-box .checks{margin-top:16px}
 .ex-box .feat__note{margin-top:14px}
-.txt-link{display:inline-flex;align-items:center;gap:6px;margin-left:.4em;font-weight:700;color:var(--navy);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
-.txt-link span{text-decoration:none;transition:transform .3s var(--ease)}
+.txt-link{margin-left:.4em;font-weight:700;color:var(--navy);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.txt-link span{display:inline-block;margin-left:6px;transition:transform .3s var(--ease)}   /* inline-block にすると矢印に下線が付かない */
 .txt-link:hover span{transform:translateX(3px)}
 /* 事業カード：3枚とも「〜を詳しく→」の文字リンクにそろえる */
 .tp-card--main{justify-content:center}
 .tp-card--main .tp-card__go--text{margin-top:28px;padding-top:0}
 .tp-card:not(.tp-card--main) .tp-card__go--text{align-self:flex-start}
-@media(max-width:560px){
-  .svc-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
-  .svc-tabs a{padding:8px 4px;text-align:center;letter-spacing:.02em;white-space:nowrap}
-}
+
 @media(max-width:600px){.svc-intro{text-align:left}}
-@media(max-width:360px){.svc-tabs a{padding:8px 2px;font-size:12px;letter-spacing:0}}
+
+/* =====================================================================
+   スマホの作り込み（2026-09-25 全15ページを 320〜430px で点検した結果）
+   ===================================================================== */
+
+/* ---------- 余白：ヘッダー・本文・フッターの左右を 20px にそろえる（トップと同じ） ---------- */
+@media(max-width:760px){
+  .header__inner,.container,.container--narrow,.container--wide,.container--read{width:calc(100% - 40px)}
+  .container .container,.container .container--narrow{width:100%}   /* 事業内容ページは container の中に container--narrow がある */
+  .menu-btn{margin-right:-10px}   /* 三本線の右端を 20px の線にそろえる（押せる範囲 44px はそのまま） */
+}
+/* ヘッダーを低く（73px → 61px）。ヒーローは --header-h を見て上の余白を合わせている */
+@media(max-width:600px),(max-height:500px) and (orientation:landscape){
+  :root{--header-h:61px}
+  .header__inner{padding:8px 0}
+  .header__logo{min-height:44px}
+}
+/* メニュー：上に白い帯を固定し、一覧だけが帯の下でスクロールする（× と一覧が重ならない） */
+@media(max-width:1180px){
+  .drawer__panel{padding:16px 28px 28px;border-top:var(--header-h,73px) solid #fff;background:#fff linear-gradient(var(--border),var(--border)) 0 0/100% 1px no-repeat}
+  .drawer__tel{display:flex;align-items:center;justify-content:center;min-height:44px;margin-top:6px}
+}
+
+/* ---------- フッター ---------- */
+/* 追従のLINEボタン（右下 18px・64px）が「ページ上部へ↑」に重ならないよう、下に余白 */
+@media(max-width:1300px){body:has(#fab) .footer{padding-bottom:104px}}
+@media(max-width:600px){
+  .footer__nav--cols{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 20px;width:100%}
+  .footer__col{gap:0}
+  .footer__col-ttl{margin-bottom:2px}
+  .footer__nav a{display:block;padding:10px 0;line-height:24px;letter-spacing:.06em}
+  .footer__nav a::after{bottom:9px}
+  .footer__addr a{display:inline-flex;align-items:center;min-height:40px}
+  .footer__foot{flex-wrap:wrap;gap:4px 16px}
+  .footer__copy,.footer__top{white-space:nowrap}
+  .footer__top{margin-left:auto;min-height:44px}
+}
+@media(max-width:374px){.footer__copy,.footer__top{letter-spacing:.04em}}
+
+/* ---------- 押しやすさ（44px 以上） ---------- */
+@media(max-width:600px){
+  .tp-more{margin-top:24px;text-align:center}
+  .tp-more a{justify-content:center;width:100%;min-height:48px;padding:0 20px;border:1px solid var(--border-strong);border-radius:var(--r-pill);background:#fff}
+  .tp-links a{min-height:44px;white-space:nowrap}
+  .co-table__row dd a{display:inline-block;padding-block:8px;margin-block:-8px}
+  .breadcrumb a{padding-block:14px}
+  .tp-btns .btn,.tp-cta__btns .btn{flex:1 1 100%}
+  .fab .i-line{width:20px;height:20px}
+}
+
+/* ---------- 事業タブ：スマホは3分割の切り替えボタン ---------- */
+@media(max-width:560px){
+  .svc-tabs{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr) minmax(0,7fr);gap:0;border:1px solid var(--border-strong);border-radius:12px;background:#fff}
+  .svc-tabs a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:0 2px;border:0;border-radius:0;font-size:13px;letter-spacing:0;white-space:nowrap}
+  .svc-tabs a:first-child{border-radius:11px 0 0 11px}
+  .svc-tabs a:last-child{border-radius:0 11px 11px 0}
+  .svc-tabs a+a{border-left:1px solid var(--border)}
+  .svc-tabs a:focus-visible{outline-offset:-3px}
+}
+@media(max-width:360px){.svc-tabs a{font-size:12px}}
+
+/* ---------- トップ ---------- */
+/* お問い合わせの写真：Safari では幅が 0 になって写真が消えていた */
+@media(max-width:860px){.tp-cta__media{width:100%}}
+@media(max-width:560px){.tp-cta__body{padding-inline:22px}}
+@media(max-width:860px){.tp-card--main{padding:26px 22px 24px}}
+@media(max-width:359px){
+  .tp-cta__ttl{font-size:24px}
+  .tp-lead{font-size:15px;letter-spacing:.02em}
+}
+/* 代表挨拶：写真の枠を小さくして、ひとことを全幅に。名前は枠の横に2行で */
+@media(max-width:560px){
+  .tp-bottom .tp-message{grid-template-columns:64px minmax(0,1fr);grid-template-areas:"label label" "quote quote" "ph name" "links links";gap:0 14px;align-items:center}
+  .tp-bottom .tp-message>div:not(.tp-portrait){display:contents}
+  .tp-bottom .tp-message .tp-box__label{grid-area:label}
+  .tp-bottom .tp-message__quote{grid-area:quote;margin-top:10px}
+  .tp-bottom .tp-portrait{grid-area:ph;margin-top:18px}
+  .tp-bottom .tp-portrait img{width:24px}
+  .tp-bottom .tp-message__name{grid-area:name;margin-top:18px;display:flex;flex-direction:column;line-height:1.5}
+  .tp-bottom .tp-message__name strong{margin:2px 0 0;letter-spacing:.08em}
+  .tp-bottom .tp-message .tp-links{grid-area:links;margin-top:10px}
+  .tp-profile div{grid-template-columns:5.5em minmax(0,1fr);gap:10px}
+}
+/* 流れ：番号の丸をアイコンの真上に、見出しと本文の左端をそろえる */
+@media(max-width:560px){
+  .tp-steps{padding:8px 16px}
+  .tp-step__head{gap:12px}
+  .tp-step__num{margin-inline:4px}
+  .tp-step__body{margin-top:8px}
+}
+/* 縦に積んだ3項目の上下の余白をつめる */
+@media(max-width:860px){
+  .tp-reasons{margin-top:28px}
+  .tp-reason:first-child{padding-top:6px}
+  .tp-reason:last-child{padding-bottom:0}
+  #reserve .tp-reason .btn{width:min(100%,280px)}
+}
+
+/* ---------- 下層の共通部品 ---------- */
+/* 右の案内カード：1列になると直後の紺の帯と同じボタン・電話が並ぶため、ボタンと電話を消して薄い注記に */
+@media(max-width:960px){
+  .detail>.side-card{padding:20px;background:var(--bg-2);box-shadow:none;text-align:left}
+  .detail>.side-card .side-card__ttl{margin-bottom:10px}
+  .detail>.side-card .side-card__checks{display:flex;margin:0}
+  .detail>.side-card .btn,.detail>.side-card .side-card__tel{display:none}
+  /* セミナー・採用は、カードの中身が本文と紺の帯で出ているので、カードごと出さない */
+  .detail>.side-card:has(a.btn--navy){display:none}
+}
+/* よくある質問：左右の余白をつめ、答えの左端を質問の文字にそろえる */
+@media(max-width:600px){
+  .faq__q{padding:16px 4px;gap:10px}
+  .faq__a{padding:0 4px 16px 42px}
+  #faq .detail-fig{margin-bottom:0}
+}
+/* 紺の帯（ページ末尾の案内） */
+@media(max-width:600px){
+  .cta-band__catch{font-size:clamp(21px,6.6vw,26px);letter-spacing:.08em}
+  .cta-band__btns{flex-direction:column;align-items:center;gap:14px}
+  .cta-band__btns .btn{width:100%;max-width:340px;padding-inline:16px}
+  .cta-band__tel{margin-top:6px}
+}
+/* 事業ページの写真の帯：スマホでは細すぎるので高くする（顔が入らないよう、下側を拡大して切り出す） */
+@media(max-width:600px){
+  .detail-fig--band .detail-fig__ph{aspect-ratio:2/1}
+  .detail-fig--band .ph-img{top:auto;height:185%}
+  .detail-fig--room .detail-fig__ph{aspect-ratio:16/9}
+}
+/* 本文の中の3項目（私たちの姿勢・セミナーでお話しすること・ここで働くということ）：アイコン左・文字右の行に */
+@media(max-width:600px){
+  .detail__main .reason-grid{gap:12px}
+  .detail__main .reason{display:grid;grid-template-columns:48px minmax(0,1fr);column-gap:14px;align-items:center;padding:18px 16px;text-align:left}
+  .detail__main .reason__icon{grid-row:1/span 2;width:48px;height:48px;margin:0}
+  .detail__main .reason__icon svg{width:26px;height:26px}
+  .detail__main .reason__ttl{font-size:18px;line-height:1.6;margin-bottom:2px}
+  .detail__main .reason__txt{text-align:left;line-height:1.85}
+  .detail__main .tp-reason{display:grid;grid-template-columns:36px minmax(0,1fr);column-gap:16px;align-items:start;text-align:left;padding:20px 0}
+  .detail__main .tp-reason .i-ico{grid-row:1/span 2;width:36px;height:36px;margin:0}
+  .detail__main .tp-reason__ttl{margin-top:4px}
+  .detail__main .tp-reason__txt{margin-top:4px;text-wrap:wrap}
+}
+/* 本文の中の手順（セミナー・採用）：番号・見出し・アイコンを1行に、本文をその下に */
+@media(max-width:600px){
+  .detail__main .flow{grid-template-columns:1fr;gap:12px}
+  .detail__main .flow__step{display:grid;grid-template-columns:30px minmax(0,1fr) 34px;grid-template-areas:"num ttl ico" ". txt txt";column-gap:14px;align-items:center;text-align:left;padding:18px 18px 18px 16px}
+  .detail__main .flow__step::after{display:none}
+  .detail__main .flow__num{position:static;transform:none;grid-area:num;box-shadow:none}
+  .detail__main .flow__icon{grid-area:ico;width:34px;height:34px;margin:0}
+  .detail__main .flow__ttl{grid-area:ttl;margin:0}
+  .detail__main .flow__txt{grid-area:txt;margin-top:6px}
+}
+/* おすすめのカード：どのカードも2行で */
+.targets li>span>.nw{display:block}   /* 2語の組はどの幅でも2行に（ライフプラン・セミナーの <br> とそろえる） */
+/* 住まいの例への移動先：固定ヘッダーの下に隠れないように */
+.ex-box{scroll-margin-top:96px}
+@media(max-width:600px){
+  .detail-txt .txt-link{display:block;width:fit-content;margin:4px 0 0;padding:8px 0}
+  .svc-entry .more-link .btn{display:flex;width:100%}
+}
+/* 表：ラベルと値の左端を本文にそろえる */
+@media(max-width:600px){
+  .co-table__row{padding-inline:0}
+  #profile .tp-box{padding:4px 18px}
+}
+/* 会社情報の代表メッセージ：枠を外し、ひとことを全幅に、署名を小さな枠の横に */
+@media(max-width:600px){
+  #message .tp-box{padding:0;border:0;background:none}
+  #message .tp-message{grid-template-columns:56px minmax(0,1fr);grid-template-areas:"q q" "ph name";gap:16px 14px;align-items:center}
+  #message .tp-message>div:not(.tp-portrait){display:contents}
+  #message .tp-portrait{grid-area:ph}
+  #message .tp-portrait img{width:20px}
+  #message .tp-message__quote{grid-area:q;margin-top:0}
+  #message .tp-message__name{grid-area:name;margin-top:0;line-height:1.5}
+  #message .tp-message__name strong{display:block;margin:2px 0 0;white-space:nowrap}
+  #message .tp-message+.tp-text{margin-top:22px;padding-top:22px;border-top:1px solid var(--border)}
+}
+/* 選ばれる理由の比較表 */
+@media(max-width:400px){
+  #window .tp-box{padding:20px 16px}
+  #window .tp-profile div{grid-template-columns:5.4em minmax(0,1fr);gap:8px}
+}
+
+/* ---------- お問い合わせ・お知らせ・404 ---------- */
+@media(max-width:760px){
+  .contact-ch__mail{align-self:stretch;display:flex;align-items:center;justify-content:center;min-height:48px;padding:0 16px;border:1px solid var(--border-strong);border-radius:var(--r-pill);font-size:var(--fs-3);font-weight:700;letter-spacing:.02em;word-break:normal;overflow-wrap:anywhere}
+  .contact-ch__txt:last-child{margin-bottom:0}
+  .contact-items__mail{display:block;max-width:400px;margin-top:22px}
+}
+@media(min-width:761px){.contact-items__mail{display:none}}
+@media(max-width:640px){
+  .news-card{grid-template-columns:auto 1fr;align-items:center;gap:8px 12px;padding:20px 0}
+  .news-card__body{grid-column:1/-1}
+}
+@media(max-width:600px){
+  .num-head+.tp-links{flex-direction:column;gap:0;margin-top:-12px}
+  .num-head+.tp-links a{justify-content:space-between;min-height:52px;border-bottom:1px solid var(--border)}
+  .detail-quote{padding:14px 16px}
+}
+
+/* ---------- 再点検（2026-09-25）で見つかった、タブレット・PCの幅の調整 ---------- */
+/* iPad 横（1024〜1179px）：トップの説明文が写真の人物の手に掛からないように */
+@media(min-width:1024px) and (max-width:1179px){.tp-hero__lead{max-width:490px}}
+/* 右の案内カードが出て本文が狭くなる 961〜1180px：カードを2列に、3項目の内側の余白をつめる。流れも2列に */
+@media(min-width:961px) and (max-width:1180px){
+  .detail__main .targets{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .detail__main .reason{padding-inline:14px}
+  .detail__main .reason__ttl{font-size:20px;letter-spacing:.04em}
+  .detail__main .tp-reason{padding-inline:12px}
+  .tp-steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:26px}
+  .tp-step:nth-child(3)::before{display:none}
+}
+/* 中央ぞろえの短い文：PC・タブレットでは文節で折る */
+@media(min-width:601px){
+  @supports (word-break:auto-phrase){.reason__txt,.svc-intro{word-break:auto-phrase}}
+  @supports not (word-break:auto-phrase){.svc-intro{word-break:keep-all}}
+  .svc-intro{text-wrap:balance}
+}
+/* 住まいの例へのリンク：段落末尾の処理で入る span に、矢印用の指定が掛からないように */
+.txt-link>.nw{display:inline;margin-left:0}
+/* 選ばれる理由の比較：641px 未満は2つの枠を縦に */
+@media(max-width:640px){#window .flow--2col{grid-template-columns:1fr}}
+/* 本文の中の手順：アイコンのない手順（セミナー）は見出しに幅を使う */
+@media(max-width:600px){
+  .detail__main .flow__step:not(:has(.flow__icon)){grid-template-columns:30px minmax(0,1fr);grid-template-areas:"num ttl" ". txt"}
+  .footer__addr a{min-height:44px}
+  .fab__txt{font-size:12px;line-height:1.2}
+}
+/* 761〜960px（1列で4つ並ぶ幅）も、アイコンを上・文字を下に（「ポケットWi-Fi」が枠からはみ出さないように） */
+@media(min-width:761px) and (max-width:960px){.targets li{flex-direction:column;align-items:flex-start;gap:8px}}
+/* タブレット・PC：下層の写真を固定ヘッダーの下から始める（ヘッダーの裏に顔が隠れないように） */
+@media screen and (min-width:761px){.page-hero__media{top:calc(var(--header-h,73px) - 1px)}}
+/* 住まいの例へのリンク：ラベルの途中で折らない。801px 未満は段落の下に1行で */
+.txt-link{white-space:nowrap}
+@media(max-width:800px){.detail-txt .txt-link{display:block;width:fit-content;margin:4px 0 0;padding:8px 0}}
+/* 私たちの姿勢：601〜820px も、スマホと同じくアイコン左・文字右の行に（本文の左端にそろえる） */
+@media(min-width:601px) and (max-width:820px){
+  .detail__main .reason-grid{max-width:none;gap:12px}
+  .detail__main .reason{display:grid;grid-template-columns:48px minmax(0,1fr);column-gap:16px;align-items:center;padding:20px 24px;text-align:left}
+  .detail__main .reason__icon{grid-row:1/span 2;width:48px;height:48px;margin:0}
+  .detail__main .reason__icon svg{width:26px;height:26px}
+  .detail__main .reason__ttl{font-size:18px;line-height:1.6;margin-bottom:2px}
+  .detail__main .reason__txt{text-align:left;line-height:1.85}
+}

@@ -85,4 +85,38 @@
 
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
+
+  // 段落の最後の5文字は改行させない（最終行に「ます。」だけが残るのを防ぐ）。
+  // 段落の中に別の行として置かれた注記（display:block の span など）は、別のまとまりとして扱う。
+  // 英数字（電話・メール・社名）を含む末尾は、もともと分かれないので触らない。
+  const isBlock = node => /block|flex|grid|list-item|table/.test(getComputedStyle(node).display);
+  const keepTail = block => {
+    const walker = document.createTreeWalker(block, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        for (let el = node.parentElement; el && el !== block; el = el.parentElement) {
+          if (isBlock(el)) return NodeFilter.FILTER_REJECT;
+        }
+        return node.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      }
+    });
+    let last = null;
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) last = node;
+    if (!last || last.parentElement.closest(".nw")) return;
+    // flex・grid の直下に足すと別の並びの要素になってしまうので、そこには足さない
+    if (/flex|grid/.test(getComputedStyle(last.parentElement).display)) return;
+    const text = last.nodeValue.replace(/\s+$/, "");
+    if (text.length < 10) return;
+    const tail = text.slice(-5);
+    if (/[\sA-Za-z0-9@.\-]/.test(tail)) return;
+    last.nodeValue = text.slice(0, -5);
+    const keep = document.createElement("span");
+    keep.className = "nw";
+    keep.textContent = tail;
+    last.after(keep);
+  };
+  document.querySelectorAll("main :is(p, li, dd)").forEach(el => {
+    if (el.closest(".tp-chips, .breadcrumb, .tp-hero__note, .nw")) return;
+    keepTail(el);
+    el.querySelectorAll("span").forEach(span => { if (isBlock(span)) keepTail(span); });
+  });
 })();
