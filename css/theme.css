@@ -100,6 +100,19 @@
 .tp-hero__note span{display:inline-block}
 .tp-hero__cap,.tp-cta__media .photo-note,.page-hero__media .photo-note{padding:2px 8px;border-radius:3px;background:rgba(10,26,51,.55);color:#fff;font-size:11px;line-height:1.6;text-shadow:none}
 .tp-hero__cap{position:absolute;right:max(16px,calc((100% - 1120px)/2));bottom:14px;z-index:1;margin:0}
+/* PC：ヘッダーの下から画面の高さいっぱいに写真を出す。
+   ただし縦に長い窓では写真の左右が大きく切れて家族が文字に寄るので、高さは幅の 62.5%（写真とほぼ同じ横長）までにする */
+@media(min-width:1024px){
+  .tp-hero__inner{min-height:max(560px,min(calc(100vh - var(--header-h,73px)),62.5vw));min-height:max(560px,min(calc(100svh - var(--header-h,73px)),62.5vw))}
+  .tp-hero__cap{right:20px;bottom:16px}   /* 写真いっぱいの画面の右下の角に */
+}
+/* 大きな画面では、写真に負けないよう見出しと説明文を少し大きく */
+@media(min-width:1800px){
+  .tp-hero__inner{width:var(--wrap-wide)}   /* 文字の左端をヘッダーのロゴにそろえ、写真の人物と重ならない幅を確保 */
+  .tp-hero__body{max-width:720px}
+  .tp-hero__title{font-size:clamp(54px,2.5vw,64px)}
+  .tp-hero__lead{font-size:17px}
+}
 /* スマホ・タブレット：写真と見出しを1枚の絵として組む。
    見出しは写真の上に重ね、説明文とボタンは写真の下に置く（説明文まで重ねると人物に掛かって読みにくいため）。 */
 @media(max-width:1023px){
