@@ -33,7 +33,6 @@
 .btn__arrow{transition:transform .3s var(--ease)}
 .btn:hover .btn__arrow{transform:translateX(3px)}
 .i-ico{width:40px;height:40px;flex:none;color:var(--navy);stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.photo-note{margin-top:8px;font-size:12px;line-height:1.7;letter-spacing:.02em;color:var(--gray)}
 
 /* 追従のLINEボタン（モックアップ右下の緑の丸） */
 .fab{background:var(--green);color:#fff;box-shadow:0 8px 24px rgba(14,135,67,.35)}
@@ -98,13 +97,10 @@
 .tp-hero__note{margin-top:18px;font-size:var(--fs-2);letter-spacing:var(--ls-body);color:var(--gray)}
 .tp-hero__note span+span::before{content:"／";margin:0 .5em;color:var(--border-strong)}
 .tp-hero__note span{display:inline-block}
-.tp-hero__cap,.tp-cta__media .photo-note,.page-hero__media .photo-note{padding:2px 8px;border-radius:3px;background:rgba(10,26,51,.55);color:#fff;font-size:11px;line-height:1.6;text-shadow:none}
-.tp-hero__cap{position:absolute;right:max(16px,calc((100% - 1120px)/2));bottom:14px;z-index:1;margin:0}
 /* PC：ヘッダーの下から画面の高さいっぱいに写真を出す。
    ただし縦に長い窓では写真の左右が大きく切れて家族が文字に寄るので、高さは幅の 62.5%（写真とほぼ同じ横長）までにする */
 @media(min-width:1024px){
   .tp-hero__inner{min-height:max(560px,min(calc(100vh - var(--header-h,73px)),62.5vw));min-height:max(560px,min(calc(100svh - var(--header-h,73px)),62.5vw))}
-  .tp-hero__cap{right:20px;bottom:16px}   /* 写真いっぱいの画面の右下の角に */
 }
 /* 大きな画面では、写真に負けないよう見出しと説明文を少し大きく */
 @media(min-width:1800px){
@@ -124,7 +120,6 @@
   .tp-hero__sub{grid-area:2/1;width:var(--tp-wrap);margin-inline:auto;padding:28px 0 48px}
   .tp-hero__lead{margin-top:0;max-width:none}
   .tp-hero__note{max-width:none}
-  .tp-hero__cap{grid-area:1/1;align-self:end;justify-self:end;position:relative;inset:auto;margin:0 10px 10px 0}
 }
 /* スマホ（縦）：同じ家族写真の上に空を描き足した縦長版（hero-family-sp-v1）。空の部分に見出しを置く */
 @media(max-width:760px) and (orientation:portrait){
@@ -287,7 +282,6 @@
 .tp-cta__media picture,.tp-cta__media img{display:block;width:100%;height:100%}
 .tp-cta__media img{position:absolute;inset:0;object-fit:cover;object-position:60% 40%}
 .tp-cta__media::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,var(--navy) 0%,rgba(16,40,76,0) 32%);pointer-events:none}
-.tp-cta__media .photo-note{position:absolute;right:12px;bottom:10px;z-index:2;margin:0}
 .tp-cta :focus-visible{outline-color:#fff}
 @media(max-width:860px){
   .tp-cta{grid-template-columns:1fr}
@@ -309,7 +303,6 @@
 .page-hero__media picture,.page-hero__media img{display:block;width:100%;height:100%}
 .page-hero__media img{object-fit:cover;object-position:50% 40%}
 .page-hero__media::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,var(--navy) 0%,rgba(16,40,76,.55) 30%,rgba(16,40,76,0) 62%)}
-.page-hero__media .photo-note{position:absolute;right:12px;bottom:8px;z-index:2;margin:0}
 /* スマホ：写真のあるページは、写真の下半分に紺のぼかしを掛けて、見出しを写真の上に重ねる（トップと同じく写真と見出しを1枚に組む）。
    写真ごとの切り出し位置は figure の --sp-pos で調整する */
 @media(max-width:760px){
@@ -318,7 +311,6 @@
   .page-hero__media img{object-position:var(--sp-pos,50% 30%)!important}
   .page-hero__media::before{background:linear-gradient(0deg,rgba(16,40,76,.97) 0%,rgba(16,40,76,.9) 30%,rgba(16,40,76,.66) 52%,rgba(16,40,76,0) 76%)}
   .page-hero:has(.page-hero__media) :is(.breadcrumb,.breadcrumb a){color:#fff;text-shadow:0 1px 3px rgba(10,26,51,.9),0 0 10px rgba(10,26,51,.6)}   /* 明るい写真の上でも 4.5:1 以上 */
-  .page-hero__media .photo-note{top:10px;right:10px;bottom:auto}
   .page-hero:has(.page-hero__media) .container{grid-area:1/1;align-self:end;z-index:2;padding-bottom:28px}
   .page-hero:has(.page-hero__media) .breadcrumb{margin-bottom:12px}
   .page-hero:has(.page-hero__media) .page-hero__lead{margin-top:10px}
@@ -402,7 +394,6 @@
 /* ---------- コントラスト（WCAG AA 4.5:1 を満たす色に） ---------- */
 .footer__col-ttl{color:#9aa6b8}                       /* 紺地で 7.05:1（旧 白42% は 4.02:1） */
 .tp-label{color:#7d6532}                              /* 薄い地で 5.18:1（旧 4.39:1） */
-.tp-hero__cap,.tp-cta__media .photo-note,.page-hero__media .photo-note{background:rgba(10,26,51,.78)}  /* 明るい写真の上でも 4.5:1 以上 */
 
 /* ---------- ご相談いただけること：ライフプランを中心に ----------
    9/24 MTG 07:14〜08:03。住まいは独立した柱ではなく、ライフプランの中の例。
